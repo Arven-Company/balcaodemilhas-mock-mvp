@@ -1,0 +1,178 @@
+/* Layout principal - Milhas Balcão */
+.app-shell {
+  min-height: 100vh;
+  background: var(--color-bg);
+  font-family: var(--font-family);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 80px;
+}
+
+.app-main {
+  flex: 1;
+  overflow: auto;
+  max-width: 393px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Header genérico */
+.app-header {
+  background: var(--color-bg-card);
+  padding: 12px 20px 16px;
+  border-radius: 0 0 var(--radius-card) var(--radius-card);
+  box-shadow: var(--shadow-header);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.app-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.app-header-title {
+  font-size: 24px;
+  font-weight: 600;
+  background: linear-gradient(to right, var(--color-primary), var(--color-primary-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+.app-header-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--color-border);
+}
+
+/* Filtros em pills */
+.app-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.app-filter-pill {
+  padding: 8px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-filter);
+  background: var(--color-bg-card);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text);
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+.app-filter-pill.active {
+  background: linear-gradient(to right, #fff, #f4f9ff);
+  border-color: var(--color-border-filter);
+}
+
+/* Abas (Compra / Venda) */
+.app-tabs {
+  display: flex;
+  background: var(--color-bg-card);
+  box-shadow: var(--shadow-header);
+  border-radius: 0 0 var(--radius-card) var(--radius-card);
+}
+
+.app-tab {
+  flex: 1;
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+.app-tab.active {
+  border-bottom-color: var(--color-primary);
+  color: var(--color-text);
+}
+
+/* Lista de conteúdo */
+.app-list {
+  padding: 16px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Bottom navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 393px;
+  margin: 0 auto;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  box-shadow: var(--shadow-nav);
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 12px 12px;
+  z-index: 100;
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-nav-inactive);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-family);
+  text-decoration: none;
+  min-width: 64px;
+}
+
+.bottom-nav-item.active {
+  color: var(--color-nav-active);
+}
+
+.bottom-nav-item img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+/* Subheader (ex: Virgin Atlantic + contagem) */
+.app-subheader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 12px 20px 8px;
+  color: var(--color-text-secondary);
+}
+
+.app-subheader-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.app-subheader-count {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+}

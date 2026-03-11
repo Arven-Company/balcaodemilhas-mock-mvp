@@ -4,13 +4,21 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
+  server: {
+    host: true,
+    port: 5173,
+  },
+  preview: {
+    host: true,
+    port: 4173,
+  },
   plugins: [
     react(),
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'Balcao',
-        short_name: 'Balcao',
+        name: 'Balcão de Milhas - Mock MVP',
+        short_name: 'Milhas MVP',
         description: 'Protótipo instalável',
         theme_color: '#242424',
         icons: [

@@ -1,0 +1,259 @@
+/* Cards Emissões e Balcão - alinhado ao Figma */
+.card-emissao {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.card-emissao-image {
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-emissao-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-emissao-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.84) 79%);
+  pointer-events: none;
+}
+
+.card-emissao-image-content {
+  position: absolute;
+  inset: 0;
+  padding: 10px 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  color: white;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.card-emissao-image-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-start;
+}
+
+.card-emissao-image-left .route {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.card-emissao-image-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.card-emissao-image-right .price {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.badge-executiva {
+  display: inline-block;
+  background: var(--color-accent);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 6px;
+  border-radius: 21px;
+  letter-spacing: 0.22px;
+  margin-bottom: 4px;
+}
+
+.card-emissao-footer {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-emissao-agent {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-emissao-agent img {
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.card-emissao-agent-info .rating {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.card-emissao-agent-info .name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.card-emissao-sponsor {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.card-emissao-airline {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+}
+
+.card-emissao-airline .logo {
+  height: 18px;
+  width: auto;
+  object-fit: contain;
+}
+
+.card-emissao-airline .type {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+/* Card Balcão (marketplace) */
+.card-balcao {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card-soft);
+  overflow: hidden;
+}
+
+.card-balcao-body {
+  padding: 12px 16px 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.card-balcao-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.card-balcao-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.card-balcao-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.card-balcao-meta {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.card-balcao-right {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.card-balcao-miles {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.card-balcao-approx {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+.card-balcao-actions {
+  display: flex;
+  gap: 16px;
+  padding: 0 16px 16px;
+}
+
+.card-balcao-actions .btn-outline {
+  flex: 1;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-btn);
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+.card-balcao-actions .btn-primary {
+  flex: 1;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: var(--radius-btn);
+  background: var(--color-primary);
+  color: white;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+/* Card Promoção */
+.card-promo {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card-soft);
+  overflow: hidden;
+}
+
+.card-promo-image {
+  height: 100px;
+  background: var(--color-border);
+}
+
+.card-promo-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-promo-body {
+  padding: 12px 16px;
+}
+
+.card-promo-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0 0 4px;
+}
+
+.card-promo-meta {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
