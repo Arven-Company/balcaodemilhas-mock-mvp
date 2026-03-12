@@ -2,6 +2,15 @@ import { useState, useEffect } from 'react'
 import { useApp } from '../context/AppContext'
 import { MOCK_BALCAO_COMPRA, MOCK_BALCAO_VENDA } from '../data/mocks'
 import Verificacao from './Verificacao'
+import TermosCompra from '../components/fluxo-compra/TermosCompra'
+import PixCompra from '../components/fluxo-compra/PixCompra'
+import ChatDadosCompra from '../components/fluxo-compra/ChatDadosCompra'
+import AguardoCompra from '../components/fluxo-compra/AguardoCompra'
+import ConfirmacaoCompra from '../components/fluxo-compra/ConfirmacaoCompra'
+import TermosVenda from '../components/fluxo-venda/TermosVenda'
+import AguardoVenda from '../components/fluxo-venda/AguardoVenda'
+import StepperVenda from '../components/fluxo-venda/StepperVenda'
+import ConfirmacaoVenda from '../components/fluxo-venda/ConfirmacaoVenda'
 import '../styles/cards.css'
 import '../styles/app-layout.css'
 import '../styles/fluxo-balcao.css'
@@ -22,8 +31,24 @@ export default function Balcao() {
   const [contraproposta, setContraproposta] = useState({ open: false, offerId: null, originalValue: 100 })
   const [contrapropostaValor, setContrapropostaValor] = useState('')
   const [contrapropostaError, setContrapropostaError] = useState('')
+  const [filtroCompanhia, setFiltroCompanhia] = useState('')
+  const [ordenacao, setOrdenacao] = useState('recentes') // 'recentes' | 'preco'
+  const [layoutBalcao, setLayoutBalcao] = useState('list') // 'list' | 'grid'
+  const [showChat, setShowChat] = useState(false)
 
-  const list = tab === 'compra' ? MOCK_BALCAO_COMPRA : MOCK_BALCAO_VENDA
+  const rawList = tab === 'compra' ? MOCK_BALCAO_COMPRA : MOCK_BALCAO_VENDA
+  const list = (() => {
+    let l = [...rawList]
+    if (filtroCompanhia) {
+      l = l.filter((item) => (item.companhia || '') === filtroCompanhia)
+    }
+    if (ordenacao === 'preco') {
+      l.sort((a, b) => (a.originalValue ?? 0) - (b.originalValue ?? 0))
+    } else {
+      l.sort((a, b) => (a.id || '').localeCompare(b.id || ''))
+    }
+    return l
+  })()
   const primaryAction = tab === 'compra' ? 'Iniciar Compra' : 'Iniciar Venda'
   const flowSteps = flowType === 'compra' ? FLOW_COMPRA_STEPS : FLOW_VENDA_STEPS
   const totalSteps = flowSteps.length
@@ -171,114 +196,35 @@ export default function Balcao() {
 
         <div className="fluxo-content">
           {flowType === 'compra' && flowStep === 1 && (
-            <section className="fluxo-card">
-              <h2>Aceite dos termos</h2>
-              <p className="fluxo-desc">Leia e aceite os termos da compra para continuar.</p>
-              <label className="fluxo-check">
-                <input type="checkbox" checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} />
-                <span>Aceito os termos e condições (simulado)</span>
-              </label>
-              <button type="button" className="btn btn-primary" disabled={!termsAccepted} onClick={goNextStep}>
-                Continuar
-              </button>
-            </section>
+            <TermosCompra termsAccepted={termsAccepted} setTermsAccepted={setTermsAccepted} goNextStep={goNextStep} />
           )}
-
           {flowType === 'compra' && flowStep === 2 && (
-            <section className="fluxo-card">
-              <h2>Pagamento PIX</h2>
-              <p className="fluxo-desc">Simulação: use o QR ou o código abaixo. Após pagar, clique em Confirmar.</p>
-              <div className="fluxo-pix-placeholder">
-                <div className="fluxo-pix-qr">QR CODE</div>
-                <p className="fluxo-pix-code">Código PIX: 00020126580014br.gov.bcb.pix...</p>
-              </div>
-              <label className="fluxo-check">
-                <input type="checkbox" checked={pixConfirmed} onChange={(e) => setPixConfirmed(e.target.checked)} />
-                <span>Confirmo que realizei o pagamento (simulado)</span>
-              </label>
-              <button type="button" className="btn btn-primary" disabled={!pixConfirmed} onClick={goNextStep}>
-                Confirmar pagamento
-              </button>
-            </section>
+            <PixCompra pixConfirmed={pixConfirmed} setPixConfirmed={setPixConfirmed} goNextStep={goNextStep} />
           )}
-
           {flowType === 'compra' && flowStep === 3 && (
-            <section className="fluxo-card">
-              <h2>Envio de dados no chat</h2>
-              <p className="fluxo-desc">Envie os dados solicitados no chat com o vendedor. Quando terminar, clique em Continuar.</p>
-              <button type="button" className="btn btn-outline" onClick={() => alert('Abrir chat (simulado).')}>Abrir chat</button>
-              <button type="button" className="btn btn-primary" onClick={goNextStep}>Continuar</button>
-            </section>
+            <ChatDadosCompra showChat={showChat} setShowChat={setShowChat} goNextStep={goNextStep} />
           )}
-
-          {flowType === 'compra' && flowStep === 4 && (
-            <section className="fluxo-card">
-              <h2>Aguardo da emissão</h2>
-              <p className="fluxo-desc">Aguardando confirmação da emissão da passagem. Você será notificado.</p>
-              <button type="button" className="btn btn-primary" onClick={goNextStep}>Simular conclusão</button>
-            </section>
-          )}
-
+          {flowType === 'compra' && flowStep === 4 && <AguardoCompra goNextStep={goNextStep} />}
           {flowType === 'compra' && flowStep === 5 && (
-            <section className="fluxo-card">
-              <h2>Compra concluída</h2>
-              <p className="fluxo-desc">Resumo da compra (simulado). Oferta: {selectedOffer?.miles || '—'}.</p>
-              <button type="button" className="btn btn-primary" onClick={goNextStep}>Voltar ao Balcão</button>
-            </section>
+            <ConfirmacaoCompra selectedOffer={selectedOffer} goNextStep={goNextStep} />
           )}
 
           {flowType === 'venda' && flowStep === 1 && (
-            <section className="fluxo-card">
-              <h2>Aceite dos termos de venda</h2>
-              <p className="fluxo-desc">Leia e aceite os termos da venda para continuar.</p>
-              <label className="fluxo-check">
-                <input type="checkbox" checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} />
-                <span>Aceito os termos de venda (simulado)</span>
-              </label>
-              <button type="button" className="btn btn-primary" disabled={!termsAccepted} onClick={goNextStep}>
-                Continuar
-              </button>
-            </section>
+            <TermosVenda termsAccepted={termsAccepted} setTermsAccepted={setTermsAccepted} goNextStep={goNextStep} />
           )}
-
-          {flowType === 'venda' && flowStep === 2 && (
-            <section className="fluxo-card">
-              <h2>Aguardo do comprador</h2>
-              <p className="fluxo-desc">Sua oferta está listada. Aguardando o comprador iniciar a transação.</p>
-              <button type="button" className="btn btn-primary" onClick={goNextStep}>Simular comprador ativo</button>
-            </section>
-          )}
-
+          {flowType === 'venda' && flowStep === 2 && <AguardoVenda goNextStep={goNextStep} />}
           {flowType === 'venda' && flowStep === 3 && (
-            <section className="fluxo-card">
-              <h2>Stepper – Análise e emissão</h2>
-              <ul className="fluxo-stepper">
-                <li className="done">Análise de Segurança</li>
-                <li className="done">Confirmação de Pagamento</li>
-                <li>Obter dados no chat</li>
-                <li>
-                  <label className="fluxo-check">
-                    <input type="checkbox" checked={stepperDone} onChange={(e) => setStepperDone(e.target.checked)} />
-                    <span>Confirmar a emissão da passagem</span>
-                  </label>
-                </li>
-              </ul>
-              <button type="button" className="btn btn-outline" onClick={() => alert('Abrir chat (simulado).')}>Abrir chat</button>
-              <button type="button" className="btn btn-primary" disabled={!stepperDone} onClick={goNextStep}>Continuar</button>
-            </section>
+            <StepperVenda stepperDone={stepperDone} setStepperDone={setStepperDone} showChat={showChat} setShowChat={setShowChat} goNextStep={goNextStep} />
           )}
-
           {flowType === 'venda' && flowStep === 4 && (
-            <section className="fluxo-card">
-              <h2>Venda concluída</h2>
-              <p className="fluxo-desc">Resumo da venda (simulado). Oferta: {selectedOffer?.miles || '—'}.</p>
-              <button type="button" className="btn btn-primary" onClick={goNextStep}>Voltar ao Balcão</button>
-            </section>
+            <ConfirmacaoVenda selectedOffer={selectedOffer} goNextStep={goNextStep} />
           )}
         </div>
       </div>
     )
   }
+
+  const companhiasUnicas = [...new Set(rawList.map((item) => item.companhia).filter(Boolean))]
 
   return (
     <>
@@ -289,11 +235,32 @@ export default function Balcao() {
       </div>
       <div className="app-subheader">
         <h2 className="app-subheader-title">Virgin Atlantic</h2>
-        <span className="app-subheader-count">{tab === 'compra' ? '1400 ofertas de compra' : '320 ofertas de venda'}</span>
+        <span className="app-subheader-count">{list.length} {tab === 'compra' ? 'ofertas de compra' : 'ofertas de venda'}</span>
       </div>
-      <div className="app-list">
+      <div className="app-filters app-filters-balcao">
+        <div className="app-filter-pills">
+          <button type="button" className={`app-filter-pill ${!filtroCompanhia ? 'active' : ''}`} onClick={() => setFiltroCompanhia('')}>Todas</button>
+          {companhiasUnicas.map((c) => (
+            <button key={c} type="button" className={`app-filter-pill ${filtroCompanhia === c ? 'active' : ''}`} onClick={() => setFiltroCompanhia(c)}>{c}</button>
+          ))}
+          <select
+            className="app-filter-select"
+            value={ordenacao}
+            onChange={(e) => setOrdenacao(e.target.value)}
+            aria-label="Ordenação"
+          >
+            <option value="recentes">Mais recentes primeiro</option>
+            <option value="preco">Preço</option>
+          </select>
+        </div>
+        <div className="app-layout-toggle">
+          <button type="button" className={`app-layout-btn ${layoutBalcao === 'list' ? 'active' : ''}`} onClick={() => setLayoutBalcao('list')} aria-label="Lista">Lista</button>
+          <button type="button" className={`app-layout-btn ${layoutBalcao === 'grid' ? 'active' : ''}`} onClick={() => setLayoutBalcao('grid')} aria-label="Grade">Grade</button>
+        </div>
+      </div>
+      <div className={layoutBalcao === 'grid' ? 'app-list app-list--grid' : 'app-list'}>
         {list.map((item) => (
-          <article key={item.id} className="card-balcao">
+          <article key={item.id} className={`card-balcao ${layoutBalcao === 'grid' ? 'card-balcao--grid' : ''}`}>
             <div className="card-balcao-body">
               <div className="card-balcao-left">
                 <img src={item.avatar} alt="" className="card-balcao-avatar" />

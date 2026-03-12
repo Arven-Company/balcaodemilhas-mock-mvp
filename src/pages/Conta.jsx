@@ -2,12 +2,14 @@ import { useState, useRef, useEffect } from 'react'
 import { useApp } from '../context/AppContext'
 import { FIGMA_ASSETS } from '../assets/figma-assets'
 import { MOCK_HISTORICO_VENDAS, MOCK_PLANOS } from '../data/mocks'
+import Planos from './Planos'
 import '../styles/app-layout.css'
 import '../styles/conta.css'
 
 export default function Conta() {
   const { theme, toggleTheme } = useApp()
   const [historicoView, setHistoricoView] = useState('list') // list | detail
+  const [contaView, setContaView] = useState('painel') // painel | planos
   const [selectedTransacao, setSelectedTransacao] = useState(null)
   const planosRef = useRef(null)
 
@@ -50,6 +52,10 @@ export default function Conta() {
     onScroll()
     return () => container.removeEventListener('scroll', onScroll)
   }, [])
+
+  if (contaView === 'planos') {
+    return <Planos onBack={() => setContaView('painel')} />
+  }
 
   if (historicoView === 'detail' && selectedTransacao) {
     return (
@@ -123,6 +129,7 @@ export default function Conta() {
               </div>
             ))}
           </div>
+          <button type="button" className="conta-planos-link" onClick={() => setContaView('planos')}>Comparar planos</button>
         </section>
 
         <section className="conta-section card-balcao">

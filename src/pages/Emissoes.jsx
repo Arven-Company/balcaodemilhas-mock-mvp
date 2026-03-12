@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { FIGMA_ASSETS } from '../assets/figma-assets'
-import { MOCK_EMISSOES } from '../data/mocks'
+import { MOCK_EMISSOES, MOCK_FONTES_EMISSOES } from '../data/mocks'
 import DetalheVoo from './DetalheVoo'
 import '../styles/cards.css'
 import '../styles/app-layout.css'
@@ -95,6 +95,16 @@ export default function Emissoes() {
           </article>
         ))}
       </div>
+      <footer className="emissoes-fontes" aria-label="Fontes de dados">
+        <h3 className="emissoes-fontes-title">Fontes das ofertas</h3>
+        <ul className="emissoes-fontes-list">
+          {MOCK_FONTES_EMISSOES.map((f) => (
+            <li key={f.id}>
+              <a href={f.url} target="_blank" rel="noopener noreferrer" className="emissoes-fontes-link">{f.label}</a>
+            </li>
+          ))}
+        </ul>
+      </footer>
     </>
   )
 }

@@ -244,3 +244,109 @@
   flex: 1;
   margin: 0;
 }
+
+/* Chat modal (fluxo Compra/Venda) */
+.chat-modal-overlay {
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.chat-modal {
+  max-height: 85vh;
+  height: 480px;
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-modal) var(--radius-modal) 0 0;
+}
+
+.chat-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.chat-modal-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  margin: 0;
+}
+
+.chat-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 0 var(--space-2);
+}
+
+.chat-modal-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.chat-bubble {
+  max-width: 85%;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-btn);
+  font-size: var(--text-sm);
+}
+
+.chat-bubble--other {
+  align-self: flex-start;
+  background: var(--color-border);
+  color: var(--color-text);
+}
+
+.chat-bubble--me {
+  align-self: flex-end;
+  background: var(--color-primary);
+  color: white;
+}
+
+.chat-bubble-text {
+  margin: 0;
+}
+
+.chat-modal-input-row {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  border-top: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.chat-modal-input {
+  flex: 1;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-sm);
+  font-family: var(--font-family);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-btn);
+  box-sizing: border-box;
+}
+
+.chat-modal-send {
+  flex-shrink: 0;
+}
+
+.chat-modal-actions {
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.chat-modal-actions .btn {
+  width: 100%;
+}

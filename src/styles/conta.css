@@ -102,6 +102,26 @@
   -webkit-overflow-scrolling: touch;
 }
 
+.conta-planos-link {
+  margin-top: var(--space-3);
+  background: none;
+  border: none;
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-primary);
+  cursor: pointer;
+  font-family: var(--font-family);
+  padding: 0;
+}
+
+.conta-planos-link:hover {
+  text-decoration: underline;
+}
+
+.planos-slider-full {
+  margin: 0;
+}
+
 .conta-plano-card {
   flex: 0 0 260px;
   scroll-snap-align: center;

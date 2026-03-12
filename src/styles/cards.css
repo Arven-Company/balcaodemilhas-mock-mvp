@@ -225,6 +225,31 @@
   font-family: var(--font-family);
 }
 
+/* RF-BAL-04: card balcão em grade (compacto) */
+.card-balcao--grid .card-balcao-body {
+  padding: 10px 12px 12px;
+}
+
+.card-balcao--grid .card-balcao-name {
+  font-size: var(--text-sm);
+}
+
+.card-balcao--grid .card-balcao-miles,
+.card-balcao--grid .card-balcao-approx {
+  font-size: var(--text-xs);
+}
+
+.card-balcao--grid .card-balcao-actions {
+  padding: 0 12px 12px;
+  flex-wrap: wrap;
+}
+
+.card-balcao--grid .card-balcao-actions .btn-outline,
+.card-balcao--grid .card-balcao-actions .btn-primary {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-xs);
+}
+
 /* Card Promoção */
 .card-promo {
   background: var(--color-bg-card);
