@@ -67,6 +67,7 @@ export default function Balcao() {
           setFlowType(s.flowType)
           setFlowStep(s.flowStep)
           setSelectedOffer(s.selectedOffer || null)
+          setTab(s.flowType)
         }
       }
     } catch (_) {}
@@ -270,8 +271,24 @@ export default function Balcao() {
     <>
       <h1 className="app-header-title" style={{ padding: '24px 20px 0' }}>Balcão</h1>
       <div className="app-tabs">
-        <button type="button" className={`app-tab ${tab === 'compra' ? 'active' : ''}`} onClick={() => setTab('compra')}>Compra</button>
-        <button type="button" className={`app-tab ${tab === 'venda' ? 'active' : ''}`} onClick={() => setTab('venda')}>Venda</button>
+        <button
+          type="button"
+          className={`app-tab ${tab === 'compra' ? 'active' : ''}`}
+          onClick={() => { if (view !== 'flow' && !view.startsWith('dispute')) setTab('compra') }}
+          disabled={view === 'flow' || view.startsWith('dispute')}
+          aria-disabled={view === 'flow' || view.startsWith('dispute')}
+        >
+          Compra
+        </button>
+        <button
+          type="button"
+          className={`app-tab ${tab === 'venda' ? 'active' : ''}`}
+          onClick={() => { if (view !== 'flow' && !view.startsWith('dispute')) setTab('venda') }}
+          disabled={view === 'flow' || view.startsWith('dispute')}
+          aria-disabled={view === 'flow' || view.startsWith('dispute')}
+        >
+          Venda
+        </button>
       </div>
       <div className="app-subheader">
         <h2 className="app-subheader-title">Virgin Atlantic</h2>
@@ -283,7 +300,11 @@ export default function Balcao() {
           {companhiasUnicas.map((c) => (
             <button key={c} type="button" className={`app-filter-pill ${filtroCompanhia === c ? 'active' : ''}`} onClick={() => setFiltroCompanhia(c)}>{c}</button>
           ))}
+        </div>
+        <div className="app-filters-balcao-row2">
+          <label htmlFor="balcao-ordenar" className="app-filters-balcao-ordenar-label">Ordenar:</label>
           <select
+            id="balcao-ordenar"
             className="app-filter-select"
             value={ordenacao}
             onChange={(e) => setOrdenacao(e.target.value)}
@@ -292,10 +313,10 @@ export default function Balcao() {
             <option value="recentes">Mais recentes primeiro</option>
             <option value="preco">Preço</option>
           </select>
-        </div>
-        <div className="app-layout-toggle">
-          <button type="button" className={`app-layout-btn ${layoutBalcao === 'list' ? 'active' : ''}`} onClick={() => setLayoutBalcao('list')} aria-label="Lista">Lista</button>
-          <button type="button" className={`app-layout-btn ${layoutBalcao === 'grid' ? 'active' : ''}`} onClick={() => setLayoutBalcao('grid')} aria-label="Grade">Grade</button>
+          <div className="app-layout-toggle">
+            <button type="button" className={`app-layout-btn ${layoutBalcao === 'list' ? 'active' : ''}`} onClick={() => setLayoutBalcao('list')} aria-label="Lista">Lista</button>
+            <button type="button" className={`app-layout-btn ${layoutBalcao === 'grid' ? 'active' : ''}`} onClick={() => setLayoutBalcao('grid')} aria-label="Grade">Grade</button>
+          </div>
         </div>
       </div>
       <div className={layoutBalcao === 'grid' ? 'app-list app-list--grid' : 'app-list'}>

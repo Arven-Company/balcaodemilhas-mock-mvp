@@ -26,6 +26,7 @@
   content: '';
   position: absolute;
   inset: 0;
+  z-index: 0;
   background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.84) 79%);
   pointer-events: none;
 }
@@ -33,6 +34,7 @@
 .card-emissao-image-content {
   position: absolute;
   inset: 0;
+  z-index: 1;
   padding: var(--space-4) var(--space-6);
   display: flex;
   align-items: flex-end;

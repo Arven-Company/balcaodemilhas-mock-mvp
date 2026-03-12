@@ -252,6 +252,7 @@
 }
 
 .chat-modal {
+  background: var(--color-bg-card);
   max-height: 85vh;
   height: 480px;
   max-width: 400px;
@@ -294,6 +295,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  background: var(--color-bg);
+  min-height: 120px;
 }
 
 .chat-bubble {

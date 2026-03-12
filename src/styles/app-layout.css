@@ -77,11 +77,12 @@
   border-color: var(--color-border-filter);
 }
 
-/* RF-BAL-03 / RF-BAL-04: filtros e lista/grade no Balcão */
+/* RF-BAL-03 / RF-BAL-04: filtros e lista/grade no Balcão — duas linhas, pills maior */
 .app-filters-balcao {
   padding: 0 var(--space-7) var(--space-4);
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-4);
 }
 
 .app-filters-balcao .app-filter-pills {
@@ -89,6 +90,35 @@
   flex-wrap: wrap;
   gap: var(--space-3);
   align-items: center;
+}
+
+.app-filters-balcao .app-filter-pill {
+  font-size: var(--text-sm);
+  padding: var(--space-3) var(--space-5);
+}
+
+.app-filters-balcao-row2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.app-filters-balcao-ordenar-label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-text);
+  margin: 0;
+}
+
+.app-filters-balcao .app-filter-select {
+  font-size: var(--text-sm);
+  padding: var(--space-3) var(--space-5);
+}
+
+.app-filters-balcao .app-layout-btn {
+  font-size: var(--text-sm);
+  padding: var(--space-3) var(--space-5);
 }
 
 .app-filter-select {
@@ -158,6 +188,11 @@
 .app-tab.active {
   border-bottom-color: var(--color-primary);
   color: var(--color-text);
+}
+
+.app-tab:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* Lista de conteúdo */

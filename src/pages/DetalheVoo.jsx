@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { FIGMA_ASSETS } from '../assets/figma-assets'
 import '../styles/cards.css'
 import '../styles/app-layout.css'
@@ -12,67 +12,88 @@ function IconBack() {
   )
 }
 
-const MONTH_NAMES = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+const WEEKDAYS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
+const MONTH_NAMES_FULL = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
 
-function CalendarHorizontal({ selectedDate, onSelectDate, availableDates, milesByDate }) {
-  const year = 2025
-  const month = 2 // março (0-indexed)
-  const scrollRef = useRef(null)
+function CalendarMonth({ selectedDate, onSelectDate, availableDates, milesByDate }) {
+  const [currentYear, setCurrentYear] = useState(2025)
+  const [currentMonth, setCurrentMonth] = useState(2) // 0-indexed (Março)
 
-  const dateKey = (d) => `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`
-  const availableList = availableDates
-    .map((key) => {
-      const d = parseInt(key.slice(-2), 10)
-      return { d, key, miles: milesByDate[key] ?? null }
-    })
-    .sort((a, b) => a.d - b.d)
-
+  const dateKey = (y, m, d) => `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`
+  const isAvailable = (d) => availableDates.includes(dateKey(currentYear, currentMonth, d))
+  const getMiles = (d) => milesByDate[dateKey(currentYear, currentMonth, d)] ?? null
   const isSelected = (d) =>
     selectedDate &&
     selectedDate.getDate() === d &&
-    selectedDate.getMonth() === month &&
-    selectedDate.getFullYear() === year
+    selectedDate.getMonth() === currentMonth &&
+    selectedDate.getFullYear() === currentYear
 
-  const scroll = (dir) => {
-    if (!scrollRef.current) return
-    const step = 56 * 3
-    scrollRef.current.scrollBy({ left: dir === 'prev' ? -step : step, behavior: 'smooth' })
+  const firstDay = new Date(currentYear, currentMonth, 1).getDay()
+  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate()
+  const days = Array.from({ length: daysInMonth }, (_, i) => i + 1)
+  const emptyCells = Array.from({ length: firstDay }, (_, i) => ({ empty: true, key: `e-${i}` }))
+  const dayCells = days.map((d) => ({ empty: false, day: d, key: `d-${d}` }))
+  const allCells = [...emptyCells, ...dayCells]
+
+  const goPrevMonth = () => {
+    if (currentMonth === 0) {
+      setCurrentMonth(11)
+      setCurrentYear((y) => y - 1)
+    } else {
+      setCurrentMonth((m) => m - 1)
+    }
+  }
+
+  const goNextMonth = () => {
+    if (currentMonth === 11) {
+      setCurrentMonth(0)
+      setCurrentYear((y) => y + 1)
+    } else {
+      setCurrentMonth((m) => m + 1)
+    }
   }
 
   return (
-    <div className="detalhe-voo-calendar-h">
-      <button
-        type="button"
-        className="detalhe-voo-calendar-h-arrow"
-        onClick={() => scroll('prev')}
-        aria-label="Datas anteriores"
-      >
-        ‹
-      </button>
-      <div className="detalhe-voo-calendar-h-scroll" ref={scrollRef}>
-        {availableList.map(({ d, miles }) => {
+    <div className="detalhe-voo-calendar-month">
+      <div className="detalhe-voo-calendar-month-nav">
+        <button type="button" className="detalhe-voo-calendar-month-arrow" onClick={goPrevMonth} aria-label="Mês anterior">
+          ‹
+        </button>
+        <span className="detalhe-voo-calendar-month-title">
+          {MONTH_NAMES_FULL[currentMonth]} {currentYear}
+        </span>
+        <button type="button" className="detalhe-voo-calendar-month-arrow" onClick={goNextMonth} aria-label="Mês seguinte">
+          ›
+        </button>
+      </div>
+      <div className="detalhe-voo-calendar-month-weekdays">
+        {WEEKDAYS.map((wd) => (
+          <span key={wd} className="detalhe-voo-calendar-month-wd">{wd}</span>
+        ))}
+      </div>
+      <div className="detalhe-voo-calendar-month-grid">
+        {allCells.map((cell) => {
+          if (cell.empty) {
+            return <span key={cell.key} className="detalhe-voo-calendar-month-cell empty" />
+          }
+          const d = cell.day
+          const avail = isAvailable(d)
           const sel = isSelected(d)
+          const miles = getMiles(d)
           return (
             <button
-              key={d}
+              key={cell.key}
               type="button"
-              className={`detalhe-voo-calendar-h-cell ${sel ? 'selected' : ''}`}
-              onClick={() => onSelectDate(new Date(year, month, d))}
+              className={`detalhe-voo-calendar-month-cell ${avail ? 'available' : 'unavailable'} ${sel ? 'selected' : ''}`}
+              disabled={!avail}
+              onClick={() => avail && onSelectDate(new Date(currentYear, currentMonth, d))}
             >
               <span className="detalhe-voo-calendar-day">{d}</span>
-              {miles != null && <span className="detalhe-voo-calendar-miles">{miles}</span>}
+              {avail && miles != null && <span className="detalhe-voo-calendar-miles">{miles}</span>}
             </button>
           )
         })}
       </div>
-      <button
-        type="button"
-        className="detalhe-voo-calendar-h-arrow"
-        onClick={() => scroll('next')}
-        aria-label="Próximas datas"
-      >
-        ›
-      </button>
     </div>
   )
 }
@@ -162,7 +183,7 @@ export default function DetalheVoo({ card, onBack }) {
       <section className="detalhe-voo-section">
         <h2 className="detalhe-voo-section-title">Selecione a data</h2>
         <p className="detalhe-voo-section-desc">Dias disponíveis para emissão.</p>
-        <CalendarHorizontal
+        <CalendarMonth
           selectedDate={selectedDate}
           onSelectDate={setSelectedDate}
           availableDates={availableDates}
