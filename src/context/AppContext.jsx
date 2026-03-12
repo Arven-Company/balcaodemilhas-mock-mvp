@@ -35,6 +35,7 @@ export function AppProvider({ children }) {
     return { name: 'Marcelo Campos', avatarUrl: '' }
   })
   const [purchasedPlanName, setPurchasedPlanName] = useState(null)
+  const [hideBottomNav, setHideBottomNav] = useState(false)
 
   useEffect(() => {
     localStorage.setItem('milhas_verified', JSON.stringify(verified))
@@ -81,6 +82,8 @@ export function AppProvider({ children }) {
         setProfile,
         purchasedPlanName,
         setPurchasedPlanName,
+        hideBottomNav,
+        setHideBottomNav,
       }}
     >
       {children}

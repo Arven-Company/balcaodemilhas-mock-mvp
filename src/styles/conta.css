@@ -93,13 +93,51 @@
   color: var(--color-success);
 }
 
-.conta-planos-slider {
-  display: flex;
-  gap: var(--space-5);
-  overflow-x: auto;
-  padding: var(--space-4) 0;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
+/* Banner planos de assinatura (sem scroll, sem cards na Conta) */
+.conta-planos-banner {
+  display: block;
+  width: 100%;
+  padding: var(--space-7) var(--space-6);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  border: none;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-family);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.conta-planos-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(15, 119, 255, 0.35);
+}
+
+.conta-planos-banner-label {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2);
+}
+
+.conta-planos-banner-title {
+  display: block;
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: white;
+  margin-bottom: var(--space-3);
+}
+
+.conta-planos-banner-cta {
+  display: inline-block;
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: white;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .conta-planos-link {
@@ -118,6 +156,21 @@
   text-decoration: underline;
 }
 
+/* Slider de cards só na tela Planos (sem scrollbar visível, cards maiores) */
+.conta-planos-slider {
+  display: flex;
+  gap: var(--space-6);
+  overflow-x: auto;
+  padding: var(--space-5) 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.conta-planos-slider::-webkit-scrollbar {
+  display: none;
+}
+
 .planos-slider-full {
   margin: 0;
 }
@@ -131,6 +184,37 @@
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card-soft);
   transition: transform 0.2s ease;
+}
+
+/* Cards maiores na tela Planos */
+.planos-slider-full .conta-plano-card {
+  flex: 0 0 300px;
+  min-width: 300px;
+  padding: var(--space-7) var(--space-6);
+}
+
+.planos-slider-full .conta-plano-name {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-3);
+}
+
+.planos-slider-full .conta-plano-price {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-6);
+}
+
+.planos-slider-full .conta-plano-features {
+  font-size: var(--text-base);
+  margin-bottom: var(--space-6);
+}
+
+.planos-slider-full .conta-plano-features li {
+  margin-bottom: var(--space-3);
+}
+
+.planos-slider-full .conta-plano-btn {
+  padding: var(--space-5) var(--space-6);
+  font-size: var(--text-base);
 }
 
 .conta-plano-name {

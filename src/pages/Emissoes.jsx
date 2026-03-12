@@ -7,11 +7,12 @@ import '../styles/cards.css'
 import '../styles/app-layout.css'
 
 export default function Emissoes() {
-  const { setScreen } = useApp()
+  const { setScreen, setHideBottomNav } = useApp()
   const [view, setView] = useState('list')
   const [selectedCard, setSelectedCard] = useState(null)
 
   const goToList = () => {
+    setHideBottomNav(false)
     setView('list')
     setSelectedCard(null)
   }
@@ -19,6 +20,7 @@ export default function Emissoes() {
   const handleCardClick = (card) => {
     setSelectedCard(card)
     setView('detalhe')
+    setHideBottomNav(true)
     window.history.pushState({ emissoesView: 'detalhe', cardId: card.id }, '', window.location.pathname || '/')
   }
 
@@ -31,7 +33,14 @@ export default function Emissoes() {
   }, [view])
 
   if (view === 'detalhe' && selectedCard) {
-    return <DetalheVoo card={selectedCard} onBack={() => window.history.back()} />
+    return (
+      <DetalheVoo
+        card={selectedCard}
+        onBack={() => {
+          window.history.back()
+        }}
+      />
+    )
   }
 
   return (

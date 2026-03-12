@@ -22,14 +22,28 @@ body {
   min-height: 100vh;
   background: var(--color-bg);
   color: var(--color-text);
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
 }
 
 #root {
   min-height: 100vh;
 }
 
+/* App: sem efeito de link ao tocar/clicar */
+button,
+a,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+}
+
 button {
   cursor: pointer;
+}
+
+button:focus:not(:focus-visible) {
+  outline: none;
 }
 
 button:focus-visible {

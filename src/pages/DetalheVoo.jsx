@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { FIGMA_ASSETS } from '../assets/figma-assets'
 import '../styles/cards.css'
 import '../styles/app-layout.css'
@@ -14,49 +14,65 @@ function IconBack() {
 
 const MONTH_NAMES = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
 
-function Calendar({ selectedDate, onSelectDate, availableDates, milesByDate }) {
+function CalendarHorizontal({ selectedDate, onSelectDate, availableDates, milesByDate }) {
   const year = 2025
   const month = 2 // março (0-indexed)
-  const firstDay = new Date(year, month, 1).getDay()
-  const daysInMonth = new Date(year, month + 1, 0).getDate()
-  const days = Array.from({ length: daysInMonth }, (_, i) => i + 1)
+  const scrollRef = useRef(null)
 
   const dateKey = (d) => `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`
-  const isAvailable = (d) => availableDates.includes(dateKey(d))
-  const getMiles = (d) => milesByDate[dateKey(d)] ?? null
-  const isSelected = (d) => selectedDate && selectedDate.getDate() === d && selectedDate.getMonth() === month && selectedDate.getFullYear() === year
+  const availableList = availableDates
+    .map((key) => {
+      const d = parseInt(key.slice(-2), 10)
+      return { d, key, miles: milesByDate[key] ?? null }
+    })
+    .sort((a, b) => a.d - b.d)
+
+  const isSelected = (d) =>
+    selectedDate &&
+    selectedDate.getDate() === d &&
+    selectedDate.getMonth() === month &&
+    selectedDate.getFullYear() === year
+
+  const scroll = (dir) => {
+    if (!scrollRef.current) return
+    const step = 56 * 3
+    scrollRef.current.scrollBy({ left: dir === 'prev' ? -step : step, behavior: 'smooth' })
+  }
 
   return (
-    <div className="detalhe-voo-calendar">
-      <div className="detalhe-voo-calendar-month-row">
-        {MONTH_NAMES.map((name, i) => (
-          <span key={name} className={`detalhe-voo-calendar-month ${i === month ? 'current' : ''}`}>
-            {name}
-          </span>
-        ))}
-      </div>
-      <div className="detalhe-voo-calendar-grid">
-        {Array.from({ length: firstDay }, (_, i) => (
-          <span key={`empty-${i}`} className="detalhe-voo-calendar-cell empty" />
-        ))}
-        {days.map((d) => {
-          const avail = isAvailable(d)
+    <div className="detalhe-voo-calendar-h">
+      <button
+        type="button"
+        className="detalhe-voo-calendar-h-arrow"
+        onClick={() => scroll('prev')}
+        aria-label="Datas anteriores"
+      >
+        ‹
+      </button>
+      <div className="detalhe-voo-calendar-h-scroll" ref={scrollRef}>
+        {availableList.map(({ d, miles }) => {
           const sel = isSelected(d)
-          const miles = getMiles(d)
           return (
             <button
               key={d}
               type="button"
-              className={`detalhe-voo-calendar-cell ${avail ? 'available' : 'unavailable'} ${sel ? 'selected' : ''}`}
-              disabled={!avail}
-              onClick={() => avail && onSelectDate(new Date(year, month, d))}
+              className={`detalhe-voo-calendar-h-cell ${sel ? 'selected' : ''}`}
+              onClick={() => onSelectDate(new Date(year, month, d))}
             >
               <span className="detalhe-voo-calendar-day">{d}</span>
-              {avail && miles != null && <span className="detalhe-voo-calendar-miles">{miles}</span>}
+              {miles != null && <span className="detalhe-voo-calendar-miles">{miles}</span>}
             </button>
           )
         })}
       </div>
+      <button
+        type="button"
+        className="detalhe-voo-calendar-h-arrow"
+        onClick={() => scroll('next')}
+        aria-label="Próximas datas"
+      >
+        ›
+      </button>
     </div>
   )
 }
@@ -96,7 +112,7 @@ export default function DetalheVoo({ card, onBack }) {
   }
 
   return (
-    <div className="detalhe-voo">
+    <div className={`detalhe-voo ${selectedDate ? 'detalhe-voo--has-ordem' : ''}`}>
       <header className="app-header detalhe-voo-header">
         <div className="app-header-row">
           <button type="button" className="detalhe-voo-back" onClick={onBack} aria-label="Voltar">
@@ -146,7 +162,7 @@ export default function DetalheVoo({ card, onBack }) {
       <section className="detalhe-voo-section">
         <h2 className="detalhe-voo-section-title">Selecione a data</h2>
         <p className="detalhe-voo-section-desc">Dias disponíveis para emissão.</p>
-        <Calendar
+        <CalendarHorizontal
           selectedDate={selectedDate}
           onSelectDate={setSelectedDate}
           availableDates={availableDates}
@@ -158,16 +174,35 @@ export default function DetalheVoo({ card, onBack }) {
         </div>
       </section>
 
-      <div className="detalhe-voo-actions">
-        <button
-          type="button"
-          className="btn-primary detalhe-voo-btn"
-          onClick={handleSolicitar}
-          disabled={!selectedDate}
-        >
-          Solicitar no balcão
-        </button>
-      </div>
+      {selectedDate && (() => {
+        const key = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`
+        const miles = milesByDate[key]
+        const dayNames = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb']
+        const monthNames = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
+        const dateLabel = `${dayNames[selectedDate.getDay()]}, ${selectedDate.getDate()} de ${monthNames[selectedDate.getMonth()]} de ${selectedDate.getFullYear()}`
+        return (
+          <div className="detalhe-voo-ordem-card">
+            <h2 className="detalhe-voo-ordem-title">Nova Ordem de Balcão</h2>
+            <div className="detalhe-voo-ordem-row">
+              <div className="detalhe-voo-ordem-info">
+                {card.airlineLogo && (
+                  <img src={card.airlineLogo} alt="" className="detalhe-voo-ordem-logo" />
+                )}
+                <p className="detalhe-voo-ordem-date">{dateLabel}</p>
+                <p className="detalhe-voo-ordem-route">{card.route}</p>
+                <p className="detalhe-voo-ordem-miles">{miles ? `${miles.replace('k', '')}.000 milhas` : '—'}</p>
+              </div>
+              <button
+                type="button"
+                className="detalhe-voo-ordem-btn"
+                onClick={handleSolicitar}
+              >
+                Criar Oferta de Compra
+              </button>
+            </div>
+          </div>
+        )
+      })()}
 
       {showConfirmModal && (
         <div className="detalhe-voo-modal-overlay" onClick={handleCloseModal}>

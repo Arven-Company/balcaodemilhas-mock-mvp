@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useApp } from '../context/AppContext'
 import { FIGMA_ASSETS } from '../assets/figma-assets'
-import { MOCK_HISTORICO_VENDAS, MOCK_PLANOS } from '../data/mocks'
+import { MOCK_HISTORICO_VENDAS } from '../data/mocks'
 import '../styles/app-layout.css'
 import '../styles/conta.css'
 
@@ -9,7 +9,6 @@ export default function Conta() {
   const { profile, setScreen } = useApp()
   const [historicoView, setHistoricoView] = useState('list') // list | detail
   const [selectedTransacao, setSelectedTransacao] = useState(null)
-  const planosRef = useRef(null)
   const avatarSrc = profile?.avatarUrl?.trim() || FIGMA_ASSETS.avatar
 
   const handleHistoricoClick = (t) => {
@@ -30,27 +29,6 @@ export default function Conta() {
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
   }, [historicoView])
-
-  useEffect(() => {
-    const container = planosRef.current
-    if (!container) return
-    const cards = container.querySelectorAll('.conta-plano-card')
-    const onScroll = () => {
-      if (!cards.length) return
-      const center = container.scrollLeft + container.clientWidth / 2
-      cards.forEach((card) => {
-        const rect = card.getBoundingClientRect()
-        const containerRect = container.getBoundingClientRect()
-        const cardCenter = rect.left - containerRect.left + rect.width / 2 + container.scrollLeft
-        const distance = Math.abs(center - cardCenter)
-        const scale = Math.max(0.92, 1 - distance / 800)
-        card.style.transform = `scale(${scale})`
-      })
-    }
-    container.addEventListener('scroll', onScroll)
-    onScroll()
-    return () => container.removeEventListener('scroll', onScroll)
-  }, [])
 
   if (historicoView === 'detail' && selectedTransacao) {
     return (
@@ -112,22 +90,15 @@ export default function Conta() {
         </section>
 
         <section className="conta-section">
-          <h3 className="conta-section-title">Planos de assinatura</h3>
-          <div className="conta-planos-slider" ref={planosRef}>
-            {MOCK_PLANOS.map((pl) => (
-              <div key={pl.id} className="conta-plano-card">
-                <h4 className="conta-plano-name">{pl.name}</h4>
-                <p className="conta-plano-price">{pl.price}</p>
-                <ul className="conta-plano-features">
-                  {pl.features.map((f, i) => (
-                    <li key={i}>{f}</li>
-                  ))}
-                </ul>
-                <button type="button" className="conta-plano-btn">Selecionar</button>
-              </div>
-            ))}
-          </div>
-          <button type="button" className="conta-planos-link" onClick={() => setScreen('planos')}>Comparar planos</button>
+          <button
+            type="button"
+            className="conta-planos-banner"
+            onClick={() => setScreen('planos')}
+          >
+            <span className="conta-planos-banner-label">Planos de assinatura</span>
+            <span className="conta-planos-banner-title">Conheça e compare os planos</span>
+            <span className="conta-planos-banner-cta">Ver planos →</span>
+          </button>
         </section>
 
         <section className="conta-section card-balcao">

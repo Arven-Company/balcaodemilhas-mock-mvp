@@ -22,10 +22,11 @@ export default function App() {
     setContractAccepted,
     purchasedPlanName,
     setPurchasedPlanName,
+    hideBottomNav,
   } = useApp()
 
   const showContractGate = !contractAccepted && (module === 'conta' || module === 'balcao')
-  const showBottomNav = !showContractGate && screen === ''
+  const showBottomNav = !showContractGate && screen === '' && !hideBottomNav
 
   const handleContractFinish = () => {
     setContractAccepted(true)

@@ -9,12 +9,10 @@ const COMPANHIAS = ['Virgin Atlantic', 'LATAM', 'Azul', 'GOL', 'TAP Air Portugal
 export default function Filtros({ onBack }) {
   const { filters, setFilters } = useApp()
   const [selectedAirlines, setSelectedAirlines] = useState(filters.airlines || [])
-  const [milesMin, setMilesMin] = useState(filters.milesMin ?? 0)
   const [milesMax, setMilesMax] = useState(filters.milesMax ?? 500000)
 
   useEffect(() => {
     setSelectedAirlines(filters.airlines || [])
-    setMilesMin(filters.milesMin ?? 0)
     setMilesMax(filters.milesMax ?? 500000)
   }, [filters])
 
@@ -25,13 +23,12 @@ export default function Filtros({ onBack }) {
   }
 
   const handleApply = () => {
-    setFilters({ airlines: selectedAirlines, milesMin, milesMax })
+    setFilters({ airlines: selectedAirlines, milesMin: 0, milesMax })
     onBack()
   }
 
   const handleClear = () => {
     setSelectedAirlines([])
-    setMilesMin(0)
     setMilesMax(500000)
     setFilters({ airlines: [], milesMin: 0, milesMax: 500000 })
   }
@@ -68,8 +65,8 @@ export default function Filtros({ onBack }) {
           <h3 className="filtros-section-title">Quantidade de Milhas</h3>
           <div className="filtros-range-box">
             <div className="filtros-range-values">
-              <span>{(milesMin / 1000).toLocaleString('pt-BR')}k</span>
-              <span>{(milesMax / 1000).toLocaleString('pt-BR')}k</span>
+              <span>0k</span>
+              <span>até {(milesMax / 1000).toLocaleString('pt-BR')}k</span>
             </div>
             <input
               type="range"
@@ -79,15 +76,7 @@ export default function Filtros({ onBack }) {
               value={milesMax}
               onChange={(e) => setMilesMax(Number(e.target.value))}
               className="filtros-range"
-            />
-            <input
-              type="range"
-              min="0"
-              max="500000"
-              step="10000"
-              value={milesMin}
-              onChange={(e) => setMilesMin(Number(e.target.value))}
-              className="filtros-range"
+              aria-label="Máximo de milhas"
             />
           </div>
         </section>

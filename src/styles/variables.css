@@ -91,7 +91,7 @@
   --size-avatar-sm: 24px;
   --size-avatar-md: 32px;
   --width-app-max: 393px;
-  --height-nav: 80px;
+  --height-nav: 56px;
 }
 
 [data-theme="dark"] {
