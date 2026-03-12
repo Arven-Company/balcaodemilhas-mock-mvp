@@ -124,9 +124,43 @@ Cada **push** na branch ligada à Vercel (ou cada `vercel --prod`) gera um novo 
   ```
   Confirma com `git remote -v`. Seguidos commits/push usam o novo nome.
 
+## Abrir como app (e não como página web)
+
+Hoje o projeto é uma **PWA**: no browser parece uma página; para virar “app” (sem barra de endereço, ícone no ecrã inicial) tens estas opções, por ordem de esforço.
+
+### Opção 1 — Instalar a PWA (recomendado para testar depressa)
+
+- **O que é:** O mesmo projeto, mas “instalado” a partir do Chrome no telemóvel.  
+- **Como:** Faz deploy (ex. Vercel) e no **Chrome (Android)** abre o URL do site → menu (⋮) → **“Instalar app”** / **“Adicionar ao ecrã inicial”**.  
+- **Resultado:** O ícone aparece na gaveta de apps; ao abrir, corre em janela própria (**standalone**), sem barra do browser. O manifest já está com `display: 'standalone'` e `orientation: 'portrait'`.  
+- **Limitação:** Continua a ser uma PWA (não é um .apk instalado “como app do sistema”). Utilizador tem de usar “Instalar app” uma vez.
+
+### Opção 2 — Capacitor (app “de verdade”, APK/IPA)
+
+- **O que é:** Embalar o mesmo código React/Vite numa **app nativa** (WebView) e gerar **APK** (Android) e, se quiseres, **IPA** (iOS).  
+- **Vantagens:** Abre como app nativa (sem depender do “Instalar app” do Chrome), pode ir para Play Store / App Store, e mais tarde podes usar plugins (câmara, notificações, etc.).  
+- **Esforço:** Adicionar Capacitor ao projeto, configurar e gerar o projeto Android (e opcionalmente iOS); builds APK/AAB pelo Android Studio.  
+- **Recomendação:** Melhor opção se queres **estrutura de app real** e distribuir por loja ou ficheiro .apk.
+
+### Opção 3 — PWA Builder (APK a partir do URL, sem alterar código)
+
+- **O que é:** Em [pwabuilder.com](https://www.pwabuilder.com) colas o URL do teu deploy; o site gera um **APK** (e opcionalmente TWA para Play Store).  
+- **Vantagens:** Não mexe no código; rápido para ter um .apk.  
+- **Limitação:** O “app” é basicamente um contentor que abre a tua PWA; menos integração nativa que com Capacitor.
+
+### Opção 4 — TWA (Trusted Web Activity) para Play Store
+
+- **O que é:** Pacote Android que abre a tua PWA em modo app (sem UI do browser), adequado para publicar na **Play Store**.  
+- **Como:** Pode ser gerado via PWA Builder ou com um projeto Android TWA manual.  
+- **Recomendação:** Usar se o objetivo é **só** estar na Play Store e a experiência for 100% a tua PWA.
+
+**Resumo:** Para **usar já como app** no telemóvel, usa a **Opção 1** (Instalar a PWA). Para **estrutura que seja realmente uma app** (APK, loja, ícone “de app”), a opção que recomendo é **Capacitor (Opção 2)**.
+
+---
+
 ## PWA e instalação no celular
 
-O projeto usa `vite-plugin-pwa`. Depois do deploy (ou ao abrir o build no telemóvel), no **Chrome** podes usar **“Adicionar ao ecrã inicial”** / **“Instalar app”**. O app abre em janela própria, sem barra do browser — mas continua a ser uma **PWA (web)**, não um ficheiro APK.
+O projeto usa `vite-plugin-pwa` com `display: 'standalone'` e `orientation: 'portrait'`. Depois do deploy (ou ao abrir o build no telemóvel), no **Chrome** usa **“Instalar app”** / **“Adicionar ao ecrã inicial”** para abrir em janela própria, sem barra do browser.
 
 ### Quero um APK para instalar (tipo app nativa)
 

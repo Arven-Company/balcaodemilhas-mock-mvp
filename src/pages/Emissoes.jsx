@@ -1,9 +1,37 @@
+import { useState, useEffect } from 'react'
 import { FIGMA_ASSETS } from '../assets/figma-assets'
 import { MOCK_EMISSOES } from '../data/mocks'
+import DetalheVoo from './DetalheVoo'
 import '../styles/cards.css'
 import '../styles/app-layout.css'
 
 export default function Emissoes() {
+  const [view, setView] = useState('list')
+  const [selectedCard, setSelectedCard] = useState(null)
+
+  const goToList = () => {
+    setView('list')
+    setSelectedCard(null)
+  }
+
+  const handleCardClick = (card) => {
+    setSelectedCard(card)
+    setView('detalhe')
+    window.history.pushState({ emissoesView: 'detalhe', cardId: card.id }, '', window.location.pathname || '/')
+  }
+
+  useEffect(() => {
+    const onPopState = () => {
+      if (view === 'detalhe') goToList()
+    }
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [view])
+
+  if (view === 'detalhe' && selectedCard) {
+    return <DetalheVoo card={selectedCard} onBack={() => window.history.back()} />
+  }
+
   return (
     <>
       <header className="app-header">
@@ -22,7 +50,7 @@ export default function Emissoes() {
       </header>
       <div className="app-list">
         {MOCK_EMISSOES.map((card) => (
-          <article key={card.id} className="card-emissao">
+          <article key={card.id} className="card-emissao" role="button" tabIndex={0} onClick={() => handleCardClick(card)} onKeyDown={(e) => e.key === 'Enter' && handleCardClick(card)}>
             <div className="card-emissao-image">
               <img src={card.image} alt="" />
               <div className="card-emissao-image-content">

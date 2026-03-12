@@ -1,0 +1,221 @@
+/* Conta — painel, histórico, planos, configurações (RF-ACC-01 a RF-ACC-04) */
+.conta-list {
+  padding-bottom: var(--space-8);
+}
+
+.conta-painel {
+  padding: var(--space-7) var(--space-6) !important;
+}
+
+.conta-painel-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.conta-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--color-border);
+}
+
+.conta-nome {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  margin: 0;
+}
+
+.conta-plano-label {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  margin: var(--space-1) 0 0;
+}
+
+.conta-section {
+  margin-bottom: var(--space-6);
+}
+
+.conta-section-title {
+  font-size: var(--text-md);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-5);
+}
+
+.conta-historico {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.conta-historico-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto auto;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-5) var(--space-6);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  margin-bottom: var(--space-4);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  transition: box-shadow 0.2s;
+}
+
+.conta-historico-item:hover {
+  box-shadow: var(--shadow-card-soft);
+}
+
+.conta-historico-date {
+  color: var(--color-text-muted);
+}
+
+.conta-historico-type {
+  font-weight: var(--font-medium);
+  color: var(--color-text);
+}
+
+.conta-historico-miles {
+  color: var(--color-text-secondary);
+}
+
+.conta-historico-value {
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+}
+
+.conta-historico-status {
+  font-size: var(--text-xs);
+  color: var(--color-success);
+}
+
+.conta-planos-slider {
+  display: flex;
+  gap: var(--space-5);
+  overflow-x: auto;
+  padding: var(--space-4) 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.conta-plano-card {
+  flex: 0 0 260px;
+  scroll-snap-align: center;
+  padding: var(--space-6);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card-soft);
+  transition: transform 0.2s ease;
+}
+
+.conta-plano-name {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-2);
+}
+
+.conta-plano-price {
+  font-size: var(--text-base);
+  color: var(--color-primary);
+  font-weight: var(--font-semibold);
+  margin: 0 0 var(--space-5);
+}
+
+.conta-plano-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.conta-plano-features li {
+  margin-bottom: var(--space-2);
+  padding-left: var(--space-5);
+  position: relative;
+}
+
+.conta-plano-features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-success);
+}
+
+.conta-plano-btn {
+  width: 100%;
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  font-family: var(--font-family);
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+}
+
+.conta-config-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) 0;
+  cursor: pointer;
+}
+
+.conta-config-label {
+  font-size: var(--text-base);
+  color: var(--color-text);
+}
+
+.conta-config-toggle {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--color-primary);
+}
+
+.conta-section.card-balcao {
+  padding: var(--space-6);
+}
+
+.conta-back {
+  background: none;
+  border: none;
+  padding: var(--space-2) 0;
+  font-size: var(--text-base);
+  color: var(--color-primary);
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+.conta-detalhe-wrap .app-header {
+  margin-bottom: 0;
+}
+
+.conta-detalhe {
+  padding: var(--space-6) var(--space-7);
+}
+
+.conta-detalhe-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-7);
+  box-shadow: var(--shadow-card-soft);
+}
+
+.conta-detalhe-card p {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-base);
+  color: var(--color-text);
+}
+
+.conta-detalhe-card p:last-child {
+  margin-bottom: 0;
+}

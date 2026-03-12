@@ -78,3 +78,5 @@ Obter assets exportados pelo Figma (Export ou Figma MCP) e colocar em `src/asset
 - **Screenshot:** Incluído em `get_design_context` para referência visual.
 
 Implementar o app em `src/` conforme [Especificacao-Tecnica-Milhas-Balcao.md](./Especificacao-Tecnica-Milhas-Balcao.md) e usar esta referência para alinhar tipografia, ícones e estrutura ao Figma.
+
+**Design system abstraído:** Padrões, estilo visual, espaçamento e características deste design estão documentados em [design-system.md](./design-system.md); os tokens CSS em `src/styles/variables.css`.

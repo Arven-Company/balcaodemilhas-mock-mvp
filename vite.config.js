@@ -20,7 +20,11 @@ export default defineConfig({
         name: 'Balcão de Milhas - Mock MVP',
         short_name: 'Milhas MVP',
         description: 'Protótipo instalável',
+        start_url: '/',
+        display: 'standalone',
+        orientation: 'portrait',
         theme_color: '#242424',
+        background_color: '#ffffff',
         icons: [
           {
             src: '/icon-192.png',

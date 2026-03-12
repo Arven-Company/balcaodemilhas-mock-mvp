@@ -5,7 +5,7 @@ import '../styles/verificacao.css'
 const STEP_VERIFICACAO = 1
 const STEP_ANEXOS = 2
 
-export default function Verificacao() {
+export default function Verificacao({ onComplete, onBack }) {
   const { completeVerification } = useApp()
   const [step, setStep] = useState(STEP_VERIFICACAO)
   const [verificacaoOk, setVerificacaoOk] = useState(false)
@@ -15,6 +15,11 @@ export default function Verificacao() {
   const canAdvanceStep1 = verificacaoOk
   const canAdvanceStep2 = doc1 && doc2
   const canEnterApp = step === STEP_ANEXOS && canAdvanceStep2
+
+  const handleFinish = () => {
+    completeVerification()
+    onComplete?.()
+  }
 
   return (
     <div className="verificacao">
@@ -84,12 +89,17 @@ export default function Verificacao() {
             type="button"
             className="btn btn-primary"
             disabled={!canEnterApp}
-            onClick={completeVerification}
+            onClick={handleFinish}
           >
-            Entrar no app
+            {onComplete ? 'Continuar' : 'Entrar no app'}
           </button>
         </section>
       </div>
+      {onBack && (
+        <button type="button" className="btn btn-outline verificacao-back" onClick={onBack}>
+          Voltar
+        </button>
+      )}
     </div>
   )
 }

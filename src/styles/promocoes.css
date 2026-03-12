@@ -1,0 +1,143 @@
+/* Promoções — detalhe e cupons (RF-PRO-02, RF-PRO-03) */
+.promo-detalhe-back {
+  background: none;
+  border: none;
+  padding: var(--space-2) 0;
+  font-size: var(--text-base);
+  color: var(--color-primary);
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+.promo-detalhe-hero {
+  height: 180px;
+  overflow: hidden;
+  background: var(--color-border);
+}
+
+.promo-detalhe-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.promo-detalhe-content {
+  padding: var(--space-6) var(--space-7) var(--space-8);
+}
+
+.promo-detalhe-title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-2);
+}
+
+.promo-detalhe-meta {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-6);
+}
+
+.promo-block {
+  margin-bottom: var(--space-5);
+}
+
+.promo-para {
+  font-size: var(--text-base);
+  color: var(--color-text);
+  line-height: var(--line-height-relaxed);
+  margin: 0 0 var(--space-3);
+}
+
+.promo-list {
+  margin: 0 0 var(--space-3);
+  padding-left: var(--space-6);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  line-height: var(--line-height-relaxed);
+}
+
+.promo-list li {
+  margin-bottom: var(--space-2);
+}
+
+.promo-note {
+  font-size: var(--text-sm);
+  color: var(--color-warning);
+  background: var(--color-warning-bg);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-btn);
+  margin: 0;
+}
+
+.promo-cupons {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.promo-cupons-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-5);
+}
+
+.promo-cupom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding: var(--space-5) var(--space-6);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-btn);
+  margin-bottom: var(--space-4);
+}
+
+.promo-cupom-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.promo-cupom-code {
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  font-family: monospace;
+  letter-spacing: 0.05em;
+}
+
+.promo-cupom-desc {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.promo-cupom-btn {
+  flex-shrink: 0;
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  font-family: var(--font-family);
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.promo-cupom-btn:hover {
+  background: var(--color-primary-dark);
+}
+
+.promo-cupom-btn:active {
+  transform: scale(0.98);
+}
+
+/* feedback "Copiado!" */
+.promo-cupom-btn:not(:empty) {
+  min-width: 72px;
+}

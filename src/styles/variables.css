@@ -1,31 +1,104 @@
-/* Milhas Balcão - design tokens (Figma) */
+/* ==========================================================================
+   Milhas Balcão - Design tokens (abstraídos do Figma)
+   Ref: docs/Figma-Milhas-Referencia.md | docs/design-system.md
+   ========================================================================== */
+
 :root {
+  /* ---- Cores de marca (Figma) ---- */
   --color-primary: #0f77ff;
   --color-primary-dark: #094899;
   --color-accent: #f6bd00;
+
+  /* ---- Superfícies ---- */
   --color-bg: #f8f8f9;
   --color-bg-card: #ffffff;
+  --color-bg-elevated: #ffffff;
+  --color-bg-overlay: rgba(0, 0, 0, 0.4);
   --color-border: #e5e5e5;
   --color-border-filter: #d4e8ff;
+
+  /* ---- Texto ---- */
   --color-text: #4a4a4a;
   --color-text-secondary: #666666;
   --color-text-muted: #767676;
   --color-text-light: #a1a1a1;
   --color-nav-active: #0f77ff;
   --color-nav-inactive: #666;
+
+  /* ---- Estados semânticos ---- */
+  --color-success: #0d8050;
+  --color-success-bg: #e6f4ee;
+  --color-warning: #b35c00;
+  --color-warning-bg: #fff4e6;
+  --color-error: #c23030;
+  --color-error-bg: #fce8e8;
+  --color-info: #0f77ff;
+  --color-info-bg: #e8f2ff;
+
+  /* ---- Estados de controlo ---- */
+  --color-focus-ring: var(--color-primary);
+  --color-disabled-bg: #f0f0f0;
+  --color-disabled-text: #9a9a9a;
+  --color-hover-overlay: rgba(0, 0, 0, 0.04);
+
+  /* ---- Sombras (Figma) ---- */
   --shadow-card: 0px 3px 5px 0px rgba(0, 0, 0, 0.12);
   --shadow-card-soft: 0px 3px 5px 0px rgba(0, 0, 0, 0.05);
   --shadow-header: 0px 4px 10.1px 0px rgba(0, 0, 0, 0.1);
   --shadow-nav: 0px -6px 6px 0px rgba(0, 0, 0, 0.1);
+  --shadow-modal: 0px 8px 24px 0px rgba(0, 0, 0, 0.15);
+
+  /* ---- Bordas / raios ---- */
   --radius-card: 16px;
   --radius-pill: 24px;
   --radius-btn: 6px;
+  --radius-modal: 20px;
+  --radius-badge: 21px;
+
+  /* ---- Tipografia (Figma: Schibsted Grotesk) ---- */
   --font-family: 'Schibsted Grotesk', system-ui, -apple-system, sans-serif;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-base: 14px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 24px;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.4;
+  --line-height-relaxed: 1.5;
+
+  /* ---- Espaçamento (escala Figma) ---- */
+  --space-1: 4px;
+  --space-2: 6px;
+  --space-3: 8px;
+  --space-4: 10px;
+  --space-5: 12px;
+  --space-6: 16px;
+  --space-7: 20px;
+  --space-8: 24px;
+  --space-9: 28px;
+  --space-10: 32px;
+  /* Uso: padding/margin/gap; ex: header padding 12px 20px 16px → space-5 space-7 space-6 */
+
+  /* ---- Dimensões de componentes (Figma) ---- */
+  --height-btn: 32px;
+  --height-btn-touch: 44px;
+  --height-card-image: 100px;
+  --size-avatar-sm: 24px;
+  --size-avatar-md: 32px;
+  --width-app-max: 393px;
+  --height-nav: 80px;
 }
 
 [data-theme="dark"] {
   --color-bg: #1a1a1a;
   --color-bg-card: #2d2d2d;
+  --color-bg-elevated: #383838;
+  --color-bg-overlay: rgba(0, 0, 0, 0.6);
   --color-border: #404040;
   --color-border-filter: #1e3a5f;
   --color-text: #e5e5e5;
@@ -33,6 +106,14 @@
   --color-text-muted: #9a9a9a;
   --color-text-light: #7a7a7a;
   --color-nav-inactive: #9a9a9a;
+  --color-success-bg: #1a3d2e;
+  --color-warning-bg: #3d2e1a;
+  --color-error-bg: #3d1a1a;
+  --color-info-bg: #1a2a3d;
+  --color-disabled-bg: #2d2d2d;
+  --color-disabled-text: #666;
+  --color-hover-overlay: rgba(255, 255, 255, 0.06);
   --shadow-card: 0px 3px 8px 0px rgba(0, 0, 0, 0.3);
   --shadow-nav: 0px -6px 12px 0px rgba(0, 0, 0, 0.3);
+  --shadow-modal: 0px 8px 24px 0px rgba(0, 0, 0, 0.4);
 }

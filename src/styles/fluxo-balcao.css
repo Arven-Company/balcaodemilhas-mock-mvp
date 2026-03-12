@@ -1,0 +1,246 @@
+/* Fluxo Balcão: Compra / Venda (etapas) */
+.fluxo-balcao-wrap .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5) var(--space-6);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  font-family: var(--font-family);
+  border: none;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+}
+
+.fluxo-balcao-wrap .btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.fluxo-balcao-wrap .btn-primary:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.fluxo-balcao-wrap .btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.fluxo-balcao-wrap .btn-outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.fluxo-balcao-wrap {
+  min-height: 100vh;
+  background: var(--color-bg);
+  padding-bottom: var(--height-nav);
+}
+
+.fluxo-back {
+  background: none;
+  border: none;
+  padding: var(--space-2) 0;
+  font-size: var(--text-base);
+  color: var(--color-primary);
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+.fluxo-progress {
+  margin-top: var(--space-5);
+}
+
+.fluxo-progress-text {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.fluxo-progress-bar {
+  height: 6px;
+  background: var(--color-border);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.fluxo-progress-fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: var(--radius-pill);
+  transition: width 0.2s ease;
+}
+
+.fluxo-content {
+  padding: var(--space-6) var(--space-7) var(--space-8);
+}
+
+.fluxo-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-7);
+  box-shadow: var(--shadow-card-soft);
+  margin-bottom: var(--space-6);
+}
+
+.fluxo-card h2 {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-3);
+}
+
+.fluxo-desc {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-5);
+  line-height: var(--line-height-normal);
+}
+
+.fluxo-check {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  cursor: pointer;
+  font-size: var(--text-base);
+  color: var(--color-text);
+  margin-bottom: var(--space-5);
+}
+
+.fluxo-check input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--color-primary);
+}
+
+.fluxo-card .btn {
+  margin-top: var(--space-3);
+  width: 100%;
+}
+
+.fluxo-card .btn + .btn {
+  margin-top: var(--space-3);
+}
+
+.fluxo-pix-placeholder {
+  padding: var(--space-6);
+  background: var(--color-bg);
+  border-radius: var(--radius-btn);
+  margin-bottom: var(--space-5);
+  text-align: center;
+}
+
+.fluxo-pix-qr {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto var(--space-5);
+  background: var(--color-border);
+  border-radius: var(--radius-btn);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.fluxo-pix-code {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  word-break: break-all;
+  margin: 0;
+}
+
+.fluxo-stepper {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-5);
+}
+
+.fluxo-stepper li {
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--text-base);
+  color: var(--color-text);
+}
+
+.fluxo-stepper li:last-child {
+  border-bottom: none;
+}
+
+.fluxo-stepper li.done {
+  color: var(--color-text-muted);
+}
+
+.fluxo-stepper li.done::before {
+  content: '✓ ';
+  color: var(--color-success);
+}
+
+/* Modal contraproposta (RN-OFF-01) */
+.fluxo-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: var(--space-6);
+}
+
+.fluxo-modal {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-modal);
+  padding: var(--space-7);
+  max-width: 360px;
+  width: 100%;
+  box-shadow: var(--shadow-modal);
+}
+
+.fluxo-modal-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-3);
+}
+
+.fluxo-modal-desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-5);
+}
+
+.fluxo-modal-input {
+  width: 100%;
+  padding: var(--space-5) var(--space-6);
+  font-size: var(--text-base);
+  font-family: var(--font-family);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-btn);
+  margin-bottom: var(--space-3);
+  box-sizing: border-box;
+}
+
+.fluxo-modal-input[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
+.fluxo-modal-error {
+  font-size: var(--text-sm);
+  color: var(--color-error);
+  margin: 0 0 var(--space-5);
+}
+
+.fluxo-modal-actions {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.fluxo-modal-actions .btn {
+  flex: 1;
+  margin: 0;
+}

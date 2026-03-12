@@ -1,5 +1,4 @@
 import { useApp } from './context/AppContext'
-import Verificacao from './pages/Verificacao'
 import Emissoes from './pages/Emissoes'
 import Balcao from './pages/Balcao'
 import Promocoes from './pages/Promocoes'
@@ -7,12 +6,8 @@ import Conta from './pages/Conta'
 import BottomNav from './components/BottomNav'
 import './App.css'
 
-function AppContent() {
-  const { verified, module } = useApp()
-
-  if (!verified) {
-    return <Verificacao />
-  }
+export default function App() {
+  const { module } = useApp()
 
   return (
     <div className="app-shell">
@@ -25,8 +20,4 @@ function AppContent() {
       <BottomNav />
     </div>
   )
-}
-
-export default function App() {
-  return <AppContent />
 }

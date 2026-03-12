@@ -1,0 +1,157 @@
+/* Detalhe do voo + calendário (RF-EMI-04) */
+.detalhe-voo {
+  padding-bottom: var(--space-8);
+}
+
+.detalhe-voo-header .app-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.detalhe-voo-back {
+  background: none;
+  border: none;
+  padding: var(--space-2);
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.detalhe-voo-card {
+  margin: 0 var(--space-7) var(--space-6);
+}
+
+.detalhe-voo-section {
+  margin: 0 var(--space-7) var(--space-6);
+  padding: var(--space-6);
+  background: var(--color-bg-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card-soft);
+  border: 1px solid var(--color-border);
+}
+
+.detalhe-voo-section-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-1);
+}
+
+.detalhe-voo-section-desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-5);
+}
+
+.detalhe-voo-calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-1);
+  margin-bottom: var(--space-3);
+  text-align: center;
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  color: var(--color-text-muted);
+}
+
+.detalhe-voo-calendar-grid {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.detalhe-voo-calendar-cell {
+  aspect-ratio: 1;
+  max-width: 48px;
+  max-height: 48px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-btn);
+  border: 1px solid transparent;
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  font-family: var(--font-family);
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+}
+
+.detalhe-voo-calendar-cell.empty {
+  visibility: hidden;
+  cursor: default;
+}
+
+.detalhe-voo-calendar-cell.available {
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.detalhe-voo-calendar-cell.available:hover {
+  border-color: var(--color-primary);
+  background: var(--color-info-bg);
+}
+
+.detalhe-voo-calendar-cell.selected {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.detalhe-voo-calendar-cell.unavailable {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.detalhe-voo-legend {
+  display: flex;
+  gap: var(--space-6);
+  margin-top: var(--space-5);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.detalhe-voo-legend-item.available::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: var(--space-2);
+  border-radius: 4px;
+  background: var(--color-primary);
+  vertical-align: middle;
+}
+
+.detalhe-voo-legend-item.unavailable::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: var(--space-2);
+  border-radius: 4px;
+  background: var(--color-border);
+  vertical-align: middle;
+}
+
+.detalhe-voo-actions {
+  padding: 0 var(--space-7);
+}
+
+.detalhe-voo-btn {
+  width: 100%;
+  padding: var(--space-5) var(--space-6);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  border: none;
+  border-radius: var(--radius-btn);
+  background: var(--color-primary);
+  color: white;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+.detalhe-voo-btn:disabled {
+  background: var(--color-disabled-bg);
+  color: var(--color-disabled-text);
+  cursor: not-allowed;
+}
