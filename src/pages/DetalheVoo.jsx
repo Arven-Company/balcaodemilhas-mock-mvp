@@ -14,17 +14,16 @@ function IconBack() {
 
 const DAYS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
 
-function Calendar({ selectedDate, onSelectDate, availableDates }) {
+function Calendar({ selectedDate, onSelectDate, availableDates, milesByDate }) {
   const year = 2025
   const month = 2 // março
   const firstDay = new Date(year, month, 1).getDay()
   const daysInMonth = new Date(year, month + 1, 0).getDate()
   const days = Array.from({ length: daysInMonth }, (_, i) => i + 1)
 
-  const isAvailable = (d) => {
-    const key = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`
-    return availableDates.includes(key)
-  }
+  const dateKey = (d) => `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`
+  const isAvailable = (d) => availableDates.includes(dateKey(d))
+  const getMiles = (d) => milesByDate[dateKey(d)] ?? null
   const isSelected = (d) => selectedDate && selectedDate.getDate() === d && selectedDate.getMonth() === month && selectedDate.getFullYear() === year
 
   return (
@@ -34,13 +33,14 @@ function Calendar({ selectedDate, onSelectDate, availableDates }) {
           <span key={d} className="detalhe-voo-calendar-weekday">{d}</span>
         ))}
       </div>
-      <div className="detalhe-voo-calendar-grid" style={{ gridTemplateColumns: 'repeat(7, 1fr)' }}>
+      <div className="detalhe-voo-calendar-grid">
         {Array.from({ length: firstDay }, (_, i) => (
           <span key={`empty-${i}`} className="detalhe-voo-calendar-cell empty" />
         ))}
         {days.map((d) => {
           const avail = isAvailable(d)
           const sel = isSelected(d)
+          const miles = getMiles(d)
           return (
             <button
               key={d}
@@ -49,7 +49,8 @@ function Calendar({ selectedDate, onSelectDate, availableDates }) {
               disabled={!avail}
               onClick={() => avail && onSelectDate(new Date(year, month, d))}
             >
-              {d}
+              <span className="detalhe-voo-calendar-day">{d}</span>
+              {avail && miles != null && <span className="detalhe-voo-calendar-miles">{miles}</span>}
             </button>
           )
         })}
@@ -58,11 +59,39 @@ function Calendar({ selectedDate, onSelectDate, availableDates }) {
   )
 }
 
+/* Mock: milhas por data (disponíveis para emissão) */
+const DEFAULT_MILES_BY_DATE = {
+  '2025-03-05': '120k',
+  '2025-03-08': '95k',
+  '2025-03-12': '110k',
+  '2025-03-15': '98k',
+  '2025-03-19': '125k',
+  '2025-03-22': '88k',
+  '2025-03-26': '102k',
+}
+
 export default function DetalheVoo({ card, onBack }) {
   const [selectedDate, setSelectedDate] = useState(null)
-  const availableDates = [
-    '2025-03-05', '2025-03-08', '2025-03-12', '2025-03-15', '2025-03-19', '2025-03-22', '2025-03-26',
-  ]
+  const [showConfirmModal, setShowConfirmModal] = useState(false)
+  const availableDates = Object.keys(DEFAULT_MILES_BY_DATE)
+  const milesByDate = DEFAULT_MILES_BY_DATE
+
+  const handleSolicitar = () => {
+    if (!selectedDate) return
+    setShowConfirmModal(true)
+  }
+
+  const handleCloseModal = () => setShowConfirmModal(false)
+
+  const handleNovaOrdem = () => {
+    setShowConfirmModal(false)
+    onBack?.()
+  }
+
+  const handleCriarOferta = () => {
+    setShowConfirmModal(false)
+    onBack?.()
+  }
 
   return (
     <div className="detalhe-voo">
@@ -119,6 +148,7 @@ export default function DetalheVoo({ card, onBack }) {
           selectedDate={selectedDate}
           onSelectDate={setSelectedDate}
           availableDates={availableDates}
+          milesByDate={milesByDate}
         />
         <div className="detalhe-voo-legend">
           <span className="detalhe-voo-legend-item available">Disponível</span>
@@ -130,12 +160,32 @@ export default function DetalheVoo({ card, onBack }) {
         <button
           type="button"
           className="btn-primary detalhe-voo-btn"
-          onClick={() => selectedDate && alert('Solicitação enviada ao balcão (simulado).')}
+          onClick={handleSolicitar}
           disabled={!selectedDate}
         >
           Solicitar no balcão
         </button>
       </div>
+
+      {showConfirmModal && (
+        <div className="detalhe-voo-modal-overlay" onClick={handleCloseModal}>
+          <div className="detalhe-voo-modal" onClick={(e) => e.stopPropagation()}>
+            <h2 className="detalhe-voo-modal-title">Solicitação enviada</h2>
+            <p className="detalhe-voo-modal-desc">Sua solicitação foi enviada ao balcão. O que deseja fazer agora?</p>
+            <div className="detalhe-voo-modal-actions">
+              <button type="button" className="detalhe-voo-modal-btn primary" onClick={handleNovaOrdem}>
+                Nova Ordem de Balcão
+              </button>
+              <button type="button" className="detalhe-voo-modal-btn secondary" onClick={handleCriarOferta}>
+                Criar Oferta de Compra
+              </button>
+              <button type="button" className="detalhe-voo-modal-btn outline" onClick={handleCloseModal}>
+                Ficar nesta tela
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

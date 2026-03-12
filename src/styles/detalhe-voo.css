@@ -45,9 +45,10 @@
 
 .detalhe-voo-calendar-header {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, 48px);
   gap: var(--space-1);
   margin-bottom: var(--space-3);
+  justify-content: center;
   text-align: center;
   font-size: var(--text-xs);
   font-weight: var(--font-medium);
@@ -56,25 +57,40 @@
 
 .detalhe-voo-calendar-grid {
   display: grid;
-  gap: var(--space-2);
+  grid-template-columns: repeat(7, 48px);
+  gap: var(--space-1);
+  justify-content: center;
 }
 
 .detalhe-voo-calendar-cell {
-  aspect-ratio: 1;
-  max-width: 48px;
-  max-height: 48px;
-  margin: 0 auto;
+  width: 48px;
+  height: 48px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-btn);
   border: 1px solid transparent;
-  font-size: var(--text-sm);
-  font-weight: var(--font-medium);
-  cursor: pointer;
   font-family: var(--font-family);
+  cursor: pointer;
   background: var(--color-bg);
   color: var(--color-text-muted);
+  padding: var(--space-1);
+  box-sizing: border-box;
+}
+
+.detalhe-voo-calendar-day {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  line-height: 1.1;
+}
+
+.detalhe-voo-calendar-miles {
+  font-size: 9px;
+  font-weight: var(--font-medium);
+  line-height: 1.1;
+  color: inherit;
+  opacity: 0.9;
 }
 
 .detalhe-voo-calendar-cell.empty {
@@ -96,6 +112,10 @@
   background: var(--color-primary);
   color: white;
   border-color: var(--color-primary);
+}
+
+.detalhe-voo-calendar-cell.selected .detalhe-voo-calendar-miles {
+  opacity: 1;
 }
 
 .detalhe-voo-calendar-cell.unavailable {
@@ -154,4 +174,72 @@
   background: var(--color-disabled-bg);
   color: var(--color-disabled-text);
   cursor: not-allowed;
+}
+
+/* Modal confirmação Solicitar no balcão (Figma: Nova Ordem / Criar Oferta) */
+.detalhe-voo-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: var(--space-6);
+}
+
+.detalhe-voo-modal {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-modal);
+  padding: var(--space-7);
+  max-width: 360px;
+  width: 100%;
+  box-shadow: var(--shadow-modal);
+}
+
+.detalhe-voo-modal-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-3);
+}
+
+.detalhe-voo-modal-desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-6);
+}
+
+.detalhe-voo-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.detalhe-voo-modal-btn {
+  width: 100%;
+  padding: var(--space-5) var(--space-6);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  font-family: var(--font-family);
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  border: none;
+}
+
+.detalhe-voo-modal-btn.primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.detalhe-voo-modal-btn.secondary {
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.detalhe-voo-modal-btn.outline {
+  background: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
 }
