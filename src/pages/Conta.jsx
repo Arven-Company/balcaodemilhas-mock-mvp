@@ -2,16 +2,15 @@ import { useState, useRef, useEffect } from 'react'
 import { useApp } from '../context/AppContext'
 import { FIGMA_ASSETS } from '../assets/figma-assets'
 import { MOCK_HISTORICO_VENDAS, MOCK_PLANOS } from '../data/mocks'
-import Planos from './Planos'
 import '../styles/app-layout.css'
 import '../styles/conta.css'
 
 export default function Conta() {
-  const { theme, toggleTheme } = useApp()
+  const { profile, setScreen } = useApp()
   const [historicoView, setHistoricoView] = useState('list') // list | detail
-  const [contaView, setContaView] = useState('painel') // painel | planos
   const [selectedTransacao, setSelectedTransacao] = useState(null)
   const planosRef = useRef(null)
+  const avatarSrc = profile?.avatarUrl?.trim() || FIGMA_ASSETS.avatar
 
   const handleHistoricoClick = (t) => {
     setSelectedTransacao(t)
@@ -53,10 +52,6 @@ export default function Conta() {
     return () => container.removeEventListener('scroll', onScroll)
   }, [])
 
-  if (contaView === 'planos') {
-    return <Planos onBack={() => setContaView('painel')} />
-  }
-
   if (historicoView === 'detail' && selectedTransacao) {
     return (
       <div className="conta-detalhe-wrap">
@@ -90,12 +85,15 @@ export default function Conta() {
       <div className="app-list conta-list">
         <section className="conta-painel card-balcao">
           <div className="conta-painel-inner">
-            <img src={FIGMA_ASSETS.avatar} alt="" className="conta-avatar" />
+            <img src={avatarSrc} alt="" className="conta-avatar" />
             <div>
-              <h2 className="conta-nome">Marcelo Campos</h2>
+              <h2 className="conta-nome">{profile?.name ?? 'Usuário'}</h2>
               <p className="conta-plano-label">Plano Básico</p>
             </div>
           </div>
+          <button type="button" className="conta-planos-link" onClick={() => setScreen('editar-perfil')} style={{ display: 'block', marginTop: 'var(--space-3)' }}>
+            Editar perfil
+          </button>
         </section>
 
         <section className="conta-section">
@@ -129,15 +127,15 @@ export default function Conta() {
               </div>
             ))}
           </div>
-          <button type="button" className="conta-planos-link" onClick={() => setContaView('planos')}>Comparar planos</button>
+          <button type="button" className="conta-planos-link" onClick={() => setScreen('planos')}>Comparar planos</button>
         </section>
 
         <section className="conta-section card-balcao">
           <h3 className="conta-section-title">Configurações</h3>
-          <label className="conta-config-row">
-            <span className="conta-config-label">Tema escuro</span>
-            <input type="checkbox" checked={theme === 'dark'} onChange={toggleTheme} className="conta-config-toggle" aria-label="Alternar tema escuro" />
-          </label>
+          <button type="button" className="conta-config-row" onClick={() => setScreen('configuracoes')}>
+            <span className="conta-config-label">Configurações</span>
+            <span aria-hidden>→</span>
+          </button>
         </section>
       </div>
     </>

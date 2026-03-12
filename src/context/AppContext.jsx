@@ -18,10 +18,39 @@ export function AppProvider({ children }) {
     }
   })
   const [module, setModule] = useState('emissoes') // emissoes | balcao | promocoes | conta
+  const [screen, setScreen] = useState('') // '' | contrato | configuracoes | editar-perfil | planos | plan-success | filtros
+  const [contractAccepted, setContractAccepted] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('milhas_contract_accepted') ?? 'false')
+    } catch {
+      return false
+    }
+  })
+  const [filters, setFilters] = useState({ airlines: [], milesMin: 0, milesMax: 500000 })
+  const [profile, setProfile] = useState(() => {
+    try {
+      const raw = localStorage.getItem('milhas_profile')
+      if (raw) return JSON.parse(raw)
+    } catch {}
+    return { name: 'Marcelo Campos', avatarUrl: '' }
+  })
+  const [purchasedPlanName, setPurchasedPlanName] = useState(null)
 
   useEffect(() => {
     localStorage.setItem('milhas_verified', JSON.stringify(verified))
   }, [verified])
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('milhas_contract_accepted', JSON.stringify(contractAccepted))
+    } catch (_) {}
+  }, [contractAccepted])
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('milhas_profile', JSON.stringify(profile))
+    } catch (_) {}
+  }, [profile])
 
   useEffect(() => {
     try {
@@ -42,6 +71,16 @@ export function AppProvider({ children }) {
         toggleTheme,
         module,
         setModule,
+        screen,
+        setScreen,
+        contractAccepted,
+        setContractAccepted,
+        filters,
+        setFilters,
+        profile,
+        setProfile,
+        purchasedPlanName,
+        setPurchasedPlanName,
       }}
     >
       {children}

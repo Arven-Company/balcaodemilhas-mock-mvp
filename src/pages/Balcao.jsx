@@ -11,6 +11,8 @@ import TermosVenda from '../components/fluxo-venda/TermosVenda'
 import AguardoVenda from '../components/fluxo-venda/AguardoVenda'
 import StepperVenda from '../components/fluxo-venda/StepperVenda'
 import ConfirmacaoVenda from '../components/fluxo-venda/ConfirmacaoVenda'
+import MotivoDisputa from '../components/fluxo-disputa/MotivoDisputa'
+import StatusDisputa from '../components/fluxo-disputa/StatusDisputa'
 import '../styles/cards.css'
 import '../styles/app-layout.css'
 import '../styles/fluxo-balcao.css'
@@ -21,8 +23,9 @@ const FLOW_VENDA_STEPS = ['Termos', 'Aguardo comprador', 'Stepper', 'Confirmaç�
 export default function Balcao() {
   const { verified, completeVerification } = useApp()
   const [tab, setTab] = useState('compra')
-  const [view, setView] = useState('list') // list | verificacao | flow
+  const [view, setView] = useState('list') // list | verificacao | flow | dispute-reason | dispute-status
   const [flowType, setFlowType] = useState(null) // 'compra' | 'venda'
+  const [disputeReason, setDisputeReason] = useState(null)
   const [flowStep, setFlowStep] = useState(1)
   const [selectedOffer, setSelectedOffer] = useState(null)
   const [termsAccepted, setTermsAccepted] = useState(false)
@@ -134,6 +137,14 @@ export default function Balcao() {
     setSelectedOffer(null)
   }
 
+  const handleFinishDisputeFlow = () => {
+    setDisputeReason(null)
+    setView('list')
+    setFlowType(null)
+    setFlowStep(1)
+    setSelectedOffer(null)
+  }
+
   const minContraproposta = Math.ceil(contraproposta.originalValue * 0.85)
   const handleOpenContraproposta = (offer) => {
     const originalValue = offer?.originalValue ?? 100
@@ -175,6 +186,33 @@ export default function Balcao() {
     )
   }
 
+  if (view === 'dispute-reason' && selectedOffer) {
+    return (
+      <div className="fluxo-balcao-wrap">
+        <MotivoDisputa
+          offer={selectedOffer}
+          onBack={() => setView('flow')}
+          onConfirm={(reason) => {
+            setDisputeReason(reason)
+            setView('dispute-status')
+          }}
+        />
+      </div>
+    )
+  }
+
+  if (view === 'dispute-status' && selectedOffer) {
+    return (
+      <div className="fluxo-balcao-wrap">
+        <StatusDisputa
+          offer={selectedOffer}
+          reason={disputeReason}
+          onDone={handleFinishDisputeFlow}
+        />
+      </div>
+    )
+  }
+
   if (view === 'flow' && flowType) {
     return (
       <div className="fluxo-balcao-wrap">
@@ -184,7 +222,9 @@ export default function Balcao() {
               ← Voltar
             </button>
             <h1 className="app-header-title">{flowType === 'compra' ? 'Compra' : 'Venda'}</h1>
-            <span style={{ width: 80 }} />
+            <button type="button" className="fluxo-back" onClick={() => setView('dispute-reason')} style={{ marginLeft: 'auto' }}>
+              Abrir disputa
+            </button>
           </div>
           <div className="fluxo-progress">
             <span className="fluxo-progress-text">Etapa {flowStep} de {totalSteps}</span>

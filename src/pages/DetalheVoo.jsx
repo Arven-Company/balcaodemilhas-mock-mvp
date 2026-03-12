@@ -12,11 +12,11 @@ function IconBack() {
   )
 }
 
-const DAYS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
+const MONTH_NAMES = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
 
 function Calendar({ selectedDate, onSelectDate, availableDates, milesByDate }) {
   const year = 2025
-  const month = 2 // março
+  const month = 2 // março (0-indexed)
   const firstDay = new Date(year, month, 1).getDay()
   const daysInMonth = new Date(year, month + 1, 0).getDate()
   const days = Array.from({ length: daysInMonth }, (_, i) => i + 1)
@@ -28,9 +28,11 @@ function Calendar({ selectedDate, onSelectDate, availableDates, milesByDate }) {
 
   return (
     <div className="detalhe-voo-calendar">
-      <div className="detalhe-voo-calendar-header">
-        {DAYS.map((d) => (
-          <span key={d} className="detalhe-voo-calendar-weekday">{d}</span>
+      <div className="detalhe-voo-calendar-month-row">
+        {MONTH_NAMES.map((name, i) => (
+          <span key={name} className={`detalhe-voo-calendar-month ${i === month ? 'current' : ''}`}>
+            {name}
+          </span>
         ))}
       </div>
       <div className="detalhe-voo-calendar-grid">

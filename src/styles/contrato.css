@@ -1,0 +1,96 @@
+/* Contrato de Intermediação */
+.contrato-wrap {
+  min-height: 100vh;
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: var(--height-nav);
+}
+
+.contrato-content {
+  flex: 1;
+  padding: var(--space-6) var(--space-7);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.contrato-step {
+  margin-bottom: var(--space-7);
+}
+
+.contrato-step-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-5);
+}
+
+.contrato-step-text {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+}
+
+.contrato-termos {
+  height: 240px;
+  overflow-y: auto;
+  padding: var(--space-5);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.contrato-termos p {
+  margin: 0 0 var(--space-3);
+  line-height: var(--line-height-normal);
+}
+
+.contrato-termos p:last-child {
+  margin-bottom: 0;
+}
+
+.contrato-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.contrato-btn-primary {
+  width: 100%;
+  min-height: var(--height-btn-touch);
+  padding: var(--space-4) var(--space-6);
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  font-family: var(--font-family);
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+}
+
+.contrato-btn-primary:hover {
+  opacity: 0.9;
+}
+
+.contrato-btn-skip {
+  width: 100%;
+  padding: var(--space-4) var(--space-6);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  font-family: var(--font-family);
+  background: transparent;
+  color: var(--color-text-muted);
+  border: none;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+}
+
+.contrato-btn-skip:hover {
+  background: var(--color-hover-overlay);
+}

@@ -1,0 +1,5 @@
+{
+  "name": "Millas Balcão",
+  "description": "A web application for buying and selling airline miles, browsing flight deals, and managing offers in a marketplace, powered by Gemini.",
+  "requestFramePermissions": []
+}

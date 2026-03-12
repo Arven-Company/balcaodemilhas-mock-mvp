@@ -1,9 +1,11 @@
 import { useRef, useEffect } from 'react'
+import { useApp } from '../context/AppContext'
 import { MOCK_PLANOS } from '../data/mocks'
 import '../styles/app-layout.css'
 import '../styles/conta.css'
 
 export default function Planos({ onBack }) {
+  const { setPurchasedPlanName, setScreen } = useApp()
   const planosRef = useRef(null)
 
   useEffect(() => {
@@ -48,7 +50,16 @@ export default function Planos({ onBack }) {
                   <li key={i}>{f}</li>
                 ))}
               </ul>
-              <button type="button" className="conta-plano-btn">Selecionar</button>
+                <button
+                  type="button"
+                  className="conta-plano-btn"
+                  onClick={() => {
+                    setPurchasedPlanName(pl.name)
+                    setScreen('plan-success')
+                  }}
+                >
+                  Selecionar
+                </button>
             </div>
           ))}
         </div>

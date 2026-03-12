@@ -1,0 +1,51 @@
+.editar-perfil-content {
+  flex: 1;
+  padding: var(--space-6) var(--space-7);
+}
+
+.editar-perfil-avatar-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-7);
+}
+
+.editar-perfil-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--color-border);
+}
+
+.editar-perfil-label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.editar-perfil-label span {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-text-secondary);
+}
+
+.editar-perfil-input {
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--text-base);
+  font-family: var(--font-family);
+  color: var(--color-text);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-btn);
+}
+
+.editar-perfil-input:focus {
+  outline: none;
+  border-color: var(--color-focus-ring);
+  box-shadow: 0 0 0 2px var(--color-info-bg);
+}
+
+.editar-perfil-content .contrato-btn-primary {
+  margin-top: var(--space-4);
+}

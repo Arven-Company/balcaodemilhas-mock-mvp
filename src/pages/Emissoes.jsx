@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useApp } from '../context/AppContext'
 import { FIGMA_ASSETS } from '../assets/figma-assets'
 import { MOCK_EMISSOES, MOCK_FONTES_EMISSOES } from '../data/mocks'
 import DetalheVoo from './DetalheVoo'
@@ -6,6 +7,7 @@ import '../styles/cards.css'
 import '../styles/app-layout.css'
 
 export default function Emissoes() {
+  const { setScreen } = useApp()
   const [view, setView] = useState('list')
   const [selectedCard, setSelectedCard] = useState(null)
 
@@ -42,7 +44,7 @@ export default function Emissoes() {
         <div className="app-filters">
           <button type="button" className="app-filter-pill active">Companhias</button>
           <button type="button" className="app-filter-pill">10.02.2025 - 12/03/2025</button>
-          <button type="button" className="app-filter-pill">
+          <button type="button" className="app-filter-pill" onClick={() => setScreen('filtros')}>
             <img src={FIGMA_ASSETS.iconFilter} alt="" style={{ width: 16, height: 16, verticalAlign: 'middle', marginRight: 4 }} />
             Filtros
           </button>

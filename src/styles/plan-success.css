@@ -1,0 +1,41 @@
+.plan-success-wrap .plan-success-content {
+  flex: 1;
+  padding: var(--space-7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plan-success-card {
+  width: 100%;
+  padding: var(--space-8);
+  text-align: center;
+}
+
+.plan-success-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto var(--space-6);
+  background: var(--color-success-bg);
+  color: var(--color-success);
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plan-success-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-4);
+}
+
+.plan-success-text {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--space-7);
+  line-height: var(--line-height-relaxed);
+}
