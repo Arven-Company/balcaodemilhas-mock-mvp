@@ -77,7 +77,7 @@
 }
 
 .app-filter-pill.active {
-  background: linear-gradient(to right, #fff, #f4f9ff);
+  background: linear-gradient(to right, var(--color-bg-card), var(--color-info-bg));
   border-color: var(--color-border-filter);
 }
 

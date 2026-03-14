@@ -129,18 +129,18 @@
 }
 
 .detalhe-voo-calendar-month-cell.available {
-  background: #e3f5f5;
-  color: #3f6262;
+  background: var(--color-info-bg);
+  color: var(--color-text-secondary);
 }
 
 .detalhe-voo-calendar-month-cell.available:hover {
-  background: #ccebeb;
+  background: var(--color-accent-light);
 }
 
 .detalhe-voo-calendar-month-cell.unavailable {
   opacity: 0.4;
   cursor: not-allowed;
-  color: #212121;
+  color: var(--color-text);
 }
 
 .detalhe-voo-calendar-month-cell.selected,
@@ -168,14 +168,14 @@
   outline: none;
 }
 
-/* Figma: legenda — círculo 19px, Disponível #e3f5f5, Indisponível #e8e8e8, texto 14px #3f6262 */
+/* Legenda calendário: Disponível / Indisponível */
 .detalhe-voo-legend {
   display: flex;
   gap: var(--space-6);
   margin-top: var(--space-6);
   font-size: 14px;
   font-weight: var(--font-medium);
-  color: #3f6262;
+  color: var(--color-text-secondary);
 }
 
 .detalhe-voo-legend-item.available::before {
@@ -185,7 +185,7 @@
   height: 19px;
   margin-right: 5px;
   border-radius: 39px;
-  background: #e3f5f5;
+  background: var(--color-info-bg);
   vertical-align: middle;
 }
 
@@ -196,7 +196,7 @@
   height: 19px;
   margin-right: 5px;
   border-radius: 39px;
-  background: #e8e8e8;
+  background: var(--color-border);
   vertical-align: middle;
 }
 
