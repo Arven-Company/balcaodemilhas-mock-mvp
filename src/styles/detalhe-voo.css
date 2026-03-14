@@ -196,7 +196,7 @@
   height: 19px;
   margin-right: 5px;
   border-radius: 39px;
-  background: var(--color-border);
+  background: #d0d0d0;
   vertical-align: middle;
 }
 
@@ -235,9 +235,13 @@
 }
 
 .detalhe-voo-ordem-logo {
-  height: 18px;
+  height: 24px;
   width: auto;
+  max-width: 120px;
   object-fit: contain;
+  object-position: left center;
+  border-radius: 0;
+  display: block;
   margin-bottom: var(--space-2);
 }
 

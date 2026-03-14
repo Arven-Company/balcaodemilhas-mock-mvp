@@ -94,7 +94,7 @@
   gap: var(--space-2);
 }
 
-.card-emissao-agent img {
+.card-emissao-agent > img:not(.card-emissao-agent-logo) {
   width: var(--size-avatar-sm);
   height: var(--size-avatar-sm);
   border-radius: calc(var(--size-avatar-sm) / 2);
@@ -126,11 +126,14 @@
 }
 
 .card-emissao-agent-logo {
-  height: 18px;
+  height: 20px;
   width: auto;
-  max-width: 80px;
+  max-width: 100px;
   object-fit: contain;
+  object-position: left center;
   flex-shrink: 0;
+  border-radius: 0;
+  display: block;
 }
 
 .card-emissao-agent-type {
@@ -151,9 +154,13 @@
 }
 
 .card-emissao-airline .logo {
-  height: 18px;
+  height: 20px;
   width: auto;
+  max-width: 100px;
   object-fit: contain;
+  object-position: center;
+  border-radius: 0;
+  display: block;
 }
 
 .card-emissao-airline .type {
