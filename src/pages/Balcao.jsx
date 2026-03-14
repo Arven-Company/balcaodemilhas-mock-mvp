@@ -21,7 +21,7 @@ const FLOW_COMPRA_STEPS = ['Termos', 'PIX', 'Chat', 'Aguardo', 'Confirmação']
 const FLOW_VENDA_STEPS = ['Termos', 'Aguardo comprador', 'Stepper', 'Confirmação']
 
 export default function Balcao() {
-  const { verified, completeVerification } = useApp()
+  const { verified, completeVerification, setScreen, setSelectedOfferForMakeOffer } = useApp()
   const [tab, setTab] = useState('compra')
   const [view, setView] = useState('list') // list | verificacao | flow | dispute-reason | dispute-status
   const [flowType, setFlowType] = useState(null) // 'compra' | 'venda'
@@ -334,7 +334,7 @@ export default function Balcao() {
               </div>
             </div>
             <div className="card-balcao-actions">
-              <button type="button" className="btn-outline" onClick={(e) => { e.stopPropagation(); handleOpenContraproposta(item); }}>Fazer oferta</button>
+              <button type="button" className="btn-outline" onClick={(e) => { e.stopPropagation(); setSelectedOfferForMakeOffer(item); setScreen('make-offer'); }}>Fazer oferta</button>
               <button
                 type="button"
                 className="btn-primary"

@@ -7,7 +7,7 @@ import '../styles/cards.css'
 import '../styles/app-layout.css'
 
 export default function Emissoes() {
-  const { setScreen, setHideBottomNav } = useApp()
+  const { setScreen, setHideBottomNav, setSelectedFlightForOffer } = useApp()
   const [view, setView] = useState('list')
   const [selectedCard, setSelectedCard] = useState(null)
 
@@ -38,6 +38,10 @@ export default function Emissoes() {
         card={selectedCard}
         onBack={() => {
           window.history.back()
+        }}
+        onNavigateToCreateOffer={(card) => {
+          setSelectedFlightForOffer(card)
+          setScreen('create-purchase-offer')
         }}
       />
     )

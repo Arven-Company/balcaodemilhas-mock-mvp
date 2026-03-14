@@ -3,8 +3,9 @@ import '../styles/app-layout.css'
 import '../styles/conta.css'
 import '../styles/contrato.css'
 
-export default function Contrato({ onFinish, onSkip }) {
+export default function Contrato({ onFinish, onSkip, onBack, mode = 'gate' }) {
   const [step, setStep] = useState(1)
+  const isConsult = mode === 'consult'
 
   const renderStepContent = () => {
     switch (step) {
@@ -52,8 +53,8 @@ export default function Contrato({ onFinish, onSkip }) {
               ← Voltar
             </button>
           ) : (
-            <button type="button" className="conta-back" onClick={onSkip} aria-label="Pular">
-              Pular
+            <button type="button" className="conta-back" onClick={isConsult ? onBack : onSkip} aria-label={isConsult ? 'Voltar' : 'Pular'}>
+              {isConsult ? '← Voltar' : 'Pular'}
             </button>
           )}
           <h1 className="app-header-title">Contrato</h1>
@@ -63,19 +64,36 @@ export default function Contrato({ onFinish, onSkip }) {
       <div className="contrato-content">
         {renderStepContent()}
         <div className="contrato-actions">
-          {step < 3 && (
-            <button type="button" className="contrato-btn-primary" onClick={() => setStep(step + 1)}>
-              Próximo
-            </button>
+          {isConsult ? (
+            <>
+              {step < 3 && (
+                <button type="button" className="contrato-btn-primary" onClick={() => setStep(step + 1)}>
+                  Próximo
+                </button>
+              )}
+              {step === 3 && (
+                <button type="button" className="contrato-btn-primary" onClick={onBack}>
+                  Voltar
+                </button>
+              )}
+            </>
+          ) : (
+            <>
+              {step < 3 && (
+                <button type="button" className="contrato-btn-primary" onClick={() => setStep(step + 1)}>
+                  Próximo
+                </button>
+              )}
+              {step === 3 && (
+                <button type="button" className="contrato-btn-primary" onClick={onFinish}>
+                  Aceitar e Finalizar
+                </button>
+              )}
+              <button type="button" className="contrato-btn-skip" onClick={onSkip}>
+                Pular por enquanto
+              </button>
+            </>
           )}
-          {step === 3 && (
-            <button type="button" className="contrato-btn-primary" onClick={onFinish}>
-              Aceitar e Finalizar
-            </button>
-          )}
-          <button type="button" className="contrato-btn-skip" onClick={onSkip}>
-            Pular por enquanto
-          </button>
         </div>
       </div>
     </div>

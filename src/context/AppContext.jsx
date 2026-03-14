@@ -36,6 +36,8 @@ export function AppProvider({ children }) {
   })
   const [purchasedPlanName, setPurchasedPlanName] = useState(null)
   const [hideBottomNav, setHideBottomNav] = useState(false)
+  const [selectedFlightForOffer, setSelectedFlightForOffer] = useState(null)
+  const [selectedOfferForMakeOffer, setSelectedOfferForMakeOffer] = useState(null)
 
   useEffect(() => {
     localStorage.setItem('milhas_verified', JSON.stringify(verified))
@@ -84,6 +86,10 @@ export function AppProvider({ children }) {
         setPurchasedPlanName,
         hideBottomNav,
         setHideBottomNav,
+        selectedFlightForOffer,
+        setSelectedFlightForOffer,
+        selectedOfferForMakeOffer,
+        setSelectedOfferForMakeOffer,
       }}
     >
       {children}

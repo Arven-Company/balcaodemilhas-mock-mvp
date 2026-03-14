@@ -323,3 +323,334 @@
 .conta-detalhe-card p:last-child {
   margin-bottom: 0;
 }
+
+/* Admin */
+.conta-admin-desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin: var(--space-2) 0 0;
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.conta-admin-card {
+  width: 100%;
+  text-align: left;
+  border: none;
+  font-family: var(--font-family);
+  background: transparent;
+}
+
+.admin-label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+}
+
+.admin-dates-wrap {
+  overflow-y: auto;
+  max-height: 50vh;
+}
+
+.admin-dates-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.admin-dates-month-title {
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  text-align: center;
+  margin: 0 0 var(--space-3);
+  text-transform: capitalize;
+}
+
+.admin-dates-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  text-align: center;
+}
+
+.admin-dates-cell {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  font-size: var(--text-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+.admin-dates-cell:hover {
+  background: var(--color-info-bg);
+}
+
+.admin-dates-cell--selected {
+  background: var(--color-primary);
+  color: white;
+}
+
+.admin-dates-cell--empty {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.admin-success-content {
+  text-align: center;
+}
+
+.admin-success-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--space-6);
+  background: var(--color-success);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: var(--font-bold);
+}
+
+.admin-success-title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-3);
+}
+
+.admin-success-desc {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-6);
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Create ad / Select plan */
+.select-ad-plan-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.select-ad-plan-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: var(--space-6);
+  background: var(--color-bg-card);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-card);
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.select-ad-plan-card:hover {
+  border-color: var(--color-primary);
+}
+
+.select-ad-plan-card--selected {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-info-bg);
+}
+
+.select-ad-plan-name {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-2);
+}
+
+.select-ad-plan-price {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-4);
+}
+
+.select-ad-plan-duration {
+  font-size: var(--text-base);
+  font-weight: var(--font-regular);
+  color: var(--color-text-muted);
+}
+
+.select-ad-plan-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.select-ad-plan-benefits li {
+  margin-bottom: var(--space-2);
+  padding-left: var(--space-5);
+  position: relative;
+}
+
+.select-ad-plan-benefits li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-success);
+  font-weight: var(--font-bold);
+}
+
+.conta-ad-banner {
+  display: block;
+  width: 100%;
+  padding: var(--space-5) var(--space-6);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-family);
+  margin-bottom: var(--space-4);
+  transition: box-shadow 0.2s;
+}
+
+.conta-ad-banner:hover {
+  box-shadow: var(--shadow-card);
+}
+
+.conta-ad-banner-title {
+  display: block;
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+}
+
+.conta-ad-banner-desc {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.conta-empty-state {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: var(--text-base);
+  margin: var(--space-6) 0;
+}
+
+/* Sale detail stepper */
+.sale-detail-card {
+  margin-bottom: var(--space-6);
+}
+
+.sale-detail-miles {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--color-text);
+  margin: var(--space-2) 0;
+}
+
+.sale-detail-meta {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.sale-detail-stepper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sale-detail-stepper-row {
+  position: relative;
+}
+
+.sale-detail-stepper-line {
+  width: 2px;
+  height: var(--space-5);
+  background: var(--color-border);
+  margin-left: 7px;
+  margin-bottom: var(--space-2);
+}
+
+.sale-detail-stepper-item {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+
+.sale-detail-stepper-node-wrap {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sale-detail-stepper-node {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-border);
+}
+
+.sale-detail-stepper-node--done {
+  background: var(--color-success);
+}
+
+.sale-detail-stepper-content {
+  padding-bottom: var(--space-5);
+}
+
+.sale-detail-stepper-title {
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-1);
+}
+
+.sale-detail-stepper-title--pending {
+  color: var(--color-text-muted);
+}
+
+.sale-detail-stepper-desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.sale-detail-stepper-desc--pending {
+  color: var(--color-text-muted);
+}
+
+.create-offer-flight-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-2);
+}
+
+.create-offer-flight-price {
+  font-size: var(--text-base);
+  color: var(--color-primary);
+  margin: 0 0 var(--space-4);
+}
+
+.create-offer-placeholder {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin: 0;
+}

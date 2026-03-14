@@ -3,7 +3,7 @@ import '../styles/app-layout.css'
 import '../styles/conta.css'
 import '../styles/contrato.css'
 
-export default function Configuracoes({ onBack }) {
+export default function Configuracoes({ onBack, onOpenAdmin }) {
   const { theme, toggleTheme } = useApp()
 
   return (
@@ -31,6 +31,15 @@ export default function Configuracoes({ onBack }) {
             />
           </label>
         </section>
+        {onOpenAdmin && (
+          <section className="conta-section card-balcao">
+            <h3 className="conta-section-title">Administração</h3>
+            <button type="button" className="conta-config-row" onClick={onOpenAdmin}>
+              <span className="conta-config-label">Painel Administrador</span>
+              <span aria-hidden>→</span>
+            </button>
+          </section>
+        )}
       </div>
     </div>
   )

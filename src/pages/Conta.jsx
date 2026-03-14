@@ -75,6 +75,19 @@ export default function Conta() {
         </section>
 
         <section className="conta-section">
+          <button type="button" className="conta-ad-banner" onClick={() => setScreen('create-ad')}>
+            <span className="conta-ad-banner-title">Anunciar na Aba Emissões</span>
+            <span className="conta-ad-banner-desc">Destaque sua oferta para mais compradores.</span>
+          </button>
+        </section>
+        <section className="conta-section card-balcao">
+          <h3 className="conta-section-title">Vendas</h3>
+          <button type="button" className="conta-config-row" onClick={() => setScreen('my-sales')}>
+            <span className="conta-config-label">Minhas Vendas</span>
+            <span aria-hidden>→</span>
+          </button>
+        </section>
+        <section className="conta-section">
           <h3 className="conta-section-title">Histórico de vendas</h3>
           <ul className="conta-historico">
             {MOCK_HISTORICO_VENDAS.map((t) => (
@@ -103,6 +116,10 @@ export default function Conta() {
 
         <section className="conta-section card-balcao">
           <h3 className="conta-section-title">Configurações</h3>
+          <button type="button" className="conta-config-row" onClick={() => setScreen('contrato')}>
+            <span className="conta-config-label">Contrato de Intermediação</span>
+            <span aria-hidden>→</span>
+          </button>
           <button type="button" className="conta-config-row" onClick={() => setScreen('configuracoes')}>
             <span className="conta-config-label">Configurações</span>
             <span aria-hidden>→</span>

@@ -109,7 +109,7 @@ const DEFAULT_MILES_BY_DATE = {
   '2025-03-26': '102k',
 }
 
-export default function DetalheVoo({ card, onBack }) {
+export default function DetalheVoo({ card, onBack, onNavigateToCreateOffer }) {
   const [selectedDate, setSelectedDate] = useState(null)
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const availableDates = Object.keys(DEFAULT_MILES_BY_DATE)
@@ -216,7 +216,7 @@ export default function DetalheVoo({ card, onBack }) {
               <button
                 type="button"
                 className="detalhe-voo-ordem-btn"
-                onClick={handleSolicitar}
+                onClick={() => (onNavigateToCreateOffer ? onNavigateToCreateOffer(card) : handleSolicitar())}
               >
                 Criar Oferta de Compra
               </button>
