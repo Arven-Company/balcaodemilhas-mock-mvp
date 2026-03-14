@@ -34,6 +34,10 @@
   margin-bottom: var(--space-5);
 }
 
+.app-header-row--no-margin {
+  margin-bottom: 0;
+}
+
 .app-header-title {
   font-size: var(--text-xl);
   font-weight: var(--font-semibold);
@@ -119,6 +123,137 @@
 .app-filters-balcao .app-layout-btn {
   font-size: var(--text-sm);
   padding: var(--space-3) var(--space-5);
+}
+
+/* Balcão: toolbar com Filtro e Ordenar (abrem drawer) */
+.app-filters-balcao-toolbar {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.app-filters-balcao-buttons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.app-filter-sort-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-filter);
+  background: var(--color-bg-card);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-text);
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.app-filter-sort-btn:hover {
+  background: var(--color-hover-overlay);
+}
+
+.app-filter-sort-btn.active {
+  background: var(--color-info-bg);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.app-filter-sort-btn svg {
+  flex-shrink: 0;
+}
+
+/* Drawer Balcão (Filtro / Ordenar) */
+.balcao-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg-overlay);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 100;
+}
+
+.balcao-drawer {
+  background: var(--color-bg-card);
+  width: 100%;
+  max-width: var(--width-app-max);
+  max-height: 70vh;
+  border-radius: var(--radius-modal) var(--radius-modal) 0 0;
+  box-shadow: var(--shadow-modal);
+  padding: var(--space-4) var(--space-7) var(--space-8);
+  padding-bottom: calc(var(--space-8) + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.balcao-drawer-handle {
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-border);
+  margin: 0 auto var(--space-2);
+  flex-shrink: 0;
+}
+
+.balcao-drawer-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.balcao-drawer-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+.balcao-drawer-option {
+  display: block;
+  width: 100%;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-card);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: var(--color-text);
+  font-family: var(--font-family);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.balcao-drawer-option:hover {
+  background: var(--color-hover-overlay);
+}
+
+.balcao-drawer-option.active {
+  background: var(--color-info-bg);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.balcao-drawer-apply {
+  width: 100%;
+  padding: var(--space-5) var(--space-6);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  border-radius: var(--radius-btn);
+  flex-shrink: 0;
 }
 
 .app-filter-select {

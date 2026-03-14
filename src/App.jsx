@@ -23,6 +23,7 @@ import DetalheVenda from './pages/conta/DetalheVenda'
 import CreatePurchaseOffer from './pages/emissoes/CreatePurchaseOffer'
 import MakeOffer from './pages/balcao/MakeOffer'
 import BottomNav from './components/BottomNav'
+import ToastContainer from './components/Toast'
 import './App.css'
 
 export default function App() {
@@ -40,6 +41,9 @@ export default function App() {
     setSelectedFlightForOffer,
     selectedOfferForMakeOffer,
     setSelectedOfferForMakeOffer,
+    toasts,
+    removeToast,
+    addToast,
   } = useApp()
   const [adminNewEmission, setAdminNewEmission] = useState(null)
   const [adminSuccessInfo, setAdminSuccessInfo] = useState(null)
@@ -50,11 +54,13 @@ export default function App() {
   const showBottomNav = !showContractGate && screen === '' && !hideBottomNav
 
   const handleContractFinish = () => {
+    addToast('Contrato aceite.', 'success')
     setContractAccepted(true)
     setModule('balcao')
   }
 
   const handleContractSkip = () => {
+    addToast('Contrato ignorado.', 'info')
     setContractAccepted(true)
     setModule('conta')
   }
@@ -103,6 +109,7 @@ export default function App() {
           emissionData={adminNewEmission}
           onBack={() => setScreen('admin-add-emission')}
           onConfirm={(type, title) => {
+            addToast(type === 'emission' ? 'Emissão adicionada com sucesso.' : 'Promoção adicionada com sucesso.', 'success')
             setAdminSuccessInfo({ type, title })
             setAdminNewEmission(null)
             setScreen('admin-add-success')
@@ -115,6 +122,7 @@ export default function App() {
         <AdminAddPromotion
           onBack={() => setScreen('admin-panel')}
           onConfirm={(type, title) => {
+            addToast('Promoção adicionada com sucesso.', 'success')
             setAdminSuccessInfo({ type, title })
             setScreen('admin-add-success')
           }}
@@ -149,6 +157,7 @@ export default function App() {
       return (
         <PlanSuccess
           onDone={() => {
+            addToast('Tudo pronto.', 'success')
             setScreen('')
             setPurchasedPlanName(null)
           }}
@@ -173,7 +182,10 @@ export default function App() {
             setAdDetails(null)
             setScreen('')
           }}
-          onConfirm={() => setScreen('ad-success')}
+          onConfirm={() => {
+            addToast('Anúncio criado com sucesso.', 'success')
+            setScreen('ad-success')
+          }}
         />
       )
     }
@@ -250,6 +262,7 @@ export default function App() {
 
   return (
     <div className="app-shell">
+      <ToastContainer toasts={toasts} removeToast={removeToast} />
       <main className="app-main">
         {renderContent()}
       </main>

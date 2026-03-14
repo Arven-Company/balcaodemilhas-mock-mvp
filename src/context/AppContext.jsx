@@ -1,8 +1,22 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect, useCallback } from 'react'
 
 const AppContext = createContext(null)
 
+let toastId = 0
+function nextToastId() {
+  return `toast-${++toastId}`
+}
+
 export function AppProvider({ children }) {
+  const [toasts, setToasts] = useState([])
+  const addToast = useCallback((message, type = 'success') => {
+    const id = nextToastId()
+    setToasts((prev) => [...prev, { id, message, type }])
+  }, [])
+  const removeToast = useCallback((id) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id))
+  }, [])
+
   const [verified, setVerified] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem('milhas_verified') ?? 'false')
@@ -68,6 +82,9 @@ export function AppProvider({ children }) {
   return (
     <AppContext.Provider
       value={{
+        toasts,
+        addToast,
+        removeToast,
         verified,
         completeVerification,
         theme,

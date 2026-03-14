@@ -70,7 +70,6 @@ export default function Emissoes() {
               <img src={card.image} alt="" />
               <div className="card-emissao-image-content">
                 <div className="card-emissao-image-left">
-                  {card.executiva && <span className="badge-executiva">EXECUTIVA</span>}
                   {card.detail && <span>{card.detail}</span>}
                   {card.period && <span>{card.period}</span>}
                   <span className="route">{card.route}</span>
@@ -90,22 +89,19 @@ export default function Emissoes() {
                       <div className="rating">{card.rating}</div>
                       <div className="name">{card.agent}</div>
                     </div>
+                    {card.executiva && <span className="badge-executiva">EXECUTIVA</span>}
                   </>
                 ) : (
                   <>
-                    {card.airlineLogo && <img src={card.airlineLogo} alt="" style={{ height: 18, width: 'auto', objectFit: 'contain' }} />}
-                    <div className="card-emissao-agent-info">
-                      <div className="type">{card.type}</div>
+                    <div className="card-emissao-agent-meta">
+                      {card.airlineLogo && <img src={card.airlineLogo} alt="" className="card-emissao-agent-logo" />}
+                      {card.type && <span className="card-emissao-agent-type">{card.type}</span>}
                     </div>
+                    {card.executiva && <span className="badge-executiva">EXECUTIVA</span>}
                   </>
                 )}
               </div>
               {card.sponsor && <span className="card-emissao-sponsor">patrocinado</span>}
-              {card.airlineLogo && !card.agent && (
-                <div className="card-emissao-airline">
-                  <span className="badge-executiva">EXECUTIVA</span>
-                </div>
-              )}
             </div>
           </article>
         ))}

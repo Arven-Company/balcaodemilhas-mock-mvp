@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { useApp } from '../context/AppContext'
+import BackButton from '../components/BackButton'
 import '../styles/verificacao.css'
 
 const STEP_VERIFICACAO = 1
 const STEP_ANEXOS = 2
 
 export default function Verificacao({ onComplete, onBack }) {
-  const { completeVerification } = useApp()
+  const { completeVerification, addToast } = useApp()
   const [step, setStep] = useState(STEP_VERIFICACAO)
   const [verificacaoOk, setVerificacaoOk] = useState(false)
   const [doc1, setDoc1] = useState(false)
@@ -18,6 +19,7 @@ export default function Verificacao({ onComplete, onBack }) {
 
   const handleFinish = () => {
     completeVerification()
+    addToast('Verificação concluída.', 'success')
     onComplete?.()
   }
 
@@ -96,9 +98,7 @@ export default function Verificacao({ onComplete, onBack }) {
         </section>
       </div>
       {onBack && (
-        <button type="button" className="btn btn-outline verificacao-back" onClick={onBack}>
-          Voltar
-        </button>
+        <BackButton onClick={onBack} />
       )}
     </div>
   )

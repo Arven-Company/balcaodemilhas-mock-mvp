@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import BackButton from '../components/BackButton'
 import '../styles/app-layout.css'
 import '../styles/conta.css'
 import '../styles/contrato.css'
@@ -49,13 +50,11 @@ export default function Contrato({ onFinish, onSkip, onBack, mode = 'gate' }) {
       <header className="app-header">
         <div className="app-header-row">
           {step > 1 ? (
-            <button type="button" className="conta-back" onClick={() => setStep(step - 1)} aria-label="Voltar">
-              ← Voltar
-            </button>
+            <BackButton onClick={() => setStep(step - 1)} />
+          ) : isConsult ? (
+            <BackButton onClick={onBack} />
           ) : (
-            <button type="button" className="conta-back" onClick={isConsult ? onBack : onSkip} aria-label={isConsult ? 'Voltar' : 'Pular'}>
-              {isConsult ? '← Voltar' : 'Pular'}
-            </button>
+            <button type="button" className="conta-back" onClick={onSkip} aria-label="Pular">Pular</button>
           )}
           <h1 className="app-header-title">Contrato</h1>
           <span style={{ width: 60 }} />

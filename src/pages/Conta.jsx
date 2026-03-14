@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useApp } from '../context/AppContext'
 import { FIGMA_ASSETS } from '../assets/figma-assets'
 import { MOCK_HISTORICO_VENDAS } from '../data/mocks'
+import BackButton from '../components/BackButton'
 import '../styles/app-layout.css'
 import '../styles/conta.css'
 
@@ -35,7 +36,7 @@ export default function Conta() {
       <div className="conta-detalhe-wrap">
         <header className="app-header">
           <div className="app-header-row">
-            <button type="button" className="conta-back" onClick={() => window.history.back()}>← Voltar</button>
+            <BackButton onClick={() => window.history.back()} />
             <h1 className="app-header-title">Transação</h1>
             <span style={{ width: 60 }} />
           </div>
@@ -58,6 +59,7 @@ export default function Conta() {
       <header className="app-header">
         <div className="app-header-row">
           <h1 className="app-header-title">Conta</h1>
+          <span style={{ width: 40 }} aria-hidden />
         </div>
       </header>
       <div className="app-list conta-list">
@@ -76,16 +78,22 @@ export default function Conta() {
 
         <section className="conta-section">
           <button type="button" className="conta-ad-banner" onClick={() => setScreen('create-ad')}>
-            <span className="conta-ad-banner-title">Anunciar na Aba Emissões</span>
-            <span className="conta-ad-banner-desc">Destaque sua oferta para mais compradores.</span>
+            <span className="conta-ad-banner-icon" aria-hidden>📢</span>
+            <span className="conta-ad-banner-text">
+              <span className="conta-ad-banner-title">Anunciar na Aba Emissões</span>
+              <span className="conta-ad-banner-desc">Destaque sua oferta para mais compradores.</span>
+            </span>
+            <span className="conta-menu-chevron" aria-hidden>›</span>
           </button>
         </section>
-        <section className="conta-section card-balcao">
+        <section className="conta-section">
           <h3 className="conta-section-title">Vendas</h3>
-          <button type="button" className="conta-config-row" onClick={() => setScreen('my-sales')}>
-            <span className="conta-config-label">Minhas Vendas</span>
-            <span aria-hidden>→</span>
-          </button>
+          <div className="conta-menu">
+            <button type="button" className="conta-menu-item" onClick={() => setScreen('my-sales')}>
+              <span className="conta-menu-label">Minhas Vendas</span>
+              <span className="conta-menu-chevron" aria-hidden>›</span>
+            </button>
+          </div>
         </section>
         <section className="conta-section">
           <h3 className="conta-section-title">Histórico de vendas</h3>
@@ -114,16 +122,18 @@ export default function Conta() {
           </button>
         </section>
 
-        <section className="conta-section card-balcao">
+        <section className="conta-section">
           <h3 className="conta-section-title">Configurações</h3>
-          <button type="button" className="conta-config-row" onClick={() => setScreen('contrato')}>
-            <span className="conta-config-label">Contrato de Intermediação</span>
-            <span aria-hidden>→</span>
-          </button>
-          <button type="button" className="conta-config-row" onClick={() => setScreen('configuracoes')}>
-            <span className="conta-config-label">Configurações</span>
-            <span aria-hidden>→</span>
-          </button>
+          <div className="conta-menu">
+            <button type="button" className="conta-menu-item" onClick={() => setScreen('contrato')}>
+              <span className="conta-menu-label">Contrato de Intermediação</span>
+              <span className="conta-menu-chevron" aria-hidden>›</span>
+            </button>
+            <button type="button" className="conta-menu-item" onClick={() => setScreen('configuracoes')}>
+              <span className="conta-menu-label">Configurações</span>
+              <span className="conta-menu-chevron" aria-hidden>›</span>
+            </button>
+          </div>
         </section>
       </div>
     </>

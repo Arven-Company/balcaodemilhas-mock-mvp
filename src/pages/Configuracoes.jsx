@@ -1,18 +1,22 @@
 import { useApp } from '../context/AppContext'
+import BackButton from '../components/BackButton'
 import '../styles/app-layout.css'
 import '../styles/conta.css'
 import '../styles/contrato.css'
 
 export default function Configuracoes({ onBack, onOpenAdmin }) {
-  const { theme, toggleTheme } = useApp()
+  const { theme, toggleTheme, addToast } = useApp()
+
+  const handleToggleTheme = () => {
+    toggleTheme()
+    addToast(theme === 'dark' ? 'Tema claro ativado.' : 'Tema escuro ativado.', 'success')
+  }
 
   return (
     <div className="contrato-wrap">
       <header className="app-header">
         <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
-            ← Voltar
-          </button>
+          <BackButton onClick={onBack} />
           <h1 className="app-header-title">Configurações</h1>
           <span style={{ width: 60 }} />
         </div>
@@ -25,7 +29,7 @@ export default function Configuracoes({ onBack, onOpenAdmin }) {
             <input
               type="checkbox"
               checked={theme === 'dark'}
-              onChange={toggleTheme}
+              onChange={handleToggleTheme}
               className="conta-config-toggle"
               aria-label="Alternar tema escuro"
             />

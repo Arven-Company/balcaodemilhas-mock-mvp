@@ -1,11 +1,12 @@
 import { useRef, useEffect } from 'react'
 import { useApp } from '../context/AppContext'
 import { MOCK_PLANOS } from '../data/mocks'
+import BackButton from '../components/BackButton'
 import '../styles/app-layout.css'
 import '../styles/conta.css'
 
 export default function Planos({ onBack }) {
-  const { setPurchasedPlanName, setScreen } = useApp()
+  const { setPurchasedPlanName, setScreen, addToast } = useApp()
   const planosRef = useRef(null)
 
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function Planos({ onBack }) {
     <div className="conta-detalhe-wrap">
       <header className="app-header">
         <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={onBack}>← Voltar</button>
+          <BackButton onClick={onBack} />
           <h1 className="app-header-title">Planos</h1>
           <span style={{ width: 60 }} />
         </div>
@@ -54,6 +55,7 @@ export default function Planos({ onBack }) {
                   type="button"
                   className="conta-plano-btn"
                   onClick={() => {
+                    addToast('Plano adquirido com sucesso.', 'success')
                     setPurchasedPlanName(pl.name)
                     setScreen('plan-success')
                   }}

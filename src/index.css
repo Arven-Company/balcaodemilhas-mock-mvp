@@ -50,3 +50,27 @@ button:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
+
+/* Botão voltar padronizado: chevron esquerda em círculo (light: cinza claro; dark: variáveis) */
+.btn-back-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-back-btn-bg);
+  color: var(--color-back-btn-color);
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+}
+
+.btn-back-circle:hover {
+  background: var(--color-back-btn-hover-bg);
+}
+
+.btn-back-circle:active {
+  opacity: 0.9;
+}

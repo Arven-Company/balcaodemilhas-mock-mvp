@@ -41,6 +41,11 @@
   --color-disabled-text: #9a9a9a;
   --color-hover-overlay: rgba(0, 0, 0, 0.04);
 
+  /* ---- Botão voltar (círculo) ---- */
+  --color-back-btn-bg: #e8e8e8;
+  --color-back-btn-color: #4a4a4a;
+  --color-back-btn-hover-bg: #ddd;
+
   /* ---- Sombras (Figma) ---- */
   --shadow-card: 0px 3px 5px 0px rgba(0, 0, 0, 0.12);
   --shadow-card-soft: 0px 3px 5px 0px rgba(0, 0, 0, 0.05);
@@ -113,6 +118,9 @@
   --color-disabled-bg: #2d2d2d;
   --color-disabled-text: #666;
   --color-hover-overlay: rgba(255, 255, 255, 0.06);
+  --color-back-btn-bg: #404040;
+  --color-back-btn-color: #e5e5e5;
+  --color-back-btn-hover-bg: #505050;
   --shadow-card: 0px 3px 8px 0px rgba(0, 0, 0, 0.3);
   --shadow-nav: 0px -6px 12px 0px rgba(0, 0, 0, 0.3);
   --shadow-modal: 0px 8px 24px 0px rgba(0, 0, 0, 0.4);

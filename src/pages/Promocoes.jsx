@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { MOCK_PROMOCOES } from '../data/mocks'
+import BackButton from '../components/BackButton'
 import '../styles/cards.css'
 import '../styles/app-layout.css'
 import '../styles/promocoes.css'
@@ -53,9 +54,7 @@ export default function Promocoes() {
       <div className="promo-detalhe">
         <header className="app-header">
           <div className="app-header-row">
-            <button type="button" className="promo-detalhe-back" onClick={() => window.history.back()} aria-label="Voltar">
-              ← Voltar
-            </button>
+            <BackButton onClick={() => window.history.back()} />
             <h1 className="app-header-title">Promoção</h1>
             <span style={{ width: 60 }} />
           </div>
@@ -97,6 +96,7 @@ export default function Promocoes() {
       <header className="app-header">
         <div className="app-header-row">
           <h1 className="app-header-title">Promoções</h1>
+          <span style={{ width: 40 }} aria-hidden />
         </div>
       </header>
       <div className="app-list">

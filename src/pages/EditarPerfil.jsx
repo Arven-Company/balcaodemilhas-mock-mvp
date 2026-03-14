@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useApp } from '../context/AppContext'
 import { FIGMA_ASSETS } from '../assets/figma-assets'
+import BackButton from '../components/BackButton'
 import '../styles/app-layout.css'
 import '../styles/conta.css'
 import '../styles/contrato.css'
 import '../styles/editar-perfil.css'
 
 export default function EditarPerfil({ onBack }) {
-  const { profile, setProfile } = useApp()
+  const { profile, setProfile, addToast } = useApp()
   const [name, setName] = useState(profile?.name ?? '')
   const [avatarUrl, setAvatarUrl] = useState(profile?.avatarUrl ?? '')
 
@@ -18,6 +19,7 @@ export default function EditarPerfil({ onBack }) {
 
   const handleSave = () => {
     setProfile({ name: name.trim() || profile?.name, avatarUrl: avatarUrl.trim() || '' })
+    addToast('Perfil atualizado.', 'success')
     onBack()
   }
 
@@ -27,9 +29,7 @@ export default function EditarPerfil({ onBack }) {
     <div className="contrato-wrap">
       <header className="app-header">
         <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
-            ← Voltar
-          </button>
+          <BackButton onClick={onBack} />
           <h1 className="app-header-title">Editar perfil</h1>
           <span style={{ width: 60 }} />
         </div>

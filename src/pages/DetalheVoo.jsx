@@ -1,16 +1,10 @@
 import { useState } from 'react'
+import { useApp } from '../context/AppContext'
 import { FIGMA_ASSETS } from '../assets/figma-assets'
+import BackButton from '../components/BackButton'
 import '../styles/cards.css'
 import '../styles/app-layout.css'
 import '../styles/detalhe-voo.css'
-
-function IconBack() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M19 12H5M12 19l-7-7 7-7" />
-    </svg>
-  )
-}
 
 const WEEKDAYS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
 const MONTH_NAMES_FULL = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
@@ -110,6 +104,7 @@ const DEFAULT_MILES_BY_DATE = {
 }
 
 export default function DetalheVoo({ card, onBack, onNavigateToCreateOffer }) {
+  const { addToast } = useApp()
   const [selectedDate, setSelectedDate] = useState(null)
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const availableDates = Object.keys(DEFAULT_MILES_BY_DATE)
@@ -124,11 +119,13 @@ export default function DetalheVoo({ card, onBack, onNavigateToCreateOffer }) {
 
   const handleNovaOrdem = () => {
     setShowConfirmModal(false)
+    addToast('Solicitação enviada.', 'success')
     onBack?.()
   }
 
   const handleCriarOferta = () => {
     setShowConfirmModal(false)
+    addToast('Solicitação enviada.', 'success')
     onBack?.()
   }
 
@@ -136,9 +133,7 @@ export default function DetalheVoo({ card, onBack, onNavigateToCreateOffer }) {
     <div className={`detalhe-voo ${selectedDate ? 'detalhe-voo--has-ordem' : ''}`}>
       <header className="app-header detalhe-voo-header">
         <div className="app-header-row">
-          <button type="button" className="detalhe-voo-back" onClick={onBack} aria-label="Voltar">
-            <IconBack />
-          </button>
+          <BackButton onClick={onBack} />
           <h1 className="app-header-title">Detalhe do voo</h1>
           <span style={{ width: 40 }} />
         </div>
@@ -149,7 +144,6 @@ export default function DetalheVoo({ card, onBack, onNavigateToCreateOffer }) {
           <img src={card.image} alt="" />
           <div className="card-emissao-image-content">
             <div className="card-emissao-image-left">
-              {card.executiva && <span className="badge-executiva">EXECUTIVA</span>}
               {card.detail && <span>{card.detail}</span>}
               {card.period && <span>{card.period}</span>}
               <span className="route">{card.route}</span>
@@ -168,12 +162,16 @@ export default function DetalheVoo({ card, onBack, onNavigateToCreateOffer }) {
                 <div className="rating">{card.rating}</div>
                 <div className="name">{card.agent}</div>
               </div>
+              {card.executiva && <span className="badge-executiva">EXECUTIVA</span>}
             </div>
           ) : (
             card.airlineLogo && (
-              <div className="card-emissao-airline">
-                <img src={card.airlineLogo} alt="" className="logo" />
-                <span className="type">{card.type}</span>
+              <div className="card-emissao-agent">
+                <div className="card-emissao-agent-meta">
+                  <img src={card.airlineLogo} alt="" className="card-emissao-agent-logo" />
+                  {card.type && <span className="card-emissao-agent-type">{card.type}</span>}
+                </div>
+                {card.executiva && <span className="badge-executiva">EXECUTIVA</span>}
               </div>
             )
           )}

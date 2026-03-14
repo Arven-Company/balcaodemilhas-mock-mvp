@@ -1,10 +1,12 @@
 import { useState, useMemo } from 'react'
+import { useApp } from '../../context/AppContext'
 import '../../styles/app-layout.css'
 import '../../styles/conta.css'
 import '../../styles/contrato.css'
 import '../../styles/fluxo-balcao.css'
 
 export default function MakeOffer({ offer, onBack }) {
+  const { addToast } = useApp()
   const originalValue = offer?.originalValue ?? 100
   const milesLabel = offer?.miles ?? '—'
   const minAllowed = useMemo(() => Math.ceil(originalValue * 0.85), [originalValue])
@@ -19,6 +21,7 @@ export default function MakeOffer({ offer, onBack }) {
 
   const handleSubmit = () => {
     if (isInvalid) return
+    addToast('Proposta enviada.', 'success')
     onBack()
   }
 

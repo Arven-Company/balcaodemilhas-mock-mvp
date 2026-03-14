@@ -2,7 +2,7 @@
 .card-emissao {
   background: var(--color-bg-card);
   border-radius: var(--radius-card);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-card-soft);
   overflow: hidden;
 }
 
@@ -84,6 +84,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-height: 52px;
+  flex-shrink: 0;
 }
 
 .card-emissao-agent {
@@ -113,6 +115,32 @@
 .card-emissao-sponsor {
   font-size: var(--text-xs);
   color: var(--color-text-secondary);
+}
+
+.card-emissao-agent-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 0;
+}
+
+.card-emissao-agent-logo {
+  height: 18px;
+  width: auto;
+  max-width: 80px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.card-emissao-agent-type {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .card-emissao-airline {

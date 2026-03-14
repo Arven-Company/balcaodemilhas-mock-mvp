@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import BackButton from '../BackButton'
 import '../../styles/app-layout.css'
 import '../../styles/conta.css'
 import '../../styles/contrato.css'
@@ -27,9 +28,7 @@ export default function MotivoDisputa({ offer, onBack, onConfirm }) {
     <div className="disputa-wrap">
       <header className="app-header">
         <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
-            ← Voltar
-          </button>
+          <BackButton onClick={onBack} />
           <h1 className="app-header-title">Abrir Disputa</h1>
           <span style={{ width: 60 }} />
         </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useApp } from '../context/AppContext'
 import { MOCK_BALCAO_COMPRA, MOCK_BALCAO_VENDA } from '../data/mocks'
+import BackButton from '../components/BackButton'
 import Verificacao from './Verificacao'
 import TermosCompra from '../components/fluxo-compra/TermosCompra'
 import PixCompra from '../components/fluxo-compra/PixCompra'
@@ -21,7 +22,7 @@ const FLOW_COMPRA_STEPS = ['Termos', 'PIX', 'Chat', 'Aguardo', 'Confirmação']
 const FLOW_VENDA_STEPS = ['Termos', 'Aguardo comprador', 'Stepper', 'Confirmação']
 
 export default function Balcao() {
-  const { verified, completeVerification, setScreen, setSelectedOfferForMakeOffer } = useApp()
+  const { verified, completeVerification, setScreen, setSelectedOfferForMakeOffer, addToast } = useApp()
   const [tab, setTab] = useState('compra')
   const [view, setView] = useState('list') // list | verificacao | flow | dispute-reason | dispute-status
   const [flowType, setFlowType] = useState(null) // 'compra' | 'venda'
@@ -38,6 +39,8 @@ export default function Balcao() {
   const [ordenacao, setOrdenacao] = useState('recentes') // 'recentes' | 'preco'
   const [layoutBalcao, setLayoutBalcao] = useState('list') // 'list' | 'grid'
   const [showChat, setShowChat] = useState(false)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [drawerMode, setDrawerMode] = useState('filter') // 'filter' | 'sort'
 
   const rawList = tab === 'compra' ? MOCK_BALCAO_COMPRA : MOCK_BALCAO_VENDA
   const list = (() => {
@@ -194,6 +197,7 @@ export default function Balcao() {
           offer={selectedOffer}
           onBack={() => setView('flow')}
           onConfirm={(reason) => {
+            addToast('Disputa registada.', 'success')
             setDisputeReason(reason)
             setView('dispute-status')
           }}
@@ -219,9 +223,7 @@ export default function Balcao() {
       <div className="fluxo-balcao-wrap">
         <header className="app-header">
           <div className="app-header-row">
-            <button type="button" className="fluxo-back" onClick={exitFlow} aria-label="Sair do fluxo">
-              ← Voltar
-            </button>
+            <BackButton onClick={exitFlow} ariaLabel="Sair do fluxo" />
             <h1 className="app-header-title">{flowType === 'compra' ? 'Compra' : 'Venda'}</h1>
             <button type="button" className="fluxo-back" onClick={() => setView('dispute-reason')} style={{ marginLeft: 'auto' }}>
               Abrir disputa
@@ -269,7 +271,12 @@ export default function Balcao() {
 
   return (
     <>
-      <h1 className="app-header-title" style={{ padding: '24px 20px 0' }}>Balcão</h1>
+      <header className="app-header">
+        <div className="app-header-row app-header-row--no-margin">
+          <h1 className="app-header-title">Balcão</h1>
+          <span style={{ width: 40 }} aria-hidden />
+        </div>
+      </header>
       <div className="app-tabs">
         <button
           type="button"
@@ -294,31 +301,61 @@ export default function Balcao() {
         <h2 className="app-subheader-title">Virgin Atlantic</h2>
         <span className="app-subheader-count">{list.length} {tab === 'compra' ? 'ofertas de compra' : 'ofertas de venda'}</span>
       </div>
-      <div className="app-filters app-filters-balcao">
-        <div className="app-filter-pills">
-          <button type="button" className={`app-filter-pill ${!filtroCompanhia ? 'active' : ''}`} onClick={() => setFiltroCompanhia('')}>Todas</button>
-          {companhiasUnicas.map((c) => (
-            <button key={c} type="button" className={`app-filter-pill ${filtroCompanhia === c ? 'active' : ''}`} onClick={() => setFiltroCompanhia(c)}>{c}</button>
-          ))}
-        </div>
-        <div className="app-filters-balcao-row2">
-          <label htmlFor="balcao-ordenar" className="app-filters-balcao-ordenar-label">Ordenar:</label>
-          <select
-            id="balcao-ordenar"
-            className="app-filter-select"
-            value={ordenacao}
-            onChange={(e) => setOrdenacao(e.target.value)}
-            aria-label="Ordenação"
+      <div className="app-filters app-filters-balcao app-filters-balcao-toolbar">
+        <div className="app-filters-balcao-buttons">
+          <button
+            type="button"
+            className={`app-filter-sort-btn ${filtroCompanhia ? 'active' : ''}`}
+            onClick={() => { setDrawerMode('filter'); setDrawerOpen(true); }}
+            aria-label="Filtrar"
           >
-            <option value="recentes">Mais recentes primeiro</option>
-            <option value="preco">Preço</option>
-          </select>
-          <div className="app-layout-toggle">
-            <button type="button" className={`app-layout-btn ${layoutBalcao === 'list' ? 'active' : ''}`} onClick={() => setLayoutBalcao('list')} aria-label="Lista">Lista</button>
-            <button type="button" className={`app-layout-btn ${layoutBalcao === 'grid' ? 'active' : ''}`} onClick={() => setLayoutBalcao('grid')} aria-label="Grade">Grade</button>
-          </div>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+            </svg>
+            <span>Filtro</span>
+          </button>
+          <button
+            type="button"
+            className="app-filter-sort-btn"
+            onClick={() => { setDrawerMode('sort'); setDrawerOpen(true); }}
+            aria-label="Ordenar"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <line x1="4" y1="6" x2="20" y2="6" />
+              <line x1="4" y1="12" x2="14" y2="12" />
+              <line x1="4" y1="18" x2="8" y2="18" />
+            </svg>
+            <span>Ordenar</span>
+          </button>
+        </div>
+        <div className="app-layout-toggle">
+          <button type="button" className={`app-layout-btn ${layoutBalcao === 'list' ? 'active' : ''}`} onClick={() => setLayoutBalcao('list')} aria-label="Lista">Lista</button>
+          <button type="button" className={`app-layout-btn ${layoutBalcao === 'grid' ? 'active' : ''}`} onClick={() => setLayoutBalcao('grid')} aria-label="Grade">Grade</button>
         </div>
       </div>
+
+      {drawerOpen && (
+        <div className="balcao-drawer-overlay" onClick={() => setDrawerOpen(false)} aria-hidden>
+          <div className="balcao-drawer" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label={drawerMode === 'filter' ? 'Filtros' : 'Ordenação'}>
+            <div className="balcao-drawer-handle" aria-hidden />
+            <h2 className="balcao-drawer-title">{drawerMode === 'filter' ? 'Filtrar por companhia' : 'Ordenar'}</h2>
+            {drawerMode === 'filter' ? (
+              <div className="balcao-drawer-options">
+                <button type="button" className={`balcao-drawer-option ${!filtroCompanhia ? 'active' : ''}`} onClick={() => setFiltroCompanhia('')}>Todas</button>
+                {companhiasUnicas.map((c) => (
+                  <button key={c} type="button" className={`balcao-drawer-option ${filtroCompanhia === c ? 'active' : ''}`} onClick={() => setFiltroCompanhia(c)}>{c}</button>
+                ))}
+              </div>
+            ) : (
+              <div className="balcao-drawer-options">
+                <button type="button" className={`balcao-drawer-option ${ordenacao === 'recentes' ? 'active' : ''}`} onClick={() => setOrdenacao('recentes')}>Mais recentes primeiro</button>
+                <button type="button" className={`balcao-drawer-option ${ordenacao === 'preco' ? 'active' : ''}`} onClick={() => setOrdenacao('preco')}>Preço</button>
+              </div>
+            )}
+            <button type="button" className="balcao-drawer-apply btn btn-primary" onClick={() => setDrawerOpen(false)}>Aplicar</button>
+          </div>
+        </div>
+      )}
       <div className={layoutBalcao === 'grid' ? 'app-list app-list--grid' : 'app-list'}>
         {list.map((item) => (
           <article key={item.id} className={`card-balcao ${layoutBalcao === 'grid' ? 'card-balcao--grid' : ''}`}>

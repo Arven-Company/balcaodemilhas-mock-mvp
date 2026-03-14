@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useApp } from '../context/AppContext'
+import BackButton from '../components/BackButton'
 import '../styles/app-layout.css'
 import '../styles/conta.css'
 import '../styles/filtros.css'
@@ -7,7 +8,7 @@ import '../styles/filtros.css'
 const COMPANHIAS = ['Virgin Atlantic', 'LATAM', 'Azul', 'GOL', 'TAP Air Portugal']
 
 export default function Filtros({ onBack }) {
-  const { filters, setFilters } = useApp()
+  const { filters, setFilters, addToast } = useApp()
   const [selectedAirlines, setSelectedAirlines] = useState(filters.airlines || [])
   const [milesMax, setMilesMax] = useState(filters.milesMax ?? 500000)
 
@@ -24,6 +25,7 @@ export default function Filtros({ onBack }) {
 
   const handleApply = () => {
     setFilters({ airlines: selectedAirlines, milesMin: 0, milesMax })
+    addToast('Filtros aplicados.', 'success')
     onBack()
   }
 
@@ -31,15 +33,14 @@ export default function Filtros({ onBack }) {
     setSelectedAirlines([])
     setMilesMax(500000)
     setFilters({ airlines: [], milesMin: 0, milesMax: 500000 })
+    addToast('Filtros limpos.', 'info')
   }
 
   return (
     <div className="filtros-wrap">
       <header className="app-header">
         <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
-            ← Voltar
-          </button>
+          <BackButton onClick={onBack} />
           <h1 className="app-header-title">Filtros</h1>
           <span style={{ width: 60 }} />
         </div>
