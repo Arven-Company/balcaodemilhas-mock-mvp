@@ -245,7 +245,7 @@
   margin: 0;
 }
 
-/* Chat modal (fluxo Compra/Venda) */
+/* Chat modal (fluxo Compra/Venda) — drawer em tela cheia */
 .chat-modal-overlay {
   align-items: flex-end;
   justify-content: center;
@@ -253,9 +253,11 @@
 
 .chat-modal {
   background: var(--color-bg-card);
-  max-height: 85vh;
-  height: 480px;
-  max-width: 400px;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100vh;
+  max-height: 100dvh;
+  max-width: var(--width-app-max);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -324,23 +326,52 @@
 
 .chat-modal-input-row {
   display: flex;
+  align-items: center;
   gap: var(--space-3);
   padding: var(--space-3) var(--space-5);
+  padding-bottom: calc(var(--space-3) + env(safe-area-inset-bottom));
   border-top: 1px solid var(--color-border);
   flex-shrink: 0;
+  background: var(--color-bg-card);
 }
 
 .chat-modal-input {
   flex: 1;
-  padding: var(--space-3) var(--space-4);
-  font-size: var(--text-sm);
+  min-width: 0;
+  padding: var(--space-4) var(--space-5);
+  padding-right: var(--space-4);
+  font-size: var(--text-base);
   font-family: var(--font-family);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-btn);
+  border-radius: var(--radius-pill);
   box-sizing: border-box;
 }
 
-.chat-modal-send {
+.chat-modal-send-btn {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-primary);
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.15s, opacity 0.15s;
+}
+
+.chat-modal-send-btn:hover {
+  background: var(--color-primary-dark);
+}
+
+.chat-modal-send-btn:active {
+  opacity: 0.9;
+}
+
+.chat-modal-send-btn svg {
   flex-shrink: 0;
 }
 

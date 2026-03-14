@@ -38,6 +38,27 @@
   margin-bottom: 0;
 }
 
+/* Centralizar título do header (Promoções, Conta e outros; não Emissões) */
+.app-header-row--centered {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  justify-items: center;
+}
+
+.app-header-row--centered .app-header-title {
+  grid-column: 2;
+  justify-self: center;
+}
+
+.app-header-row--centered > *:first-child {
+  justify-self: start;
+}
+
+.app-header-row--centered > *:last-child {
+  justify-self: end;
+}
+
 .app-header-title {
   font-size: var(--text-xl);
   font-weight: var(--font-semibold);
@@ -300,11 +321,12 @@
 }
 
 /* Abas (Compra / Venda) */
+/* Abas Compra/Venda — parte do bloco Balcão, sem sombra própria */
 .app-tabs {
   display: flex;
   background: var(--color-bg-card);
-  box-shadow: var(--shadow-header);
   border-radius: 0 0 var(--radius-card) var(--radius-card);
+  border-top: 1px solid var(--color-border);
 }
 
 .app-tab {
@@ -403,6 +425,11 @@
 
 .bottom-nav-item.active {
   color: var(--color-nav-active);
+}
+
+.bottom-nav-item:not(.active) img {
+  /* Estado inativo: cinza (nav-inactive), evita ícone azul do asset */
+  filter: brightness(0) saturate(100%) invert(40%);
 }
 
 .bottom-nav-item.active img {

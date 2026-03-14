@@ -28,7 +28,7 @@ export default function EditarPerfil({ onBack }) {
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row">
+        <div className="app-header-row app-header-row--centered">
           <BackButton onClick={onBack} />
           <h1 className="app-header-title">Editar perfil</h1>
           <span style={{ width: 60 }} />

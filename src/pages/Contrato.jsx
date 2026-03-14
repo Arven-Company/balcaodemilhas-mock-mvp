@@ -48,7 +48,7 @@ export default function Contrato({ onFinish, onSkip, onBack, mode = 'gate' }) {
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row">
+        <div className="app-header-row app-header-row--centered">
           {step > 1 ? (
             <BackButton onClick={() => setStep(step - 1)} />
           ) : isConsult ? (

@@ -35,12 +35,17 @@ export default function ChatModal({ onClose, onContinue }) {
           <input
             type="text"
             className="chat-modal-input"
-            placeholder="Digite sua mensagem..."
+            placeholder="Enviar sua mensagem..."
             value={inputVal}
             onChange={(e) => setInputVal(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleEnviar()}
           />
-          <button type="button" className="btn btn-outline chat-modal-send" onClick={handleEnviar}>Enviar</button>
+          <button type="button" className="chat-modal-send-btn" onClick={handleEnviar} aria-label="Enviar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <line x1="22" y1="2" x2="11" y2="13" />
+              <polygon points="22 2 15 22 11 13 2 9 22 2" />
+            </svg>
+          </button>
         </div>
         <div className="chat-modal-actions">
           <button type="button" className="btn btn-primary" onClick={onContinue}>Continuar</button>

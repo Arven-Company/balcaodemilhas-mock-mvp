@@ -132,7 +132,7 @@ export default function DetalheVoo({ card, onBack, onNavigateToCreateOffer }) {
   return (
     <div className={`detalhe-voo ${selectedDate ? 'detalhe-voo--has-ordem' : ''}`}>
       <header className="app-header detalhe-voo-header">
-        <div className="app-header-row">
+        <div className="app-header-row app-header-row--centered">
           <BackButton onClick={onBack} />
           <h1 className="app-header-title">Detalhe do voo</h1>
           <span style={{ width: 40 }} />

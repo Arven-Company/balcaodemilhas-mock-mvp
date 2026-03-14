@@ -35,10 +35,10 @@ export default function Conta() {
     return (
       <div className="conta-detalhe-wrap">
         <header className="app-header">
-          <div className="app-header-row">
+          <div className="app-header-row app-header-row--centered">
             <BackButton onClick={() => window.history.back()} />
             <h1 className="app-header-title">Transação</h1>
-            <span style={{ width: 60 }} />
+            <span aria-hidden />
           </div>
         </header>
         <div className="conta-detalhe">
@@ -57,9 +57,10 @@ export default function Conta() {
   return (
     <>
       <header className="app-header">
-        <div className="app-header-row">
+        <div className="app-header-row app-header-row--centered">
+          <span aria-hidden />
           <h1 className="app-header-title">Conta</h1>
-          <span style={{ width: 40 }} aria-hidden />
+          <span aria-hidden />
         </div>
       </header>
       <div className="app-list conta-list">

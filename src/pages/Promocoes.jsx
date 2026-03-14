@@ -53,10 +53,10 @@ export default function Promocoes() {
     return (
       <div className="promo-detalhe">
         <header className="app-header">
-          <div className="app-header-row">
+          <div className="app-header-row app-header-row--centered">
             <BackButton onClick={() => window.history.back()} />
             <h1 className="app-header-title">Promoção</h1>
-            <span style={{ width: 60 }} />
+            <span aria-hidden />
           </div>
         </header>
         <div className="promo-detalhe-hero">
@@ -94,9 +94,10 @@ export default function Promocoes() {
   return (
     <>
       <header className="app-header">
-        <div className="app-header-row">
+        <div className="app-header-row app-header-row--centered">
+          <span aria-hidden />
           <h1 className="app-header-title">Promoções</h1>
-          <span style={{ width: 40 }} aria-hidden />
+          <span aria-hidden />
         </div>
       </header>
       <div className="app-list">

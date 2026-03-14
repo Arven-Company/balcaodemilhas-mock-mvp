@@ -15,7 +15,7 @@ export default function Configuracoes({ onBack, onOpenAdmin }) {
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row">
+        <div className="app-header-row app-header-row--centered">
           <BackButton onClick={onBack} />
           <h1 className="app-header-title">Configurações</h1>
           <span style={{ width: 60 }} />
