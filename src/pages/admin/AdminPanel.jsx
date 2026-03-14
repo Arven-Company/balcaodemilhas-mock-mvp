@@ -1,6 +1,6 @@
-import '../styles/app-layout.css'
-import '../styles/conta.css'
-import '../styles/contrato.css'
+import '../../styles/app-layout.css'
+import '../../styles/conta.css'
+import '../../styles/contrato.css'
 
 export default function AdminPanel({ onBack, onNavigate }) {
   return (
