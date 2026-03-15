@@ -52,3 +52,60 @@
 .admin-action-item .conta-menu-chevron {
   flex-shrink: 0;
 }
+
+/* Linha com switch (ex.: Aparência – Tema escuro) */
+.admin-action-item--switch {
+  cursor: default;
+}
+
+.admin-action-item--switch:hover {
+  background: transparent;
+}
+
+.admin-action-switch-track {
+  flex-shrink: 0;
+  position: relative;
+  width: 44px;
+  height: 26px;
+  border-radius: 13px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.admin-action-switch-track:has(.admin-action-switch:checked) {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.admin-action-switch {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.admin-action-switch-track:has(.admin-action-switch:focus-visible) .admin-action-switch-thumb {
+  box-shadow: 0 0 0 2px var(--color-focus-ring);
+}
+
+.admin-action-switch-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: var(--shadow-card-soft);
+  transition: transform 0.2s;
+  pointer-events: none;
+}
+
+.admin-action-switch-track:has(.admin-action-switch:checked) .admin-action-switch-thumb {
+  transform: translateX(18px);
+}

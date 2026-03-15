@@ -4,6 +4,7 @@ import { FIGMA_ASSETS } from '../assets/figma-assets'
 import { MOCK_EMISSOES, MOCK_FONTES_EMISSOES } from '../data/mocks'
 import DetalheVoo from './DetalheVoo'
 import BackButton from '../components/BackButton'
+import TestEmissoesCards from '../components/TestEmissoesCards'
 import '../styles/cards.css'
 import '../styles/app-layout.css'
 
@@ -62,64 +63,73 @@ export default function Emissoes({ testMode }) {
             <img src={FIGMA_ASSETS.avatar} alt="" className="app-header-avatar" />
           </div>
         )}
-        <div className="app-filters">
-          <button type="button" className="app-filter-pill active">Companhias</button>
-          <button type="button" className="app-filter-pill">10.02.2025 - 12/03/2025</button>
-          <button type="button" className="app-filter-pill" onClick={() => setScreen('filtros')}>
-            <img src={FIGMA_ASSETS.iconFilter} alt="" style={{ width: 16, height: 16, verticalAlign: 'middle', marginRight: 4 }} />
-            Filtros
-          </button>
-        </div>
-        <div className="app-emissoes-layout-row">
-          <span className="app-emissoes-layout-label">Visualização</span>
-          <div className="app-layout-toggle">
-            <button type="button" className={`app-layout-btn ${layoutEmissoes === 'list' ? 'active' : ''}`} onClick={() => setLayoutEmissoes('list')} aria-label="Lista">Lista</button>
-            <button type="button" className={`app-layout-btn ${layoutEmissoes === 'grid' ? 'active' : ''}`} onClick={() => setLayoutEmissoes('grid')} aria-label="Grade">Grade</button>
+        {!testMode && (
+          <div className="app-filters">
+            <button type="button" className="app-filter-pill active">Companhias</button>
+            <button type="button" className="app-filter-pill">10.02.2025 - 12/03/2025</button>
+            <button type="button" className="app-filter-pill" onClick={() => setScreen('filtros')}>
+              <img src={FIGMA_ASSETS.iconFilter} alt="" style={{ width: 16, height: 16, verticalAlign: 'middle', marginRight: 4 }} />
+              Filtros
+            </button>
           </div>
-        </div>
+        )}
+        {!testMode && (
+          <div className="app-emissoes-layout-row">
+            <span className="app-emissoes-layout-label">Visualização</span>
+            <div className="app-layout-toggle">
+              <button type="button" className={`app-layout-btn ${layoutEmissoes === 'list' ? 'active' : ''}`} onClick={() => setLayoutEmissoes('list')} aria-label="Lista">Lista</button>
+              <button type="button" className={`app-layout-btn ${layoutEmissoes === 'grid' ? 'active' : ''}`} onClick={() => setLayoutEmissoes('grid')} aria-label="Grade">Grade</button>
+            </div>
+          </div>
+        )}
       </header>
-      <div className={layoutEmissoes === 'grid' ? 'app-list app-list--grid' : 'app-list'}>
-        {MOCK_EMISSOES.map((card) => (
-          <article key={card.id} className={`card-emissao ${layoutEmissoes === 'grid' ? 'card-emissao--grid' : ''}`} role="button" tabIndex={0} onClick={() => handleCardClick(card)} onKeyDown={(e) => e.key === 'Enter' && handleCardClick(card)}>
-            <div className="card-emissao-image">
-              <img src={card.image} alt="" />
-              <div className="card-emissao-image-content">
-                <div className="card-emissao-image-left">
-                  {card.sponsor && <span className="card-emissao-sponsor-overlay">patrocinado</span>}
-                  {card.detail && <span>{card.detail}</span>}
-                  {card.period && <span>{card.period}</span>}
-                  <span className="route">{card.route}</span>
-                </div>
-                <div className="card-emissao-image-right">
-                  {card.labelRight && <span>{card.labelRight}</span>}
-                  <span className="price">{card.price}</span>
-                </div>
-              </div>
-            </div>
-            <div className="card-emissao-footer">
-              <div className="card-emissao-agent">
-                {card.agent ? (
-                  <>
-                    <img src={FIGMA_ASSETS.avatar} alt="" />
-                    <div className="card-emissao-agent-info">
-                      <div className="rating">{card.rating}</div>
-                      <div className="name">{card.agent}</div>
-                    </div>
-                  </>
-                ) : (
-                  <div className="card-emissao-agent-meta">
-                    {card.airlineLogo && <img src={card.airlineLogo} alt="" className="card-emissao-agent-logo" />}
-                    {card.type && <span className="card-emissao-agent-type">{card.type}</span>}
+      {testMode ? (
+        <TestEmissoesCards />
+      ) : (
+        <div className={layoutEmissoes === 'grid' ? 'app-list app-list--grid' : 'app-list'}>
+          {MOCK_EMISSOES.map((card) => (
+            <article key={card.id} className={`card-emissao ${layoutEmissoes === 'grid' ? 'card-emissao--grid' : ''}`} role="button" tabIndex={0} onClick={() => handleCardClick(card)} onKeyDown={(e) => e.key === 'Enter' && handleCardClick(card)}>
+              <div className="card-emissao-image">
+                <img src={card.image} alt="" />
+                <div className="card-emissao-image-content">
+                  <div className="card-emissao-image-left">
+                    {card.sponsor && <span className="card-emissao-sponsor-overlay">patrocinado</span>}
+                    {card.detail && <span>{card.detail}</span>}
+                    {card.period && <span>{card.period}</span>}
+                    <span className="route">{card.route}</span>
                   </div>
-                )}
+                  <div className="card-emissao-image-right">
+                    {card.labelRight && <span>{card.labelRight}</span>}
+                    <span className="price">{card.price}</span>
+                  </div>
+                </div>
               </div>
-              <div className="card-emissao-footer-right">
-                {card.executiva && <span className="badge-executiva">EXECUTIVA</span>}
+              <div className="card-emissao-footer">
+                <div className="card-emissao-agent">
+                  {card.agent ? (
+                    <>
+                      <img src={FIGMA_ASSETS.avatar} alt="" />
+                      <div className="card-emissao-agent-info">
+                        <div className="rating">{card.rating}</div>
+                        <div className="name">{card.agent}</div>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="card-emissao-agent-meta">
+                      {card.airlineLogo && <img src={card.airlineLogo} alt="" className="card-emissao-agent-logo" />}
+                      {card.type && <span className="card-emissao-agent-type">{card.type}</span>}
+                    </div>
+                  )}
+                </div>
+                <div className="card-emissao-footer-right">
+                  {card.executiva && <span className="badge-executiva">EXECUTIVA</span>}
+                </div>
               </div>
-            </div>
-          </article>
-        ))}
-      </div>
+            </article>
+          ))}
+        </div>
+      )}
+      {!testMode && (
       <footer className="emissoes-fontes" aria-label="Fontes de dados">
         <h3 className="emissoes-fontes-title">Fontes das ofertas</h3>
         <ul className="emissoes-fontes-list">
@@ -130,6 +140,7 @@ export default function Emissoes({ testMode }) {
           ))}
         </ul>
       </footer>
+      )}
     </>
   )
 }

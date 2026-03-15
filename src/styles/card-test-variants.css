@@ -1,0 +1,304 @@
+/**
+ * Cards teste de emissões — variantes do Figma "Cards alternativos" (224-743).
+ * Estrutura e espaçamento próximos ao Figma; cores do app (--color-*).
+ */
+.card-test-list {
+  padding: 0 var(--space-7);
+  padding-bottom: var(--space-8);
+}
+
+.card-test {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card-soft);
+  overflow: hidden;
+  margin-bottom: var(--space-5);
+}
+
+.card-test-body {
+  padding: 14px 16px 16px;
+}
+
+.card-test-actions {
+  display: flex;
+  gap: 16px;
+  padding: 0 16px 14px;
+  min-height: 40px;
+  align-items: center;
+}
+
+.card-test-btn {
+  flex: 1;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+.card-test-btn-outline {
+  border: 1px solid var(--color-primary);
+  background: transparent;
+  color: var(--color-text-secondary);
+}
+
+.card-test-btn-primary {
+  border: none;
+  background: var(--color-primary);
+  color: white;
+}
+
+.card-test-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.card-test-avatar--32 {
+  width: 32px;
+  height: 32px;
+}
+
+.card-test-agent-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.card-test-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.card-test-meta {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  line-height: 1.2;
+}
+
+.card-test-miles {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.card-test-approx {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.card-test-total {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.card-test-logo-placeholder {
+  width: 77px;
+  height: 18px;
+  border-radius: 4px;
+  background: var(--color-border);
+  flex-shrink: 0;
+}
+
+.card-test-logo--right {
+  width: 105px;
+  height: 25px;
+  margin-left: auto;
+}
+
+.card-test-logo--left {
+  width: 106px;
+  height: 25px;
+  flex-shrink: 0;
+}
+
+/* Variant A: compact top row, miles right */
+.card-test--a .card-test-body {
+  padding: 14px 16px;
+  min-height: 74px;
+}
+
+.card-test-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.card-test-agent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.card-test-agent--row {
+  align-items: center;
+}
+
+.card-test-miles-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.card-test--a .card-test-actions {
+  padding: 0 16px 14px;
+}
+
+/* Variant B: agent row + price block with logo right */
+.card-test--b .card-test-body {
+  padding: 13px 18px 16px;
+  min-height: 111px;
+}
+
+.card-test--b .card-test-agent {
+  margin-bottom: 16px;
+}
+
+.card-test-price-block {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.card-test-price-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-test-price-left .card-test-miles {
+  font-size: 16px;
+}
+
+.card-test-price-left .card-test-total {
+  font-size: 14px;
+}
+
+/* Variant C: agent + image strip + 3 columns */
+.card-test--c .card-test-body {
+  padding: 16px 24px;
+  min-height: 151px;
+}
+
+.card-test--c .card-test-agent {
+  margin-bottom: 20px;
+}
+
+.card-test-three-cols {
+  position: relative;
+}
+
+.card-test-image-strip {
+  display: block;
+  width: 133px;
+  height: 31px;
+  border-radius: 4px;
+  background: var(--color-border);
+  margin-bottom: 16px;
+}
+
+.card-test-image-strip--small {
+  width: 113px;
+  height: 26px;
+  margin-bottom: 0;
+}
+
+.card-test-cols-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.card-test-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-test-col-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.card-test-col-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* Variant D: agent + price row (logo left, text right) */
+.card-test--d .card-test-body {
+  padding: 16px 24px;
+  min-height: 124px;
+}
+
+.card-test--d .card-test-agent {
+  margin-bottom: 20px;
+}
+
+.card-test-price-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.card-test-price-inline {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-test-price-inline .card-test-miles {
+  font-size: 16px;
+}
+
+.card-test--d .card-test-actions {
+  padding: 0 24px 16px;
+}
+
+/* Variant E: compact with inline cols */
+.card-test--e .card-test-body {
+  padding: 16px 18px;
+  min-height: 99px;
+}
+
+.card-test--e .card-test-agent {
+  margin-bottom: 20px;
+}
+
+.card-test-compact-cols {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.card-test-cols-inline {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.card-test-col-inline .card-test-col-label {
+  font-size: 12px;
+}
+
+.card-test-col-inline .card-test-col-value {
+  font-size: 14px;
+}
+
+.card-test--e .card-test-actions {
+  padding: 0 16px 14px;
+}

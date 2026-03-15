@@ -85,6 +85,15 @@ export const MOCK_EMISSOES = [
   },
 ]
 
+/* Cards alternativos (Figma node 224-743) — variantes para tela de teste de emissões */
+export const TEST_EMISSOES_CARDS = [
+  { id: 'test-1', variant: 'a', name: 'Marcelo Campos', rating: '★4,8', negociacoes: '5 negociações', miles: '150k Flying Club', avatar: FIGMA_ASSETS.avatar },
+  { id: 'test-2', variant: 'b', name: 'Marcelo Campos', rating: '★4,8', negociacoes: '5 negociações', miles: '150k Flying Club', approx: '@ R$94', total: 'R$14.100', avatar: FIGMA_ASSETS.avatar },
+  { id: 'test-3', variant: 'c', name: 'Marcelo Campos', rating: '★4,8', negociacoes: '5 negociações', cols: [{ label: 'Flying Club', value: '150k' }, { label: 'Milheiro', value: 'R$90' }, { label: 'Total', value: 'R$90.000' }], avatar: FIGMA_ASSETS.avatar },
+  { id: 'test-4', variant: 'd', name: 'Marcelo Campos', rating: '★4,8', negociacoes: '5 negociações', miles: '150k Flying Club', total: 'R$14.100', approx: '@ R$94', avatar: FIGMA_ASSETS.avatar },
+  { id: 'test-5', variant: 'e', name: 'Marcelo Campos', rating: '★4,8', negociacoes: '5 negociações', cols: [{ label: 'Flying Club', value: '150k' }, { label: 'Milheiro', value: 'R$90' }], avatar: FIGMA_ASSETS.avatar },
+]
+
 /* RF-EMI-03: fontes de dados (rodapé Emissões) */
 export const MOCK_FONTES_EMISSOES = [
   { id: 'f1', label: 'Google Flights', url: 'https://www.google.com/flights' },

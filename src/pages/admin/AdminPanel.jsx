@@ -1,3 +1,4 @@
+import BackButton from '../../components/BackButton'
 import '../../styles/app-layout.css'
 import '../../styles/conta.css'
 import '../../styles/contrato.css'
@@ -20,17 +21,15 @@ export default function AdminPanel({ onBack, onNavigate }) {
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
-            ← Voltar
-          </button>
+        <div className="app-header-row app-header-row--centered">
+          <BackButton onClick={onBack} />
           <h1 className="app-header-title">Painel Administrador</h1>
           <span style={{ width: 60 }} />
         </div>
       </header>
       <div className="conta-detalhe">
-        <section className="conta-section">
-          <h3 className="conta-section-title">Ações</h3>
+        <section className="conta-section card-balcao" aria-label="Administração">
+          <h3 className="conta-section-title">Administração</h3>
           <div className="admin-action-list">
             <button
               type="button"
