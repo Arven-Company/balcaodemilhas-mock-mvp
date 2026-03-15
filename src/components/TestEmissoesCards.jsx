@@ -1,16 +1,18 @@
 /**
  * Cards da tela "Teste de emissões" — variantes do Figma "Cards alternativos" (node 224-743).
- * Estrutura/espaçamento próximos ao Figma; cores do app (--color-*).
+ * Estrutura/espaçamento alinhados ao Figma; cores e border-radius do DS.
  */
 import { TEST_EMISSOES_CARDS } from '../data/mocks'
 import '../styles/card-test-variants.css'
+
+const LOGO_IBERIA = '/logo-iberia.png'
 
 function CardTestVariant({ card }) {
   const variant = card.variant || 'a'
 
   const actions = (
     <div className="card-test-actions">
-      <button type="button" className="card-test-btn card-test-btn-outline">Fazer oferta</button>
+      <button type="button" className="card-test-btn card-test-btn-secondary">Fazer oferta</button>
       <button type="button" className="card-test-btn card-test-btn-primary">Iniciar Venda</button>
     </div>
   )
@@ -28,7 +30,7 @@ function CardTestVariant({ card }) {
               </div>
             </div>
             <div className="card-test-miles-block">
-              <span className="card-test-logo-placeholder" aria-hidden />
+              <img src={LOGO_IBERIA} alt="" className="card-test-logo" />
               <span className="card-test-miles">{card.miles}</span>
             </div>
           </div>
@@ -55,7 +57,7 @@ function CardTestVariant({ card }) {
               {card.approx && <span className="card-test-approx">{card.approx}</span>}
               <span className="card-test-total">{card.total}</span>
             </div>
-            <span className="card-test-logo-placeholder card-test-logo--right" aria-hidden />
+            <img src={LOGO_IBERIA} alt="" className="card-test-logo card-test-logo--right" />
           </div>
         </div>
         {actions}
@@ -75,7 +77,7 @@ function CardTestVariant({ card }) {
             </div>
           </div>
           <div className="card-test-three-cols">
-            <span className="card-test-image-strip" aria-hidden />
+            <img src={LOGO_IBERIA} alt="" className="card-test-image-strip card-test-logo-strip" />
             <div className="card-test-cols-row">
               {card.cols?.map((col, i) => (
                 <div key={i} className="card-test-col">
@@ -103,7 +105,7 @@ function CardTestVariant({ card }) {
             </div>
           </div>
           <div className="card-test-price-row">
-            <span className="card-test-logo-placeholder card-test-logo--left" aria-hidden />
+            <img src={LOGO_IBERIA} alt="" className="card-test-logo card-test-logo--left" />
             <div className="card-test-price-inline">
               <span className="card-test-miles">{card.miles}</span>
               <span className="card-test-total">{card.total}</span>
@@ -128,7 +130,7 @@ function CardTestVariant({ card }) {
             </div>
           </div>
           <div className="card-test-compact-cols">
-            <span className="card-test-image-strip card-test-image-strip--small" aria-hidden />
+            <img src={LOGO_IBERIA} alt="" className="card-test-image-strip card-test-image-strip--small card-test-logo-strip" />
             <div className="card-test-cols-inline">
               {card.cols?.map((col, i) => (
                 <div key={i} className="card-test-col-inline">
