@@ -270,7 +270,7 @@ export default function Balcao() {
   const companhiasUnicas = [...new Set(rawList.map((item) => item.companhia).filter(Boolean))]
 
   return (
-    <>
+    <div className="balcao-container">
       <header className="app-header">
         <div className="app-header-row app-header-row--no-margin">
           <h1 className="app-header-title">Balcão</h1>
@@ -406,6 +406,6 @@ export default function Balcao() {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }

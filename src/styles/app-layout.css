@@ -119,6 +119,14 @@
   color: var(--color-text-muted);
 }
 
+/* Container do Balcão: header + Compra/Venda + subheader + filtros + lista */
+.balcao-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
 /* RF-BAL-03 / RF-BAL-04: filtros e lista/grade no Balcão — duas linhas, pills maior */
 .app-filters-balcao {
   padding: 0 var(--space-7) var(--space-4);
