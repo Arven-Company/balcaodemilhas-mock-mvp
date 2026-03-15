@@ -168,6 +168,47 @@
   color: var(--color-text-muted);
 }
 
+/* Emissões em grade: cards compactos, mesma informação, melhor varredura visual */
+.card-emissao--grid .card-emissao-image {
+  height: 72px;
+}
+
+.card-emissao--grid .card-emissao-image-content {
+  padding: var(--space-2) var(--space-4);
+}
+
+.card-emissao--grid .card-emissao-image-left .route {
+  font-size: var(--text-sm);
+}
+
+.card-emissao--grid .card-emissao-image-right .price {
+  font-size: var(--text-sm);
+}
+
+.card-emissao--grid .card-emissao-footer {
+  padding: var(--space-3) var(--space-4);
+  min-height: 44px;
+}
+
+.card-emissao--grid .card-emissao-agent-info .name {
+  font-size: var(--text-xs);
+}
+
+.card-emissao--grid .card-emissao-agent > img:not(.card-emissao-agent-logo) {
+  width: var(--size-avatar-sm);
+  height: var(--size-avatar-sm);
+  border-radius: calc(var(--size-avatar-sm) / 2);
+}
+
+.card-emissao--grid .badge-executiva {
+  font-size: 10px;
+  padding: 2px var(--space-2);
+}
+
+.card-emissao--grid .card-emissao-sponsor {
+  font-size: 10px;
+}
+
 /* Card Balcão (marketplace) */
 .card-balcao {
   background: var(--color-bg-card);

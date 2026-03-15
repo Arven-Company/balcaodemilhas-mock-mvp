@@ -4,7 +4,7 @@ import '../styles/app-layout.css'
 import '../styles/conta.css'
 import '../styles/contrato.css'
 
-export default function Configuracoes({ onBack, onOpenAdmin }) {
+export default function Configuracoes({ onBack, onOpenAdmin, onOpenTestEmissoes }) {
   const { theme, toggleTheme, addToast } = useApp()
 
   const handleToggleTheme = () => {
@@ -40,10 +40,19 @@ export default function Configuracoes({ onBack, onOpenAdmin }) {
             <h3 className="conta-section-title">Administração</h3>
             <button type="button" className="conta-config-row" onClick={onOpenAdmin}>
               <span className="conta-config-label">Painel Administrador</span>
-              <span aria-hidden>→</span>
+              <span className="conta-menu-chevron" aria-hidden>›</span>
             </button>
           </section>
         )}
+        <section className="conta-section card-balcao" aria-label="Desenvolvimento">
+          <h3 className="conta-section-title">Desenvolvimento</h3>
+          {onOpenTestEmissoes && (
+            <button type="button" className="conta-config-row" onClick={onOpenTestEmissoes}>
+              <span className="conta-config-label">Tela de teste de emissões</span>
+              <span className="conta-menu-chevron" aria-hidden>›</span>
+            </button>
+          )}
+        </section>
       </div>
     </div>
   )

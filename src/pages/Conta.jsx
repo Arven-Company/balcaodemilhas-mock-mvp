@@ -119,7 +119,7 @@ export default function Conta() {
           >
             <span className="conta-planos-banner-label">Planos de assinatura</span>
             <span className="conta-planos-banner-title">Conheça e compare os planos</span>
-            <span className="conta-planos-banner-cta">Ver planos →</span>
+            <span className="conta-planos-banner-cta">Ver planos ›</span>
           </button>
         </section>
 

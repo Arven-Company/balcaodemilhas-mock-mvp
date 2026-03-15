@@ -82,7 +82,20 @@ export default function App() {
       return <Filtros onBack={() => setScreen('')} />
     }
     if (screen === 'configuracoes') {
-      return <Configuracoes onBack={() => setScreen('')} onOpenAdmin={() => setScreen('admin-panel')} />
+      return (
+        <Configuracoes
+          onBack={() => setScreen('')}
+          onOpenAdmin={() => setScreen('admin-panel')}
+          onOpenTestEmissoes={() => setScreen('test-emissoes')}
+        />
+      )
+    }
+    if (screen === 'test-emissoes') {
+      return (
+        <Emissoes
+          testMode={{ onBack: () => setScreen('configuracoes') }}
+        />
+      )
     }
     if (screen === 'admin-panel') {
       return (
