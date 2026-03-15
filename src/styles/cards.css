@@ -51,6 +51,12 @@
   align-items: flex-start;
 }
 
+.card-emissao-sponsor-overlay {
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2px;
+}
+
 .card-emissao-image-left .route {
   font-size: var(--text-md);
   font-weight: var(--font-semibold);
@@ -86,6 +92,12 @@
   justify-content: space-between;
   min-height: 52px;
   flex-shrink: 0;
+}
+
+.card-emissao-footer-right {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
 }
 
 .card-emissao-agent {
@@ -206,6 +218,10 @@
 }
 
 .card-emissao--grid .card-emissao-sponsor {
+  font-size: 10px;
+}
+
+.card-emissao--grid .card-emissao-sponsor-overlay {
   font-size: 10px;
 }
 
