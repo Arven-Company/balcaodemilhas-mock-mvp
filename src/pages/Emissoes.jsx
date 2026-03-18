@@ -106,7 +106,7 @@ export default function Emissoes({ testMode }) {
               </div>
               <div className="card-emissao-footer">
                 <div className="card-emissao-agent">
-                  {card.agent ? (
+                  {card.sponsor && card.agent ? (
                     <>
                       <img src={FIGMA_ASSETS.avatar} alt="" />
                       <div className="card-emissao-agent-info">
