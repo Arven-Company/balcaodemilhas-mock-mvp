@@ -348,7 +348,7 @@
 .card-balcao-list {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-card);
+  border-radius: var(--radius-card-lg);
   box-shadow: var(--shadow-card-soft);
   overflow: hidden;
   display: flex;
@@ -366,7 +366,7 @@
 .card-balcao-list-avatar {
   width: 32px;
   height: 32px;
-  border-radius: 12px;
+  border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
 }
@@ -379,7 +379,7 @@
 }
 
 .card-balcao-list-name {
-  font-size: var(--text-md);
+  font-size: var(--text-lg);
   font-weight: var(--font-semibold);
   color: var(--color-text);
   line-height: var(--line-height-tight);
@@ -405,7 +405,7 @@
 .card-balcao-list-logo-metrics {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-3);
 }
 
 .card-balcao-list-metrics {
@@ -423,16 +423,16 @@
 }
 
 .card-balcao-list-metric-label {
-  font-size: var(--text-sm);
-  font-weight: var(--font-medium);
-  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
   line-height: var(--line-height-normal);
 }
 
 .card-balcao-list-metric-value {
-  font-size: var(--text-lg);
+  font-size: var(--text-md);
   font-weight: var(--font-semibold);
-  color: var(--color-text);
+  color: var(--color-text-light);
   line-height: var(--line-height-tight);
 }
 
@@ -445,12 +445,12 @@
 
 .card-balcao-list-actions .btn-outline {
   flex: 1;
-  min-height: var(--height-btn-touch);
+  min-height: var(--height-btn-md);
   padding: var(--space-4) var(--space-6);
   font-size: var(--text-base);
   font-weight: var(--font-medium);
   border: none;
-  border-radius: var(--radius-btn);
+  border-radius: var(--radius-btn-lg);
   background: var(--color-disabled-bg);
   color: var(--color-text-secondary);
   cursor: pointer;
@@ -459,12 +459,12 @@
 
 .card-balcao-list-actions .btn-primary {
   flex: 1;
-  min-height: var(--height-btn-touch);
+  min-height: var(--height-btn-md);
   padding: var(--space-4) var(--space-6);
   font-size: var(--text-base);
   font-weight: var(--font-medium);
   border: none;
-  border-radius: var(--radius-btn);
+  border-radius: var(--radius-btn-lg);
   background: var(--color-primary);
   color: white;
   cursor: pointer;

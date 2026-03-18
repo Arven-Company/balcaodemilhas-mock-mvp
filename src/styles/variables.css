@@ -58,8 +58,10 @@
 
   /* ---- Bordas / raios ---- */
   --radius-card: 16px;
+  --radius-card-lg: 24px;
   --radius-pill: 24px;
   --radius-btn: 6px;
+  --radius-btn-lg: 12px;
   --radius-modal: 20px;
   --radius-badge: 21px;
 
@@ -94,6 +96,7 @@
 
   /* ---- Dimensões de componentes (Figma) ---- */
   --height-btn: 32px;
+  --height-btn-md: 40px;
   --height-btn-touch: 44px;
   --height-card-image: 100px;
   --size-avatar-sm: 24px;
