@@ -359,23 +359,31 @@
 
 .card-balcao-list-top {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--space-2);
 }
 
-.card-balcao-list-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
+.card-balcao-list-avatar-wrap {
+  width: 44px;
+  height: 44px;
   flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.card-balcao-list-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .card-balcao-list-info {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-4);
   min-width: 0;
+  justify-content: center;
 }
 
 .card-balcao-list-name {
@@ -423,9 +431,9 @@
 }
 
 .card-balcao-list-metric-label {
-  font-size: var(--text-lg);
+  font-size: var(--text-md);
   font-weight: var(--font-semibold);
-  color: var(--color-text);
+  color: var(--color-text-muted);
   line-height: var(--line-height-normal);
 }
 

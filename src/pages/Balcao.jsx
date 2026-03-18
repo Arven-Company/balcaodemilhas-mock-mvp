@@ -370,7 +370,9 @@ export default function Balcao() {
             return (
               <article key={item.id} className="card-balcao-list">
                 <div className="card-balcao-list-top">
-                  <img src={item.avatar} alt="" className="card-balcao-list-avatar" />
+                  <div className="card-balcao-list-avatar-wrap">
+                    <img src={item.avatar} alt="" className="card-balcao-list-avatar" />
+                  </div>
                   <div className="card-balcao-list-info">
                     <span className="card-balcao-list-name">{item.name}</span>
                     <span className="card-balcao-list-meta">{item.rating} • {item.negociacoes}</span>
