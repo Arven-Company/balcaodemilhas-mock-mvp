@@ -38,10 +38,10 @@ export const MOCK_EMISSOES = [
     price: 'R$ 2.890',
     type: '1 parada',
     executiva: true,
-    agent: 'Fernanda Lima',
-    rating: '★4,9',
+    agent: null,
+    rating: null,
     sponsor: false,
-    airlineLogo: null,
+    airlineLogo: FIGMA_ASSETS.airlineLogo,
   },
   {
     id: 'emi-4',
