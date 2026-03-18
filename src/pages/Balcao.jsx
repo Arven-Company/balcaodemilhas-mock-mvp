@@ -376,21 +376,23 @@ export default function Balcao() {
                     <span className="card-balcao-list-meta">{item.rating} • {item.negociacoes}</span>
                   </div>
                 </div>
-                {item.airlineLogo && (
-                  <img src={item.airlineLogo} alt="" className="card-balcao-list-logo" />
-                )}
-                <div className="card-balcao-list-metrics">
-                  <div className="card-balcao-list-metric">
-                    <span className="card-balcao-list-metric-label">{item.companhia || 'Programa'}</span>
-                    <span className="card-balcao-list-metric-value">{amountLabel}</span>
-                  </div>
-                  <div className="card-balcao-list-metric">
-                    <span className="card-balcao-list-metric-label">Milheiro</span>
-                    <span className="card-balcao-list-metric-value">R$ {milheiro}</span>
-                  </div>
-                  <div className="card-balcao-list-metric">
-                    <span className="card-balcao-list-metric-label">Valor</span>
-                    <span className="card-balcao-list-metric-value">{valorFormatado}</span>
+                <div className="card-balcao-list-logo-metrics">
+                  {item.airlineLogo && (
+                    <img src={item.airlineLogo} alt="" className="card-balcao-list-logo" />
+                  )}
+                  <div className="card-balcao-list-metrics">
+                    <div className="card-balcao-list-metric">
+                      <span className="card-balcao-list-metric-label">{item.companhia || 'Programa'}</span>
+                      <span className="card-balcao-list-metric-value">{amountLabel}</span>
+                    </div>
+                    <div className="card-balcao-list-metric">
+                      <span className="card-balcao-list-metric-label">Milheiro</span>
+                      <span className="card-balcao-list-metric-value">R$ {milheiro}</span>
+                    </div>
+                    <div className="card-balcao-list-metric">
+                      <span className="card-balcao-list-metric-label">Valor</span>
+                      <span className="card-balcao-list-metric-value">{valorFormatado}</span>
+                    </div>
                   </div>
                 </div>
                 <div className="card-balcao-list-actions">

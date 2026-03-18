@@ -347,7 +347,7 @@
 /* Card Balcão – vista Lista (estrutura detalhada, ref. Figma) */
 .card-balcao-list {
   background: var(--color-bg-card);
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card-soft);
   overflow: hidden;
@@ -393,10 +393,19 @@
 }
 
 .card-balcao-list-logo {
-  height: 31px;
-  max-width: 133px;
+  height: 20px;
+  width: auto;
+  max-width: 100px;
   object-fit: contain;
   object-position: left center;
+  flex-shrink: 0;
+  display: block;
+}
+
+.card-balcao-list-logo-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 .card-balcao-list-metrics {
@@ -440,7 +449,7 @@
   padding: var(--space-4) var(--space-6);
   font-size: var(--text-base);
   font-weight: var(--font-medium);
-  border: 1px solid var(--color-primary);
+  border: none;
   border-radius: var(--radius-btn);
   background: var(--color-disabled-bg);
   color: var(--color-text-secondary);
