@@ -440,7 +440,7 @@
 .card-balcao-list-metric-value {
   font-size: var(--text-md);
   font-weight: var(--font-semibold);
-  color: var(--color-text-light);
+  color: var(--color-disabled-text);
   line-height: var(--line-height-tight);
 }
 
