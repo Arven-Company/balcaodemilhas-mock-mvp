@@ -330,7 +330,7 @@ export default function Balcao() {
         </div>
         <div className="app-layout-toggle">
           <button type="button" className={`app-layout-btn ${layoutBalcao === 'list' ? 'active' : ''}`} onClick={() => setLayoutBalcao('list')} aria-label="Lista">Lista</button>
-          <button type="button" className={`app-layout-btn ${layoutBalcao === 'grid' ? 'active' : ''}`} onClick={() => setLayoutBalcao('grid')} aria-label="Grade">Grade</button>
+          <button type="button" className={`app-layout-btn ${layoutBalcao === 'grid' ? 'active' : ''}`} onClick={() => setLayoutBalcao('grid')} aria-label="Compacto">Compacto</button>
         </div>
       </div>
 
@@ -357,31 +357,81 @@ export default function Balcao() {
         </div>
       )}
       <div className={layoutBalcao === 'grid' ? 'app-list app-list--grid' : 'app-list'}>
-        {list.map((item) => (
-          <article key={item.id} className={`card-balcao ${layoutBalcao === 'grid' ? 'card-balcao--grid' : ''}`}>
-            <div className="card-balcao-body">
-              <div className="card-balcao-left">
-                <img src={item.avatar} alt="" className="card-balcao-avatar" />
-                <span className="card-balcao-name">{item.name}</span>
-                <span className="card-balcao-meta">{item.rating}  •  {item.negociacoes}</span>
+        {list.map((item) => {
+          const milesMatch = (item.miles || '').match(/(\d+)\s*k/i)
+          const milesK = milesMatch ? parseInt(milesMatch[1], 10) : 100
+          const milheiro = milesK > 0 ? Math.round(item.originalValue / milesK) : 0
+          const valorFormatado = typeof item.originalValue === 'number'
+            ? `R$ ${item.originalValue.toLocaleString('pt-BR')}`
+            : (item.approx || '—')
+          const amountLabel = milesMatch ? `${milesMatch[1]}k` : (item.miles || '—')
+
+          if (layoutBalcao === 'list') {
+            return (
+              <article key={item.id} className="card-balcao-list">
+                <div className="card-balcao-list-top">
+                  <img src={item.avatar} alt="" className="card-balcao-list-avatar" />
+                  <div className="card-balcao-list-info">
+                    <span className="card-balcao-list-name">{item.name}</span>
+                    <span className="card-balcao-list-meta">{item.rating} • {item.negociacoes}</span>
+                  </div>
+                </div>
+                {item.airlineLogo && (
+                  <img src={item.airlineLogo} alt="" className="card-balcao-list-logo" />
+                )}
+                <div className="card-balcao-list-metrics">
+                  <div className="card-balcao-list-metric">
+                    <span className="card-balcao-list-metric-label">{item.companhia || 'Programa'}</span>
+                    <span className="card-balcao-list-metric-value">{amountLabel}</span>
+                  </div>
+                  <div className="card-balcao-list-metric">
+                    <span className="card-balcao-list-metric-label">Milheiro</span>
+                    <span className="card-balcao-list-metric-value">R$ {milheiro}</span>
+                  </div>
+                  <div className="card-balcao-list-metric">
+                    <span className="card-balcao-list-metric-label">Valor</span>
+                    <span className="card-balcao-list-metric-value">{valorFormatado}</span>
+                  </div>
+                </div>
+                <div className="card-balcao-list-actions">
+                  <button type="button" className="btn-outline" onClick={(e) => { e.stopPropagation(); setSelectedOfferForMakeOffer(item); setScreen('make-offer'); }}>Fazer oferta</button>
+                  <button
+                    type="button"
+                    className="btn-primary"
+                    onClick={(e) => { e.stopPropagation(); handleIniciarCompraVenda(item, tab === 'compra' ? 'compra' : 'venda'); }}
+                  >
+                    {primaryAction}
+                  </button>
+                </div>
+              </article>
+            )
+          }
+          return (
+            <article key={item.id} className="card-balcao card-balcao--grid">
+              <div className="card-balcao-body">
+                <div className="card-balcao-left">
+                  <img src={item.avatar} alt="" className="card-balcao-avatar" />
+                  <span className="card-balcao-name">{item.name}</span>
+                  <span className="card-balcao-meta">{item.rating}  •  {item.negociacoes}</span>
+                </div>
+                <div className="card-balcao-right">
+                  <span className="card-balcao-miles">{item.miles}</span>
+                  {item.approx && <span className="card-balcao-approx">{item.approx}</span>}
+                </div>
               </div>
-              <div className="card-balcao-right">
-                <span className="card-balcao-miles">{item.miles}</span>
-                {item.approx && <span className="card-balcao-approx">{item.approx}</span>}
+              <div className="card-balcao-actions">
+                <button type="button" className="btn-outline" onClick={(e) => { e.stopPropagation(); setSelectedOfferForMakeOffer(item); setScreen('make-offer'); }}>Fazer oferta</button>
+                <button
+                  type="button"
+                  className="btn-primary"
+                  onClick={(e) => { e.stopPropagation(); handleIniciarCompraVenda(item, tab === 'compra' ? 'compra' : 'venda'); }}
+                >
+                  {primaryAction}
+                </button>
               </div>
-            </div>
-            <div className="card-balcao-actions">
-              <button type="button" className="btn-outline" onClick={(e) => { e.stopPropagation(); setSelectedOfferForMakeOffer(item); setScreen('make-offer'); }}>Fazer oferta</button>
-              <button
-                type="button"
-                className="btn-primary"
-                onClick={(e) => { e.stopPropagation(); handleIniciarCompraVenda(item, tab === 'compra' ? 'compra' : 'venda'); }}
-              >
-                {primaryAction}
-              </button>
-            </div>
-          </article>
-        ))}
+            </article>
+          )
+        })}
       </div>
 
       {contraproposta.open && (

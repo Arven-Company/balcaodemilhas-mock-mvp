@@ -344,6 +344,124 @@
   font-size: var(--text-xs);
 }
 
+/* Card Balcão – vista Lista (estrutura detalhada, ref. Figma) */
+.card-balcao-list {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card-soft);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+  padding: var(--space-6) var(--space-7);
+}
+
+.card-balcao-list-top {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.card-balcao-list-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.card-balcao-list-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.card-balcao-list-name {
+  font-size: var(--text-md);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  line-height: var(--line-height-tight);
+}
+
+.card-balcao-list-meta {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-normal);
+}
+
+.card-balcao-list-logo {
+  height: 31px;
+  max-width: 133px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.card-balcao-list-metrics {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.card-balcao-list-metric {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+
+.card-balcao-list-metric-label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-normal);
+}
+
+.card-balcao-list-metric-value {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  line-height: var(--line-height-tight);
+}
+
+.card-balcao-list-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.card-balcao-list-actions .btn-outline {
+  flex: 1;
+  min-height: var(--height-btn-touch);
+  padding: var(--space-4) var(--space-6);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-btn);
+  background: var(--color-disabled-bg);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+.card-balcao-list-actions .btn-primary {
+  flex: 1;
+  min-height: var(--height-btn-touch);
+  padding: var(--space-4) var(--space-6);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  border: none;
+  border-radius: var(--radius-btn);
+  background: var(--color-primary);
+  color: white;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
 /* Card Promoção */
 .card-promo {
   background: var(--color-bg-card);
