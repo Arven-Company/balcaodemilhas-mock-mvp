@@ -347,7 +347,7 @@
 /* Card Balcão – vista Lista (estrutura detalhada, ref. Figma) */
 .card-balcao-list {
   background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card-soft);
   overflow: hidden;

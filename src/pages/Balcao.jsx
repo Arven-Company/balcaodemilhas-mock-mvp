@@ -356,7 +356,7 @@ export default function Balcao() {
           </div>
         </div>
       )}
-      <div className={layoutBalcao === 'grid' ? 'app-list app-list--grid' : 'app-list'}>
+      <div className="app-list">
         {list.map((item) => {
           const milesMatch = (item.miles || '').match(/(\d+)\s*k/i)
           const milesK = milesMatch ? parseInt(milesMatch[1], 10) : 100
@@ -406,8 +406,9 @@ export default function Balcao() {
               </article>
             )
           }
+          /* Compacto: card original (ex-Lista), igual ao anterior */
           return (
-            <article key={item.id} className="card-balcao card-balcao--grid">
+            <article key={item.id} className="card-balcao">
               <div className="card-balcao-body">
                 <div className="card-balcao-left">
                   <img src={item.avatar} alt="" className="card-balcao-avatar" />
