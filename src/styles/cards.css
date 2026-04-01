@@ -1,13 +1,22 @@
-/* Cards Emissões e Balcão - alinhado ao Figma */
+/* Cards Emissoes e Balcao */
 .card-emissao {
-  background: var(--color-bg-card);
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-card-soft);
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  transition: transform var(--duration-fast) var(--ease-default),
+              box-shadow var(--duration-fast) var(--ease-default);
   overflow: hidden;
 }
 
 .card-emissao[role="button"] {
   cursor: pointer;
+}
+
+@media (hover: hover) {
+  .card-emissao[role="button"]:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-soft), 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
 }
 
 .card-emissao-image {
@@ -495,12 +504,21 @@
 .card-promo-image {
   height: var(--height-card-image);
   background: var(--color-border);
+  position: relative;
+  overflow: hidden;
 }
 
 .card-promo-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.card-promo-image-scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-scrim);
+  pointer-events: none;
 }
 
 .card-promo-body {
@@ -518,4 +536,20 @@
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   margin: 0;
+}
+
+.card-promo-meta-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.card-promo-badge {
+  flex-shrink: 0;
+}
+
+.card-promo-validade {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
 }

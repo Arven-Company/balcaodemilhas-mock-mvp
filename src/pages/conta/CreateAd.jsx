@@ -1,10 +1,8 @@
 import { useState } from 'react'
-import '../../styles/app-layout.css'
-import '../../styles/conta.css'
-import '../../styles/contrato.css'
-import '../../styles/fluxo-balcao.css'
+import { useNavigate } from 'react-router-dom'
 
-export default function CreateAd({ onBack, onNext }) {
+export default function CreateAd() {
+  const navigate = useNavigate()
   const [ad, setAd] = useState({
     sponsorName: '',
     from: '',
@@ -20,9 +18,13 @@ export default function CreateAd({ onBack, onNext }) {
 
   const handleNext = () => {
     if (!ad.sponsorName?.trim() || !ad.from?.trim() || !ad.to?.trim() || !ad.priceBRL?.trim()) return
-    onNext({
-      ...ad,
-      priceBRL: parseFloat(ad.priceBRL) || 0,
+    navigate('/conta/anunciar/plano', {
+      state: {
+        adData: {
+          ...ad,
+          priceBRL: parseFloat(ad.priceBRL) || 0,
+        },
+      },
     })
   }
 
@@ -30,7 +32,7 @@ export default function CreateAd({ onBack, onNext }) {
     <div className="contrato-wrap">
       <header className="app-header">
         <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
+          <button type="button" className="conta-back" onClick={() => navigate('/conta')} aria-label="Voltar">
             ← Voltar
           </button>
           <h1 className="app-header-title">Anunciar Emissão</h1>

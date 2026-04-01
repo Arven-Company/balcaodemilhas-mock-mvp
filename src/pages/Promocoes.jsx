@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react'
 import { MOCK_PROMOCOES } from '../data/mocks'
-import BackButton from '../components/BackButton'
-import '../styles/cards.css'
-import '../styles/app-layout.css'
-import '../styles/promocoes.css'
+import { useUI } from '../context/UIContext'
+import { PageHeader, Badge } from '../components/ui'
 
 function CupomItem({ code, desc, onCopy }) {
   const [copied, setCopied] = useState(false)
@@ -33,6 +31,7 @@ function CupomItem({ code, desc, onCopy }) {
 }
 
 export default function Promocoes() {
+  const { addToast } = useUI()
   const [selectedId, setSelectedId] = useState(null)
   const promo = MOCK_PROMOCOES.find((p) => p.id === selectedId)
 
@@ -52,27 +51,23 @@ export default function Promocoes() {
   if (promo) {
     return (
       <div className="promo-detalhe">
-        <header className="app-header">
-          <div className="app-header-row app-header-row--centered">
-            <BackButton onClick={() => window.history.back()} />
-            <h1 className="app-header-title">Promoção</h1>
-            <span aria-hidden />
-          </div>
-        </header>
+        <PageHeader title="Oferta" onBack={() => window.history.back()} centered />
         <div className="promo-detalhe-hero">
-          <img src={promo.image} alt="" />
+          <img src={promo.image} alt="" loading="lazy" />
+          <div className="promo-detalhe-hero-scrim" />
         </div>
         <div className="promo-detalhe-content">
           <h2 className="promo-detalhe-title">{promo.title}</h2>
-          <p className="promo-detalhe-meta">{promo.category} · {promo.validade}</p>
+          <div className="promo-detalhe-meta-row">
+            <Badge variant="primary">{promo.category}</Badge>
+            <span className="promo-detalhe-validade">{promo.validade}</span>
+          </div>
           {promo.content?.map((block, i) => (
             <div key={i} className="promo-block">
               {block.type === 'paragraph' && <p className="promo-para">{block.text}</p>}
               {block.type === 'list' && (
                 <ul className="promo-list">
-                  {block.items.map((item, j) => (
-                    <li key={j}>{item}</li>
-                  ))}
+                  {block.items.map((item, j) => <li key={j}>{item}</li>)}
                 </ul>
               )}
               {block.type === 'note' && <p className="promo-note">{block.text}</p>}
@@ -82,7 +77,14 @@ export default function Promocoes() {
             <section className="promo-cupons">
               <h3 className="promo-cupons-title">Cupons</h3>
               {promo.cupons.map((c) => (
-                <CupomItem key={c.id} code={c.code} desc={c.desc} />
+                <CupomItem
+                  key={c.id}
+                  code={c.code}
+                  desc={c.desc}
+                  onCopy={(success) => {
+                    if (success !== false) addToast('Cupom copiado!', 'success')
+                  }}
+                />
               ))}
             </section>
           )}
@@ -96,7 +98,7 @@ export default function Promocoes() {
       <header className="app-header">
         <div className="app-header-row app-header-row--centered">
           <span aria-hidden />
-          <h1 className="app-header-title">Promoções</h1>
+          <h1 className="app-header-title">Ofertas</h1>
           <span aria-hidden />
         </div>
       </header>
@@ -111,11 +113,15 @@ export default function Promocoes() {
             onKeyDown={(e) => e.key === 'Enter' && openDetail(p.id)}
           >
             <div className="card-promo-image">
-              <img src={p.image} alt="" />
+              <img src={p.image} alt="" loading="lazy" />
+              <div className="card-promo-image-scrim" />
             </div>
             <div className="card-promo-body">
               <h2 className="card-promo-title">{p.title}</h2>
-              <p className="card-promo-meta">{p.category} · {p.validade}</p>
+              <div className="card-promo-meta-row">
+                <Badge variant="outline" className="card-promo-badge">{p.category}</Badge>
+                <span className="card-promo-validade">{p.validade}</span>
+              </div>
             </div>
           </article>
         ))}

@@ -1,8 +1,10 @@
-import '../../styles/app-layout.css'
-import '../../styles/conta.css'
-import '../../styles/contrato.css'
+import { useNavigate, useLocation } from 'react-router-dom'
 
-export default function AdminAddSuccess({ type, title, onBackToPanel, onViewList }) {
+export default function AdminAddSuccess() {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const type = location.state?.type
+  const title = location.state?.title
   const typeLabel = type === 'emission' ? 'Emissão' : 'Promoção'
 
   return (
@@ -20,10 +22,10 @@ export default function AdminAddSuccess({ type, title, onBackToPanel, onViewList
           A {typeLabel.toLowerCase()} &quot;{title}&quot; já está disponível no aplicativo.
         </p>
         <div className="contrato-actions">
-          <button type="button" className="contrato-btn-primary" onClick={onBackToPanel}>
+          <button type="button" className="contrato-btn-primary" onClick={() => navigate('/admin')}>
             Voltar ao Painel
           </button>
-          <button type="button" className="contrato-btn-skip" onClick={onViewList}>
+          <button type="button" className="contrato-btn-skip" onClick={() => navigate(type === 'emission' ? '/emissoes' : '/promocoes')}>
             Ver {typeLabel === 'Emissão' ? 'Emissões' : 'Promoções'}
           </button>
         </div>

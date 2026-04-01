@@ -1,12 +1,13 @@
 import { useState, useMemo } from 'react'
-import { useApp } from '../../context/AppContext'
-import '../../styles/app-layout.css'
-import '../../styles/conta.css'
-import '../../styles/contrato.css'
-import '../../styles/fluxo-balcao.css'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useUI } from '../../context/UIContext'
+import { MOCK_BALCAO_COMPRA, MOCK_BALCAO_VENDA } from '../../data/mocks'
 
-export default function MakeOffer({ offer, onBack }) {
-  const { addToast } = useApp()
+export default function MakeOffer() {
+  const { addToast } = useUI()
+  const navigate = useNavigate()
+  const { id } = useParams()
+  const offer = [...MOCK_BALCAO_COMPRA, ...MOCK_BALCAO_VENDA].find((o) => o.id === id)
   const originalValue = offer?.originalValue ?? 100
   const milesLabel = offer?.miles ?? '—'
   const minAllowed = useMemo(() => Math.ceil(originalValue * 0.85), [originalValue])
@@ -22,14 +23,14 @@ export default function MakeOffer({ offer, onBack }) {
   const handleSubmit = () => {
     if (isInvalid) return
     addToast('Proposta enviada.', 'success')
-    onBack()
+    navigate(-1)
   }
 
   return (
     <div className="contrato-wrap">
       <header className="app-header">
         <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
+          <button type="button" className="conta-back" onClick={() => navigate(-1)} aria-label="Voltar">
             ← Voltar
           </button>
           <h1 className="app-header-title">Fazer Oferta</h1>

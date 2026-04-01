@@ -1,15 +1,17 @@
-import '../../styles/app-layout.css'
-import '../../styles/conta.css'
-import '../../styles/contrato.css'
+import { useNavigate, useParams } from 'react-router-dom'
+import { MOCK_EMISSOES } from '../../data/mocks'
 
-export default function CreatePurchaseOffer({ flight, onBack }) {
+export default function CreatePurchaseOffer() {
+  const navigate = useNavigate()
+  const { id } = useParams()
+  const flight = MOCK_EMISSOES.find((f) => f.id === id)
   const title = flight?.route || (flight?.from && flight?.to ? `${flight.from} → ${flight.to}` : 'Oferta de compra')
 
   return (
     <div className="contrato-wrap">
       <header className="app-header">
         <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
+          <button type="button" className="conta-back" onClick={() => navigate(-1)} aria-label="Voltar">
             ← Voltar
           </button>
           <h1 className="app-header-title">Criar Oferta de Compra</h1>
@@ -25,7 +27,7 @@ export default function CreatePurchaseOffer({ flight, onBack }) {
           </div>
         </div>
         <div className="contrato-actions">
-          <button type="button" className="contrato-btn-primary" onClick={onBack}>
+          <button type="button" className="contrato-btn-primary" onClick={() => navigate(-1)}>
             Voltar ao detalhe
           </button>
         </div>

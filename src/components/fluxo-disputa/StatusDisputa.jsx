@@ -1,8 +1,3 @@
-import '../../styles/app-layout.css'
-import '../../styles/conta.css'
-import '../../styles/contrato.css'
-import '../../styles/disputa.css'
-
 export default function StatusDisputa({ offer, reason, onDone }) {
   return (
     <div className="disputa-wrap">

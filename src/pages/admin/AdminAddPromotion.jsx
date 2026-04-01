@@ -1,26 +1,24 @@
 import { useState } from 'react'
-import '../../styles/app-layout.css'
-import '../../styles/conta.css'
-import '../../styles/contrato.css'
-import '../../styles/fluxo-balcao.css'
+import { useNavigate } from 'react-router-dom'
 
 const CATEGORIES = ['Clubes de Milhas', 'Pacotes e Hotéis', 'Cartões de Crédito']
 
-export default function AdminAddPromotion({ onBack, onConfirm }) {
+export default function AdminAddPromotion() {
+  const navigate = useNavigate()
   const [title, setTitle] = useState('')
   const [category, setCategory] = useState('Clubes de Milhas')
   const [expiryDate, setExpiryDate] = useState(() => new Date().toISOString().split('T')[0])
 
   const handleConfirm = () => {
     if (!title.trim()) return
-    onConfirm('promotion', title.trim())
+    navigate('/admin/sucesso', { state: { type: 'promotion', title: title.trim() } })
   }
 
   return (
     <div className="contrato-wrap">
       <header className="app-header">
         <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
+          <button type="button" className="conta-back" onClick={() => navigate('/admin')} aria-label="Voltar">
             ← Voltar
           </button>
           <h1 className="app-header-title">Adicionar Promoção</h1>

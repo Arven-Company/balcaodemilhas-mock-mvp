@@ -1,9 +1,6 @@
-import { useApp } from '../context/AppContext'
+import { useNavigate } from 'react-router-dom'
+import { useUI } from '../context/UIContext'
 import BackButton from '../components/BackButton'
-import '../styles/app-layout.css'
-import '../styles/conta.css'
-import '../styles/contrato.css'
-import '../styles/admin-panel.css'
 
 const IconAparencia = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -25,8 +22,9 @@ const IconDesenvolvimento = () => (
   </svg>
 )
 
-export default function Configuracoes({ onBack, onOpenAdmin, onOpenTestEmissoes }) {
-  const { theme, toggleTheme, addToast } = useApp()
+export default function Configuracoes() {
+  const { theme, toggleTheme, addToast } = useUI()
+  const navigate = useNavigate()
 
   const handleToggleTheme = () => {
     toggleTheme()
@@ -37,7 +35,7 @@ export default function Configuracoes({ onBack, onOpenAdmin, onOpenTestEmissoes 
     <div className="contrato-wrap">
       <header className="app-header">
         <div className="app-header-row app-header-row--centered">
-          <BackButton onClick={onBack} />
+          <BackButton onClick={() => navigate(-1)} />
           <h1 className="app-header-title">Configurações</h1>
           <span style={{ width: 60 }} />
         </div>
@@ -65,32 +63,28 @@ export default function Configuracoes({ onBack, onOpenAdmin, onOpenTestEmissoes 
             </label>
           </div>
         </section>
-        {onOpenAdmin && (
-          <section className="conta-section card-balcao" aria-label="Administração">
-            <h3 className="conta-section-title">Administração</h3>
-            <div className="admin-action-list">
-              <button type="button" className="admin-action-item" onClick={onOpenAdmin}>
-                <span className="admin-action-icon-wrap" aria-hidden>
-                  <IconAdmin />
-                </span>
-                <span className="admin-action-label">Painel Administrador</span>
-                <span className="conta-menu-chevron" aria-hidden>›</span>
-              </button>
-            </div>
-          </section>
-        )}
+        <section className="conta-section card-balcao" aria-label="Administração">
+          <h3 className="conta-section-title">Administração</h3>
+          <div className="admin-action-list">
+            <button type="button" className="admin-action-item" onClick={() => navigate('/admin')}>
+              <span className="admin-action-icon-wrap" aria-hidden>
+                <IconAdmin />
+              </span>
+              <span className="admin-action-label">Painel Administrador</span>
+              <span className="conta-menu-chevron" aria-hidden>›</span>
+            </button>
+          </div>
+        </section>
         <section className="conta-section card-balcao" aria-label="Desenvolvimento">
           <h3 className="conta-section-title">Desenvolvimento</h3>
           <div className="admin-action-list">
-            {onOpenTestEmissoes && (
-              <button type="button" className="admin-action-item" onClick={onOpenTestEmissoes}>
-                <span className="admin-action-icon-wrap" aria-hidden>
-                  <IconDesenvolvimento />
-                </span>
-                <span className="admin-action-label">Tela de teste de emissões</span>
-                <span className="conta-menu-chevron" aria-hidden>›</span>
-              </button>
-            )}
+            <button type="button" className="admin-action-item" onClick={() => navigate('/admin/emissao')}>
+              <span className="admin-action-icon-wrap" aria-hidden>
+                <IconDesenvolvimento />
+              </span>
+              <span className="admin-action-label">Tela de teste de emissões</span>
+              <span className="conta-menu-chevron" aria-hidden>›</span>
+            </button>
           </div>
         </section>
       </div>

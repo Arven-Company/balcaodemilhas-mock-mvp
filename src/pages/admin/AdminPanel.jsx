@@ -1,8 +1,5 @@
+import { useNavigate } from 'react-router-dom'
 import BackButton from '../../components/BackButton'
-import '../../styles/app-layout.css'
-import '../../styles/conta.css'
-import '../../styles/contrato.css'
-import '../../styles/admin-panel.css'
 
 const IconEmission = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -17,12 +14,14 @@ const IconPromotion = () => (
   </svg>
 )
 
-export default function AdminPanel({ onBack, onNavigate }) {
+export default function AdminPanel() {
+  const navigate = useNavigate()
+
   return (
     <div className="contrato-wrap">
       <header className="app-header">
         <div className="app-header-row app-header-row--centered">
-          <BackButton onClick={onBack} />
+          <BackButton onClick={() => navigate('/configuracoes')} />
           <h1 className="app-header-title">Painel Administrador</h1>
           <span style={{ width: 60 }} />
         </div>
@@ -34,7 +33,7 @@ export default function AdminPanel({ onBack, onNavigate }) {
             <button
               type="button"
               className="admin-action-item"
-              onClick={() => onNavigate('admin-add-emission')}
+              onClick={() => navigate('/admin/emissao')}
             >
               <span className="admin-action-icon-wrap" aria-hidden>
                 <IconEmission />
@@ -45,7 +44,7 @@ export default function AdminPanel({ onBack, onNavigate }) {
             <button
               type="button"
               className="admin-action-item"
-              onClick={() => onNavigate('admin-add-promotion')}
+              onClick={() => navigate('/admin/promocao')}
             >
               <span className="admin-action-icon-wrap" aria-hidden>
                 <IconPromotion />

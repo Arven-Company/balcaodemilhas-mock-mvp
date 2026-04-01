@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import '../styles/fluxo-balcao.css'
 
 const MOCK_MENSAGENS = [
   { id: 'm1', from: 'other', text: 'Olá! Por favor envie os dados do passageiro para emissão.' },

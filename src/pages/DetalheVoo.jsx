@@ -1,17 +1,16 @@
 import { useState } from 'react'
-import { useApp } from '../context/AppContext'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useUI } from '../context/UIContext'
 import { FIGMA_ASSETS } from '../assets/figma-assets'
-import BackButton from '../components/BackButton'
-import '../styles/cards.css'
-import '../styles/app-layout.css'
-import '../styles/detalhe-voo.css'
+import { MOCK_EMISSOES } from '../data/mocks'
+import { PageHeader, Button, Badge, PriceTag } from '../components/ui'
 
-const WEEKDAYS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
-const MONTH_NAMES_FULL = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+const WEEKDAYS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab']
+const MONTH_NAMES_FULL = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
 
 function CalendarMonth({ selectedDate, onSelectDate, availableDates, milesByDate }) {
   const [currentYear, setCurrentYear] = useState(2025)
-  const [currentMonth, setCurrentMonth] = useState(2) // 0-indexed (Março)
+  const [currentMonth, setCurrentMonth] = useState(2)
 
   const dateKey = (y, m, d) => `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`
   const isAvailable = (d) => availableDates.includes(dateKey(currentYear, currentMonth, d))
@@ -30,46 +29,28 @@ function CalendarMonth({ selectedDate, onSelectDate, availableDates, milesByDate
   const allCells = [...emptyCells, ...dayCells]
 
   const goPrevMonth = () => {
-    if (currentMonth === 0) {
-      setCurrentMonth(11)
-      setCurrentYear((y) => y - 1)
-    } else {
-      setCurrentMonth((m) => m - 1)
-    }
+    if (currentMonth === 0) { setCurrentMonth(11); setCurrentYear((y) => y - 1) }
+    else setCurrentMonth((m) => m - 1)
   }
 
   const goNextMonth = () => {
-    if (currentMonth === 11) {
-      setCurrentMonth(0)
-      setCurrentYear((y) => y + 1)
-    } else {
-      setCurrentMonth((m) => m + 1)
-    }
+    if (currentMonth === 11) { setCurrentMonth(0); setCurrentYear((y) => y + 1) }
+    else setCurrentMonth((m) => m + 1)
   }
 
   return (
     <div className="detalhe-voo-calendar-month">
       <div className="detalhe-voo-calendar-month-nav">
-        <button type="button" className="detalhe-voo-calendar-month-arrow" onClick={goPrevMonth} aria-label="Mês anterior">
-          ‹
-        </button>
-        <span className="detalhe-voo-calendar-month-title">
-          {MONTH_NAMES_FULL[currentMonth]} {currentYear}
-        </span>
-        <button type="button" className="detalhe-voo-calendar-month-arrow" onClick={goNextMonth} aria-label="Mês seguinte">
-          ›
-        </button>
+        <button type="button" className="detalhe-voo-calendar-month-arrow" onClick={goPrevMonth} aria-label="Mes anterior">&lsaquo;</button>
+        <span className="detalhe-voo-calendar-month-title">{MONTH_NAMES_FULL[currentMonth]} {currentYear}</span>
+        <button type="button" className="detalhe-voo-calendar-month-arrow" onClick={goNextMonth} aria-label="Mes seguinte">&rsaquo;</button>
       </div>
       <div className="detalhe-voo-calendar-month-weekdays">
-        {WEEKDAYS.map((wd) => (
-          <span key={wd} className="detalhe-voo-calendar-month-wd">{wd}</span>
-        ))}
+        {WEEKDAYS.map((wd) => (<span key={wd} className="detalhe-voo-calendar-month-wd">{wd}</span>))}
       </div>
       <div className="detalhe-voo-calendar-month-grid">
         {allCells.map((cell) => {
-          if (cell.empty) {
-            return <span key={cell.key} className="detalhe-voo-calendar-month-cell empty" />
-          }
+          if (cell.empty) return <span key={cell.key} className="detalhe-voo-calendar-month-cell empty" />
           const d = cell.day
           const avail = isAvailable(d)
           const sel = isSelected(d)
@@ -92,66 +73,54 @@ function CalendarMonth({ selectedDate, onSelectDate, availableDates, milesByDate
   )
 }
 
-/* Mock: milhas por data (disponíveis para emissão) */
 const DEFAULT_MILES_BY_DATE = {
-  '2025-03-05': '120k',
-  '2025-03-08': '95k',
-  '2025-03-12': '110k',
-  '2025-03-15': '98k',
-  '2025-03-19': '125k',
-  '2025-03-22': '88k',
-  '2025-03-26': '102k',
+  '2025-03-05': '120k', '2025-03-08': '95k', '2025-03-12': '110k',
+  '2025-03-15': '98k', '2025-03-19': '125k', '2025-03-22': '88k', '2025-03-26': '102k',
 }
 
-export default function DetalheVoo({ card, onBack, onNavigateToCreateOffer }) {
-  const { addToast } = useApp()
+export default function DetalheVoo() {
+  const navigate = useNavigate()
+  const { id } = useParams()
+  const { addToast } = useUI()
   const [selectedDate, setSelectedDate] = useState(null)
   const [showConfirmModal, setShowConfirmModal] = useState(false)
+
+  const card = MOCK_EMISSOES.find((e) => e.id === id)
+  if (!card) {
+    return (
+      <div>
+        <PageHeader title="Voo nao encontrado" onBack={() => navigate('/emissoes')} centered />
+      </div>
+    )
+  }
+
   const availableDates = Object.keys(DEFAULT_MILES_BY_DATE)
   const milesByDate = DEFAULT_MILES_BY_DATE
 
-  const handleSolicitar = () => {
-    if (!selectedDate) return
-    setShowConfirmModal(true)
-  }
-
-  const handleCloseModal = () => setShowConfirmModal(false)
-
   const handleNovaOrdem = () => {
     setShowConfirmModal(false)
-    addToast('Solicitação enviada.', 'success')
-    onBack?.()
-  }
-
-  const handleCriarOferta = () => {
-    setShowConfirmModal(false)
-    addToast('Solicitação enviada.', 'success')
-    onBack?.()
+    addToast('Solicitacao enviada.', 'success')
+    navigate('/emissoes')
   }
 
   return (
     <div className={`detalhe-voo ${selectedDate ? 'detalhe-voo--has-ordem' : ''}`}>
-      <header className="app-header detalhe-voo-header">
-        <div className="app-header-row app-header-row--centered">
-          <BackButton onClick={onBack} />
-          <h1 className="app-header-title">Detalhe do voo</h1>
-          <span style={{ width: 40 }} />
-        </div>
-      </header>
+      <PageHeader title="Detalhe do voo" onBack={() => navigate(-1)} centered />
 
       <article className="card-emissao detalhe-voo-card">
         <div className="card-emissao-image">
-          <img src={card.image} alt="" />
+          <img src={card.image} alt="" loading="lazy" />
+          <div className="card-emissao-image-scrim" />
           <div className="card-emissao-image-content">
             <div className="card-emissao-image-left">
-              {card.sponsor && <span className="card-emissao-sponsor-overlay">patrocinado</span>}
+              {card.sponsor && <Badge variant="primary">patrocinado</Badge>}
               {card.detail && <span>{card.detail}</span>}
               {card.period && <span>{card.period}</span>}
               <span className="route">{card.route}</span>
             </div>
             <div className="card-emissao-image-right">
               {card.labelRight && <span>{card.labelRight}</span>}
-              <span className="price">{card.price}</span>
+              <PriceTag value={card.price} size="md" />
             </div>
           </div>
         </div>
@@ -175,14 +144,14 @@ export default function DetalheVoo({ card, onBack, onNavigateToCreateOffer }) {
             )
           )}
           <div className="card-emissao-footer-right">
-            {card.executiva && <span className="badge-executiva">EXECUTIVA</span>}
+            {card.executiva && <Badge variant="primary" className="text-caps">Executiva</Badge>}
           </div>
         </div>
       </article>
 
       <section className="detalhe-voo-section">
         <h2 className="detalhe-voo-section-title">Selecione a data</h2>
-        <p className="detalhe-voo-section-desc">Dias disponíveis para emissão.</p>
+        <p className="detalhe-voo-section-desc">Dias disponiveis para emissao.</p>
         <CalendarMonth
           selectedDate={selectedDate}
           onSelectDate={setSelectedDate}
@@ -190,56 +159,44 @@ export default function DetalheVoo({ card, onBack, onNavigateToCreateOffer }) {
           milesByDate={milesByDate}
         />
         <div className="detalhe-voo-legend">
-          <span className="detalhe-voo-legend-item available">Disponível</span>
-          <span className="detalhe-voo-legend-item unavailable">Indisponível</span>
+          <span className="detalhe-voo-legend-item available">Disponivel</span>
+          <span className="detalhe-voo-legend-item unavailable">Indisponivel</span>
         </div>
       </section>
 
       {selectedDate && (() => {
         const key = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`
         const miles = milesByDate[key]
-        const dayNames = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb']
+        const dayNames = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab']
         const monthNames = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
         const dateLabel = `${dayNames[selectedDate.getDay()]}, ${selectedDate.getDate()} de ${monthNames[selectedDate.getMonth()]} de ${selectedDate.getFullYear()}`
         return (
           <div className="detalhe-voo-ordem-card">
-            <h2 className="detalhe-voo-ordem-title">Nova Ordem de Balcão</h2>
+            <h2 className="detalhe-voo-ordem-title">Nova Ordem de Balcao</h2>
             <div className="detalhe-voo-ordem-row">
               <div className="detalhe-voo-ordem-info">
-                {card.airlineLogo && (
-                  <img src={card.airlineLogo} alt="" className="detalhe-voo-ordem-logo" />
-                )}
+                {card.airlineLogo && <img src={card.airlineLogo} alt="" className="detalhe-voo-ordem-logo" />}
                 <p className="detalhe-voo-ordem-date">{dateLabel}</p>
                 <p className="detalhe-voo-ordem-route">{card.route}</p>
-                <p className="detalhe-voo-ordem-miles">{miles ? `${miles.replace('k', '')}.000 milhas` : '—'}</p>
+                <p className="detalhe-voo-ordem-miles">{miles ? `${miles.replace('k', '')}.000 milhas` : '\u2014'}</p>
               </div>
-              <button
-                type="button"
-                className="detalhe-voo-ordem-btn"
-                onClick={() => (onNavigateToCreateOffer ? onNavigateToCreateOffer(card) : handleSolicitar())}
-              >
+              <Button size="lg" fullWidth onClick={() => navigate(`/emissoes/${card.id}/oferta`)}>
                 Criar Oferta de Compra
-              </button>
+              </Button>
             </div>
           </div>
         )
       })()}
 
       {showConfirmModal && (
-        <div className="detalhe-voo-modal-overlay" onClick={handleCloseModal}>
+        <div className="detalhe-voo-modal-overlay" onClick={() => setShowConfirmModal(false)}>
           <div className="detalhe-voo-modal" onClick={(e) => e.stopPropagation()}>
-            <h2 className="detalhe-voo-modal-title">Solicitação enviada</h2>
-            <p className="detalhe-voo-modal-desc">Sua solicitação foi enviada ao balcão. O que deseja fazer agora?</p>
+            <h2 className="detalhe-voo-modal-title">Solicitacao enviada</h2>
+            <p className="detalhe-voo-modal-desc">Sua solicitacao foi enviada ao balcao. O que deseja fazer agora?</p>
             <div className="detalhe-voo-modal-actions">
-              <button type="button" className="detalhe-voo-modal-btn primary" onClick={handleNovaOrdem}>
-                Nova Ordem de Balcão
-              </button>
-              <button type="button" className="detalhe-voo-modal-btn secondary" onClick={handleCriarOferta}>
-                Criar Oferta de Compra
-              </button>
-              <button type="button" className="detalhe-voo-modal-btn outline" onClick={handleCloseModal}>
-                Ficar nesta tela
-              </button>
+              <Button fullWidth onClick={handleNovaOrdem}>Nova Ordem de Balcao</Button>
+              <Button variant="secondary" fullWidth onClick={() => { setShowConfirmModal(false); navigate(`/emissoes/${card.id}/oferta`) }}>Criar Oferta de Compra</Button>
+              <Button variant="ghost" fullWidth onClick={() => setShowConfirmModal(false)}>Ficar nesta tela</Button>
             </div>
           </div>
         </div>

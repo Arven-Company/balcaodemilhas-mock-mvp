@@ -1,10 +1,5 @@
 import { useState } from 'react'
 import BackButton from '../BackButton'
-import '../../styles/app-layout.css'
-import '../../styles/conta.css'
-import '../../styles/contrato.css'
-import '../../styles/fluxo-balcao.css'
-import '../../styles/disputa.css'
 
 const MOTIVOS = [
   'Passagem não disponível',

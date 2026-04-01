@@ -415,7 +415,15 @@
   gap: var(--space-7);
 }
 
-/* Bottom navigation — estilo Airbnb (mais compacta) */
+/* Page loading fallback */
+.page-loading {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Bottom navigation */
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -423,12 +431,12 @@
   right: 0;
   max-width: var(--width-app-max);
   margin: 0 auto;
-  background: var(--color-bg-card);
-  border-radius: var(--radius-card) var(--radius-card) 0 0;
-  box-shadow: var(--shadow-nav);
+  background: var(--nav-bg);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow: var(--nav-shadow);
   display: flex;
   justify-content: space-around;
-  padding: 6px 8px 10px;
+  padding: 6px 8px calc(10px + env(safe-area-inset-bottom, 0px));
   z-index: 100;
 }
 
@@ -437,36 +445,60 @@
   flex-direction: column;
   align-items: center;
   gap: 2px;
-  padding: 4px 8px;
+  padding: 6px 10px;
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--color-nav-inactive);
-  font-size: 10px;
+  color: var(--nav-inactive-color);
+  font-size: var(--text-xs);
   font-weight: var(--font-medium);
   font-family: var(--font-family);
   text-decoration: none;
-  min-width: 52px;
+  min-width: 56px;
+  min-height: var(--touch-target-min);
+  transition: color var(--duration-fast) var(--ease-default);
+  position: relative;
 }
 
 .bottom-nav-item.active {
-  color: var(--color-nav-active);
+  color: var(--nav-active-color);
 }
 
-.bottom-nav-item:not(.active) img {
-  /* Estado inativo: cinza (nav-inactive), evita ícone azul do asset */
-  filter: brightness(0) saturate(100%) invert(40%);
+.bottom-nav-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--nav-active-color);
 }
 
-.bottom-nav-item.active img {
-  /* Cor primária do DS (burgundy #6D2932) — ícone ativo */
-  filter: brightness(0) saturate(100%) invert(14%) sepia(62%) saturate(1200%) hue-rotate(350deg);
+.bottom-nav-item svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  transition: transform var(--duration-fast) var(--ease-spring);
+}
+
+.bottom-nav-item.active svg {
+  transform: scale(1.1);
 }
 
 .bottom-nav-item img {
   width: 22px;
   height: 22px;
   object-fit: contain;
+}
+
+.bottom-nav-item:not(.active) img {
+  filter: brightness(0) saturate(100%) invert(40%);
+}
+
+.bottom-nav-item.active img {
+  filter: brightness(0) saturate(100%) invert(14%) sepia(62%) saturate(1200%) hue-rotate(350deg);
 }
 
 /* Subheader (ex: Virgin Atlantic + contagem) */

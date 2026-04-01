@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" width="600" height="360">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8834E;stop-opacity:1"/>
+      <stop offset="60%" style="stop-color:#C4583A;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#7A2E22;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#C4583A;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#7A2E22;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="360" fill="url(#sky)"/>
+  <rect y="280" width="600" height="80" fill="url(#water)" opacity="0.5"/>
+  <!-- Torre de Belém simplificada -->
+  <rect x="250" y="200" width="100" height="120" rx="4" fill="#fff" opacity="0.2"/>
+  <rect x="262" y="180" width="76" height="30" rx="2" fill="#fff" opacity="0.25"/>
+  <rect x="274" y="165" width="52" height="25" rx="2" fill="#fff" opacity="0.25"/>
+  <rect x="286" y="148" width="28" height="25" rx="2" fill="#fff" opacity="0.3"/>
+  <rect x="293" y="135" width="14" height="20" fill="#fff" opacity="0.35"/>
+  <!-- Janelas torre -->
+  <circle cx="280" cy="225" r="5" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="300" cy="225" r="5" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="320" cy="225" r="5" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.5"/>
+  <!-- Sol -->
+  <circle cx="480" cy="70" r="35" fill="#FFD580" opacity="0.4"/>
+  <circle cx="480" cy="70" r="25" fill="#FFD580" opacity="0.5"/>
+  <!-- Reflexo no rio -->
+  <rect x="265" y="295" width="70" height="4" rx="2" fill="#fff" opacity="0.15"/>
+  <rect x="275" y="303" width="50" height="3" rx="2" fill="#fff" opacity="0.1"/>
+  <!-- Texto -->
+  <text x="300" y="80" text-anchor="middle" font-family="Georgia, serif" font-size="42" font-weight="bold" fill="#fff" opacity="0.95">Lisboa</text>
+  <text x="300" y="113" text-anchor="middle" font-family="Georgia, serif" font-size="17" fill="#fff" opacity="0.8">Rio de Janeiro ’ Lisboa</text>
+  <text x="300" y="148" text-anchor="middle" font-size="22" fill="#fff" opacity="0.75"></text>
+</svg>

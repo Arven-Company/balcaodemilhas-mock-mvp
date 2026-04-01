@@ -1,11 +1,9 @@
-import { useApp } from '../context/AppContext'
-import '../styles/app-layout.css'
-import '../styles/conta.css'
-import '../styles/contrato.css'
-import '../styles/plan-success.css'
+import { useNavigate, useLocation } from 'react-router-dom'
 
-export default function PlanSuccess({ onDone }) {
-  const { purchasedPlanName } = useApp()
+export default function PlanSuccess() {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const purchasedPlanName = location.state?.planName
 
   return (
     <div className="contrato-wrap plan-success-wrap">
@@ -23,7 +21,7 @@ export default function PlanSuccess({ onDone }) {
           <p className="plan-success-text">
             O plano <strong>{purchasedPlanName || 'escolhido'}</strong> foi ativado com sucesso.
           </p>
-          <button type="button" className="contrato-btn-primary" onClick={onDone}>
+          <button type="button" className="contrato-btn-primary" onClick={() => navigate('/conta')}>
             Concluído
           </button>
         </div>

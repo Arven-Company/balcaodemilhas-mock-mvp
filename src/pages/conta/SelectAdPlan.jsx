@@ -1,7 +1,5 @@
 import { useState } from 'react'
-import '../../styles/app-layout.css'
-import '../../styles/conta.css'
-import '../../styles/contrato.css'
+import { useNavigate } from 'react-router-dom'
 
 const AD_PLANS = [
   {
@@ -18,14 +16,15 @@ const AD_PLANS = [
   },
 ]
 
-export default function SelectAdPlan({ onBack, onConfirm }) {
+export default function SelectAdPlan() {
+  const navigate = useNavigate()
   const [selectedPlan, setSelectedPlan] = useState(AD_PLANS[1])
 
   return (
     <div className="contrato-wrap select-ad-plan-wrap">
       <header className="app-header">
         <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
+          <button type="button" className="conta-back" onClick={() => navigate('/conta')} aria-label="Voltar">
             ← Voltar
           </button>
           <h1 className="app-header-title">Escolha um Plano</h1>
@@ -60,7 +59,7 @@ export default function SelectAdPlan({ onBack, onConfirm }) {
           <button
             type="button"
             className="contrato-btn-primary"
-            onClick={() => onConfirm(selectedPlan)}
+            onClick={() => navigate('/conta/anunciar/sucesso')}
           >
             Confirmar Anúncio por R$ {selectedPlan.price}
           </button>
