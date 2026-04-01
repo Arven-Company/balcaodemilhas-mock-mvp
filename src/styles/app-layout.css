@@ -454,12 +454,10 @@
 }
 
 .bottom-nav-item:not(.active) img {
-  /* Estado inativo: cinza (nav-inactive), evita ícone azul do asset */
   filter: brightness(0) saturate(100%) invert(40%);
 }
 
 .bottom-nav-item.active img {
-  /* Cor primária do DS (burgundy #6D2932) — ícone ativo */
   filter: brightness(0) saturate(100%) invert(14%) sepia(62%) saturate(1200%) hue-rotate(350deg);
 }
 
@@ -467,6 +465,17 @@
   width: 22px;
   height: 22px;
   object-fit: contain;
+}
+
+.bottom-nav-item svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.bottom-nav-item.active svg {
+  transform: scale(1.1);
 }
 
 /* Subheader (ex: Virgin Atlantic + contagem) */
