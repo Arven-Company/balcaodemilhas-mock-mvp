@@ -1,18 +1,16 @@
-import { useNavigate } from 'react-router-dom'
 import { MOCK_HISTORICO_VENDAS } from '../../data/mocks'
 import '../../styles/app-layout.css'
 import '../../styles/conta.css'
 import '../../styles/contrato.css'
 
-export default function MinhasVendas() {
-  const navigate = useNavigate()
+export default function MinhasVendas({ onBack, onSelectSale }) {
   const list = MOCK_HISTORICO_VENDAS.filter((t) => t.type === 'Venda')
 
   return (
     <div className="contrato-wrap">
       <header className="app-header">
         <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={() => navigate(-1)} aria-label="Voltar">
+          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
             ← Voltar
           </button>
           <h1 className="app-header-title">Minhas Vendas</h1>
@@ -30,8 +28,8 @@ export default function MinhasVendas() {
                 className="conta-historico-item"
                 role="button"
                 tabIndex={0}
-                onClick={() => navigate(`/conta/vendas/${t.id}`)}
-                onKeyDown={(e) => e.key === 'Enter' && navigate(`/conta/vendas/${t.id}`)}
+                onClick={() => onSelectSale(t)}
+                onKeyDown={(e) => e.key === 'Enter' && onSelectSale(t)}
               >
                 <span className="conta-historico-date">{t.date}</span>
                 <span className="conta-historico-type">{t.type}</span>

@@ -1,8 +1,8 @@
-import { NavLink } from 'react-router-dom'
+import { useApp } from '../context/AppContext'
 
 const items = [
   {
-    to: '/emissoes',
+    id: 'emissoes',
     label: 'Emissões',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -11,7 +11,7 @@ const items = [
     ),
   },
   {
-    to: '/balcao',
+    id: 'balcao',
     label: 'Balcão',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -22,7 +22,7 @@ const items = [
     ),
   },
   {
-    to: '/promocoes',
+    id: 'promocoes',
     label: 'Promoções',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -32,7 +32,7 @@ const items = [
     ),
   },
   {
-    to: '/conta',
+    id: 'conta',
     label: 'Conta',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -44,17 +44,21 @@ const items = [
 ]
 
 export default function BottomNav() {
+  const { module, setModule } = useApp()
+
   return (
     <nav className="bottom-nav" role="navigation" aria-label="Menu principal">
-      {items.map(({ to, label, icon }) => (
-        <NavLink
-          key={to}
-          to={to}
-          className={({ isActive }) => `bottom-nav-item ${isActive ? 'active' : ''}`}
+      {items.map(({ id, label, icon }) => (
+        <button
+          key={id}
+          type="button"
+          className={`bottom-nav-item ${module === id ? 'active' : ''}`}
+          onClick={() => setModule(id)}
+          aria-current={module === id ? 'page' : undefined}
         >
           {icon}
           <span>{label}</span>
-        </NavLink>
+        </button>
       ))}
     </nav>
   )

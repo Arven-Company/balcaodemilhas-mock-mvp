@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import { MOCK_BALCAO_COMPRA, MOCK_BALCAO_VENDA } from '../data/mocks'
 import BackButton from '../components/BackButton'
@@ -23,8 +22,7 @@ const FLOW_COMPRA_STEPS = ['Termos', 'PIX', 'Chat', 'Aguardo', 'Confirmação']
 const FLOW_VENDA_STEPS = ['Termos', 'Aguardo comprador', 'Stepper', 'Confirmação']
 
 export default function Balcao() {
-  const navigate = useNavigate()
-  const { verified, completeVerification, addToast } = useApp()
+  const { verified, completeVerification, setScreen, setSelectedOfferForMakeOffer, addToast } = useApp()
   const [tab, setTab] = useState('compra')
   const [view, setView] = useState('list') // list | verificacao | flow | dispute-reason | dispute-status
   const [flowType, setFlowType] = useState(null) // 'compra' | 'venda'
@@ -391,7 +389,7 @@ export default function Balcao() {
                 </div>
               </div>
               <div className="card-balcao-list-actions">
-                <button type="button" className="btn-outline" onClick={(e) => { e.stopPropagation(); navigate(`/balcao/oferta/${item.id}`) }}>Fazer oferta</button>
+                <button type="button" className="btn-outline" onClick={(e) => { e.stopPropagation(); setSelectedOfferForMakeOffer(item); setScreen('make-offer') }}>Fazer oferta</button>
                 <button
                   type="button"
                   className="btn-primary"
