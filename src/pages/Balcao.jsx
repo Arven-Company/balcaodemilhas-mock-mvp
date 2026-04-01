@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import { MOCK_BALCAO_COMPRA, MOCK_BALCAO_VENDA } from '../data/mocks'
 import BackButton from '../components/BackButton'
@@ -22,7 +23,8 @@ const FLOW_COMPRA_STEPS = ['Termos', 'PIX', 'Chat', 'Aguardo', 'Confirmação']
 const FLOW_VENDA_STEPS = ['Termos', 'Aguardo comprador', 'Stepper', 'Confirmação']
 
 export default function Balcao() {
-  const { verified, completeVerification, setScreen, setSelectedOfferForMakeOffer, addToast } = useApp()
+  const navigate = useNavigate()
+  const { verified, completeVerification, addToast } = useApp()
   const [tab, setTab] = useState('compra')
   const [view, setView] = useState('list') // list | verificacao | flow | dispute-reason | dispute-status
   const [flowType, setFlowType] = useState(null) // 'compra' | 'venda'
@@ -32,12 +34,8 @@ export default function Balcao() {
   const [termsAccepted, setTermsAccepted] = useState(false)
   const [pixConfirmed, setPixConfirmed] = useState(false)
   const [stepperDone, setStepperDone] = useState(false)
-  const [contraproposta, setContraproposta] = useState({ open: false, offerId: null, originalValue: 100 })
-  const [contrapropostaValor, setContrapropostaValor] = useState('')
-  const [contrapropostaError, setContrapropostaError] = useState('')
   const [filtroCompanhia, setFiltroCompanhia] = useState('')
-  const [ordenacao, setOrdenacao] = useState('recentes') // 'recentes' | 'preco'
-  const [layoutBalcao, setLayoutBalcao] = useState('list') // 'list' | 'grid'
+  const [ordenacao, setOrdenacao] = useState('recentes')
   const [showChat, setShowChat] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [drawerMode, setDrawerMode] = useState('filter') // 'filter' | 'sort'
@@ -328,10 +326,6 @@ export default function Balcao() {
             <span>Ordenar</span>
           </button>
         </div>
-        <div className="app-layout-toggle">
-          <button type="button" className={`app-layout-btn ${layoutBalcao === 'list' ? 'active' : ''}`} onClick={() => setLayoutBalcao('list')} aria-label="Lista">Lista</button>
-          <button type="button" className={`app-layout-btn ${layoutBalcao === 'grid' ? 'active' : ''}`} onClick={() => setLayoutBalcao('grid')} aria-label="Compacto">Compacto</button>
-        </div>
       </div>
 
       {drawerOpen && (
@@ -366,70 +360,42 @@ export default function Balcao() {
             : (item.approx || '—')
           const amountLabel = milesMatch ? `${milesMatch[1]}k` : (item.miles || '—')
 
-          if (layoutBalcao === 'list') {
-            return (
-              <article key={item.id} className="card-balcao-list">
-                <div className="card-balcao-list-top">
-                  <div className="card-balcao-list-avatar-wrap">
-                    <img src={item.avatar} alt="" className="card-balcao-list-avatar" />
-                  </div>
-                  <div className="card-balcao-list-info">
-                    <span className="card-balcao-list-name">{item.name}</span>
-                    <span className="card-balcao-list-meta">{item.rating} • {item.negociacoes}</span>
-                  </div>
-                </div>
-                <div className="card-balcao-list-logo-metrics">
-                  {item.airlineLogo && (
-                    <img src={item.airlineLogo} alt="" className="card-balcao-list-logo" />
-                  )}
-                  <div className="card-balcao-list-metrics">
-                    <div className="card-balcao-list-metric">
-                      <span className="card-balcao-list-metric-label">{item.companhia || 'Programa'}</span>
-                      <span className="card-balcao-list-metric-value">{amountLabel}</span>
-                    </div>
-                    <div className="card-balcao-list-metric">
-                      <span className="card-balcao-list-metric-label">Milheiro</span>
-                      <span className="card-balcao-list-metric-value">R$ {milheiro}</span>
-                    </div>
-                    <div className="card-balcao-list-metric">
-                      <span className="card-balcao-list-metric-label">Valor</span>
-                      <span className="card-balcao-list-metric-value">{valorFormatado}</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="card-balcao-list-actions">
-                  <button type="button" className="btn-outline" onClick={(e) => { e.stopPropagation(); setSelectedOfferForMakeOffer(item); setScreen('make-offer'); }}>Fazer oferta</button>
-                  <button
-                    type="button"
-                    className="btn-primary"
-                    onClick={(e) => { e.stopPropagation(); handleIniciarCompraVenda(item, tab === 'compra' ? 'compra' : 'venda'); }}
-                  >
-                    {primaryAction}
-                  </button>
-                </div>
-              </article>
-            )
-          }
-          /* Compacto: card original (ex-Lista), igual ao anterior */
           return (
-            <article key={item.id} className="card-balcao">
-              <div className="card-balcao-body">
-                <div className="card-balcao-left">
-                  <img src={item.avatar} alt="" className="card-balcao-avatar" />
-                  <span className="card-balcao-name">{item.name}</span>
-                  <span className="card-balcao-meta">{item.rating}  •  {item.negociacoes}</span>
+            <article key={item.id} className="card-balcao-list">
+              <div className="card-balcao-list-top">
+                <div className="card-balcao-list-avatar-wrap">
+                  <img src={item.avatar} alt="" className="card-balcao-list-avatar" />
                 </div>
-                <div className="card-balcao-right">
-                  <span className="card-balcao-miles">{item.miles}</span>
-                  {item.approx && <span className="card-balcao-approx">{item.approx}</span>}
+                <div className="card-balcao-list-info">
+                  <span className="card-balcao-list-name">{item.name}</span>
+                  <span className="card-balcao-list-meta">{item.rating} • {item.negociacoes}</span>
                 </div>
               </div>
-              <div className="card-balcao-actions">
-                <button type="button" className="btn-outline" onClick={(e) => { e.stopPropagation(); setSelectedOfferForMakeOffer(item); setScreen('make-offer'); }}>Fazer oferta</button>
+              <div className="card-balcao-list-logo-metrics">
+                {item.airlineLogo && (
+                  <img src={item.airlineLogo} alt="" className="card-balcao-list-logo" />
+                )}
+                <div className="card-balcao-list-metrics">
+                  <div className="card-balcao-list-metric">
+                    <span className="card-balcao-list-metric-label">{item.companhia || 'Programa'}</span>
+                    <span className="card-balcao-list-metric-value">{amountLabel}</span>
+                  </div>
+                  <div className="card-balcao-list-metric">
+                    <span className="card-balcao-list-metric-label">Milheiro</span>
+                    <span className="card-balcao-list-metric-value">R$ {milheiro}</span>
+                  </div>
+                  <div className="card-balcao-list-metric">
+                    <span className="card-balcao-list-metric-label">Valor</span>
+                    <span className="card-balcao-list-metric-value">{valorFormatado}</span>
+                  </div>
+                </div>
+              </div>
+              <div className="card-balcao-list-actions">
+                <button type="button" className="btn-outline" onClick={(e) => { e.stopPropagation(); navigate(`/balcao/oferta/${item.id}`) }}>Fazer oferta</button>
                 <button
                   type="button"
                   className="btn-primary"
-                  onClick={(e) => { e.stopPropagation(); handleIniciarCompraVenda(item, tab === 'compra' ? 'compra' : 'venda'); }}
+                  onClick={(e) => { e.stopPropagation(); handleIniciarCompraVenda(item, tab === 'compra' ? 'compra' : 'venda') }}
                 >
                   {primaryAction}
                 </button>
@@ -439,28 +405,6 @@ export default function Balcao() {
         })}
       </div>
 
-      {contraproposta.open && (
-        <div className="fluxo-modal-overlay" onClick={handleCloseContraproposta}>
-          <div className="fluxo-modal" onClick={(e) => e.stopPropagation()}>
-            <h2 className="fluxo-modal-title">Fazer oferta (contraproposta)</h2>
-            <p className="fluxo-modal-desc">Valor original: R$ {contraproposta.originalValue.toLocaleString('pt-BR')}. O valor não pode ser mais de 15% inferior (mín. R$ {minContraproposta.toLocaleString('pt-BR')}).</p>
-            <input
-              type="text"
-              className="fluxo-modal-input"
-              placeholder="R$ 0,00"
-              value={contrapropostaValor}
-              onChange={handleContrapropostaChange}
-              aria-invalid={!!contrapropostaError}
-              aria-describedby={contrapropostaError ? 'contraproposta-err' : undefined}
-            />
-            {contrapropostaError && <p id="contraproposta-err" className="fluxo-modal-error">{contrapropostaError}</p>}
-            <div className="fluxo-modal-actions">
-              <button type="button" className="btn btn-outline" onClick={handleCloseContraproposta}>Cancelar</button>
-              <button type="button" className="btn btn-primary" onClick={handleContrapropostaSubmit}>Enviar oferta</button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
