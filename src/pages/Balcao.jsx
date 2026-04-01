@@ -146,38 +146,6 @@ export default function Balcao() {
     setSelectedOffer(null)
   }
 
-  const minContraproposta = Math.ceil(contraproposta.originalValue * 0.85)
-  const handleOpenContraproposta = (offer) => {
-    const originalValue = offer?.originalValue ?? 100
-    setContraproposta({ open: true, offerId: offer?.id, originalValue })
-    setContrapropostaValor('')
-    setContrapropostaError('')
-  }
-  const handleCloseContraproposta = () => {
-    setContraproposta({ open: false, offerId: null, originalValue: 100 })
-    setContrapropostaValor('')
-    setContrapropostaError('')
-  }
-  const handleContrapropostaSubmit = () => {
-    const num = Number(contrapropostaValor.replace(/\D/g, '')) / 100 || 0
-    if (num < minContraproposta) {
-      setContrapropostaError(`O valor não pode ser mais de 15% inferior ao original. Mínimo: R$ ${minContraproposta.toLocaleString('pt-BR')}`)
-      return
-    }
-    setContrapropostaError('')
-    alert('Contraproposta enviada (simulado).')
-    handleCloseContraproposta()
-  }
-  const handleContrapropostaChange = (e) => {
-    const v = e.target.value
-    setContrapropostaValor(v)
-    const num = Number(String(v).replace(/\D/g, '')) / 100 || 0
-    if (num > 0 && num < minContraproposta) {
-      setContrapropostaError(`Mínimo: R$ ${minContraproposta.toLocaleString('pt-BR')} (15% do original)`)
-    } else {
-      setContrapropostaError('')
-    }
-  }
 
   if (view === 'verificacao') {
     return (
