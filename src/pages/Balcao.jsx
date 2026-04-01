@@ -238,17 +238,17 @@ export default function Balcao() {
     <div className="balcao-container">
       <header className="app-header">
         <div className="app-header-row app-header-row--no-margin">
-          <h1 className="app-header-title">Balcão</h1>
+          <h1 className="app-header-title">Negociar</h1>
           <span style={{ width: 40 }} aria-hidden />
         </div>
+        <div style={{ paddingTop: 'var(--space-5)' }}>
+          <TabToggle
+            tabs={[{ id: 'compra', label: 'Comprar' }, { id: 'venda', label: 'Vender' }]}
+            active={tab}
+            onChange={(id) => { if (view !== 'flow' && !view.startsWith('dispute')) setTab(id) }}
+          />
+        </div>
       </header>
-      <div style={{ padding: '0 var(--space-7) var(--space-4)' }}>
-        <TabToggle
-          tabs={[{ id: 'compra', label: 'Comprar' }, { id: 'venda', label: 'Vender' }]}
-          active={tab}
-          onChange={(id) => { if (view !== 'flow' && !view.startsWith('dispute')) setTab(id) }}
-        />
-      </div>
       <div className="app-subheader">
         <h2 className="app-subheader-title">Virgin Atlantic</h2>
         <span className="app-subheader-count">{list.length} {tab === 'compra' ? 'ofertas de compra' : 'ofertas de venda'}</span>
