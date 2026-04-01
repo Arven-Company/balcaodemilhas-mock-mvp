@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { MOCK_HISTORICO_VENDAS } from '../../data/mocks'
+import BackButton from '../../components/BackButton'
 
 export default function MinhasVendas() {
   const navigate = useNavigate()
@@ -8,11 +9,9 @@ export default function MinhasVendas() {
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={() => navigate('/conta')} aria-label="Voltar">
-            ← Voltar
-          </button>
-          <h1 className="app-header-title">Minhas Vendas</h1>
+        <div className="app-header-row app-header-row--centered">
+          <BackButton onClick={() => navigate(-1)} />
+          <h1 className="app-header-title">Vendas</h1>
           <span style={{ width: 60 }} />
         </div>
       </header>

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import BackButton from '../../components/BackButton'
 
 const MONTH_NAMES = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
 
@@ -67,10 +68,8 @@ export default function AdminSelectDates() {
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={() => navigate(-1)} aria-label="Voltar">
-            ← Voltar
-          </button>
+        <div className="app-header-row app-header-row--centered">
+          <BackButton onClick={() => navigate(-1)} />
           <h1 className="app-header-title">Selecionar Datas</h1>
           <span style={{ width: 60 }} />
         </div>

@@ -9,7 +9,8 @@ export default function AdSuccess() {
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row">
+        <div className="app-header-row app-header-row--centered">
+          <span style={{ width: 60 }} />
           <h1 className="app-header-title">Anúncio Criado</h1>
           <span style={{ width: 60 }} />
         </div>

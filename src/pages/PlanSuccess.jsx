@@ -8,7 +8,7 @@ export default function PlanSuccess() {
   return (
     <div className="contrato-wrap plan-success-wrap">
       <header className="app-header">
-        <div className="app-header-row">
+        <div className="app-header-row app-header-row--centered">
           <span style={{ width: 60 }} />
           <h1 className="app-header-title">Plano ativado</h1>
           <span style={{ width: 60 }} />

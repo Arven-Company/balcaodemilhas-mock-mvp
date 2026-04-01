@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import BackButton from '../../components/BackButton'
 
 const AIRLINES = ['LATAM', 'Azul', 'GOL', 'TAP Air Portugal', 'Iberia']
 
@@ -40,10 +41,8 @@ export default function AdminAddEmission() {
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={() => navigate(-1)} aria-label="Voltar">
-            ← Voltar
-          </button>
+        <div className="app-header-row app-header-row--centered">
+          <BackButton onClick={() => navigate(-1)} />
           <h1 className="app-header-title">Adicionar Emissão</h1>
           <span style={{ width: 60 }} />
         </div>

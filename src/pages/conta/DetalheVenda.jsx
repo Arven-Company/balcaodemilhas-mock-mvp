@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { MOCK_HISTORICO_VENDAS } from '../../data/mocks'
+import BackButton from '../../components/BackButton'
 
 function StepperItem({ title, description, status }) {
   const isCompleted = status === 'completed'
@@ -29,11 +30,9 @@ export default function DetalheVenda() {
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={() => navigate('/conta/vendas')} aria-label="Voltar">
-            ← Voltar
-          </button>
-          <h1 className="app-header-title">Detalhes da Venda</h1>
+        <div className="app-header-row app-header-row--centered">
+          <BackButton onClick={() => navigate(-1)} />
+          <h1 className="app-header-title">Venda</h1>
           <span style={{ width: 60 }} />
         </div>
       </header>

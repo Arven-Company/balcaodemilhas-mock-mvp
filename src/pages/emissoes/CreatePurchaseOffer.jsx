@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { MOCK_EMISSOES } from '../../data/mocks'
+import BackButton from '../../components/BackButton'
 
 export default function CreatePurchaseOffer() {
   const navigate = useNavigate()
@@ -10,11 +11,9 @@ export default function CreatePurchaseOffer() {
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={() => navigate(-1)} aria-label="Voltar">
-            ← Voltar
-          </button>
-          <h1 className="app-header-title">Criar Oferta de Compra</h1>
+        <div className="app-header-row app-header-row--centered">
+          <BackButton onClick={() => navigate(-1)} />
+          <h1 className="app-header-title">Criar Oferta</h1>
           <span style={{ width: 60 }} />
         </div>
       </header>
