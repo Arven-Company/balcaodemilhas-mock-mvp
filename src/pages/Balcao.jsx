@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useApp } from '../context/AppContext'
 import { MOCK_BALCAO_COMPRA, MOCK_BALCAO_VENDA } from '../data/mocks'
 import BackButton from '../components/BackButton'
+import { TabToggle, BottomSheet } from '../components/ui'
 import Verificacao from './Verificacao'
 import TermosCompra from '../components/fluxo-compra/TermosCompra'
 import PixCompra from '../components/fluxo-compra/PixCompra'
@@ -273,25 +274,12 @@ export default function Balcao() {
           <span style={{ width: 40 }} aria-hidden />
         </div>
       </header>
-      <div className="app-tabs">
-        <button
-          type="button"
-          className={`app-tab ${tab === 'compra' ? 'active' : ''}`}
-          onClick={() => { if (view !== 'flow' && !view.startsWith('dispute')) setTab('compra') }}
-          disabled={view === 'flow' || view.startsWith('dispute')}
-          aria-disabled={view === 'flow' || view.startsWith('dispute')}
-        >
-          Compra
-        </button>
-        <button
-          type="button"
-          className={`app-tab ${tab === 'venda' ? 'active' : ''}`}
-          onClick={() => { if (view !== 'flow' && !view.startsWith('dispute')) setTab('venda') }}
-          disabled={view === 'flow' || view.startsWith('dispute')}
-          aria-disabled={view === 'flow' || view.startsWith('dispute')}
-        >
-          Venda
-        </button>
+      <div style={{ padding: '0 var(--space-7) var(--space-4)' }}>
+        <TabToggle
+          tabs={[{ id: 'compra', label: 'Comprar' }, { id: 'venda', label: 'Vender' }]}
+          active={tab}
+          onChange={(id) => { if (view !== 'flow' && !view.startsWith('dispute')) setTab(id) }}
+        />
       </div>
       <div className="app-subheader">
         <h2 className="app-subheader-title">Virgin Atlantic</h2>
@@ -326,28 +314,26 @@ export default function Balcao() {
         </div>
       </div>
 
-      {drawerOpen && (
-        <div className="balcao-drawer-overlay" onClick={() => setDrawerOpen(false)} aria-hidden>
-          <div className="balcao-drawer" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label={drawerMode === 'filter' ? 'Filtros' : 'Ordenação'}>
-            <div className="balcao-drawer-handle" aria-hidden />
-            <h2 className="balcao-drawer-title">{drawerMode === 'filter' ? 'Filtrar por companhia' : 'Ordenar'}</h2>
-            {drawerMode === 'filter' ? (
-              <div className="balcao-drawer-options">
-                <button type="button" className={`balcao-drawer-option ${!filtroCompanhia ? 'active' : ''}`} onClick={() => setFiltroCompanhia('')}>Todas</button>
-                {companhiasUnicas.map((c) => (
-                  <button key={c} type="button" className={`balcao-drawer-option ${filtroCompanhia === c ? 'active' : ''}`} onClick={() => setFiltroCompanhia(c)}>{c}</button>
-                ))}
-              </div>
-            ) : (
-              <div className="balcao-drawer-options">
-                <button type="button" className={`balcao-drawer-option ${ordenacao === 'recentes' ? 'active' : ''}`} onClick={() => setOrdenacao('recentes')}>Mais recentes primeiro</button>
-                <button type="button" className={`balcao-drawer-option ${ordenacao === 'preco' ? 'active' : ''}`} onClick={() => setOrdenacao('preco')}>Preço</button>
-              </div>
-            )}
-            <button type="button" className="balcao-drawer-apply btn btn-primary" onClick={() => setDrawerOpen(false)}>Aplicar</button>
+      <BottomSheet
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        title={drawerMode === 'filter' ? 'Filtrar por companhia' : 'Ordenar'}
+      >
+        {drawerMode === 'filter' ? (
+          <div className="balcao-drawer-options">
+            <button type="button" className={`balcao-drawer-option ${!filtroCompanhia ? 'active' : ''}`} onClick={() => setFiltroCompanhia('')}>Todas</button>
+            {companhiasUnicas.map((c) => (
+              <button key={c} type="button" className={`balcao-drawer-option ${filtroCompanhia === c ? 'active' : ''}`} onClick={() => setFiltroCompanhia(c)}>{c}</button>
+            ))}
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="balcao-drawer-options">
+            <button type="button" className={`balcao-drawer-option ${ordenacao === 'recentes' ? 'active' : ''}`} onClick={() => setOrdenacao('recentes')}>Mais recentes primeiro</button>
+            <button type="button" className={`balcao-drawer-option ${ordenacao === 'preco' ? 'active' : ''}`} onClick={() => setOrdenacao('preco')}>Preço</button>
+          </div>
+        )}
+        <button type="button" className="balcao-drawer-apply btn btn-primary" style={{ marginTop: 'var(--space-4)' }} onClick={() => setDrawerOpen(false)}>Aplicar</button>
+      </BottomSheet>
       <div className="app-list">
         {list.map((item) => {
           const milesMatch = (item.miles || '').match(/(\d+)\s*k/i)

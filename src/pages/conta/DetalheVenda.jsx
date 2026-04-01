@@ -1,3 +1,4 @@
+import BackButton from '../../components/BackButton'
 import '../../styles/app-layout.css'
 import '../../styles/conta.css'
 import '../../styles/contrato.css'
@@ -27,11 +28,9 @@ export default function DetalheVenda({ sale, onBack }) {
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
-            ← Voltar
-          </button>
-          <h1 className="app-header-title">Detalhes da Venda</h1>
+        <div className="app-header-row app-header-row--centered">
+          <BackButton onClick={onBack} />
+          <h1 className="app-header-title">Venda</h1>
           <span style={{ width: 60 }} />
         </div>
       </header>

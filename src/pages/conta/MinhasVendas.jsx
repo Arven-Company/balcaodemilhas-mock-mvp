@@ -1,4 +1,5 @@
 import { MOCK_HISTORICO_VENDAS } from '../../data/mocks'
+import BackButton from '../../components/BackButton'
 import '../../styles/app-layout.css'
 import '../../styles/conta.css'
 import '../../styles/contrato.css'
@@ -9,11 +10,9 @@ export default function MinhasVendas({ onBack, onSelectSale }) {
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
-            ← Voltar
-          </button>
-          <h1 className="app-header-title">Minhas Vendas</h1>
+        <div className="app-header-row app-header-row--centered">
+          <BackButton onClick={onBack} />
+          <h1 className="app-header-title">Vendas</h1>
           <span style={{ width: 60 }} />
         </div>
       </header>

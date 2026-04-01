@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { MOCK_PROMOCOES } from '../data/mocks'
+import { useApp } from '../context/AppContext'
 import BackButton from '../components/BackButton'
 import '../styles/cards.css'
 import '../styles/app-layout.css'
@@ -33,6 +34,7 @@ function CupomItem({ code, desc, onCopy }) {
 }
 
 export default function Promocoes() {
+  const { addToast } = useApp()
   const [selectedId, setSelectedId] = useState(null)
   const promo = MOCK_PROMOCOES.find((p) => p.id === selectedId)
 
@@ -82,7 +84,14 @@ export default function Promocoes() {
             <section className="promo-cupons">
               <h3 className="promo-cupons-title">Cupons</h3>
               {promo.cupons.map((c) => (
-                <CupomItem key={c.id} code={c.code} desc={c.desc} />
+                <CupomItem
+                  key={c.id}
+                  code={c.code}
+                  desc={c.desc}
+                  onCopy={(success) => {
+                    if (success !== false) addToast('Cupom copiado!', 'success')
+                  }}
+                />
               ))}
             </section>
           )}
