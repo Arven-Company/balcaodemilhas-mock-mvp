@@ -1,8 +1,13 @@
-import avatar from './images/avatar.svg'
-import cardImg1 from './images/card-roma.svg'
-import cardImg2 from './images/card-frankfurt.svg'
-import cardImg3 from './images/card-lisboa.svg'
-import airlineLogo from './images/airline-logo.svg'
+import avatar from './images/avatar.jpg'
+import cardImg1 from './images/card-roma.png'
+import cardImg2 from './images/card-frankfurt.jpg'
+import cardImg3 from './images/card-rio.jpg'
+import airlineLogo from './images/airline-iberia.png'
+import iconPlane from './images/icon-plane.svg'
+import iconHandshake from './images/icon-handshake.svg'
+import iconTag from './images/icon-tag.svg'
+import iconAvatar from './images/icon-avatar.svg'
+import iconFilter from './images/icon-filter.svg'
 
 export const FIGMA_ASSETS = {
   avatar,
@@ -10,9 +15,9 @@ export const FIGMA_ASSETS = {
   cardImg2,
   cardImg3,
   airlineLogo,
-  iconPlane: null,
-  iconHandshake: null,
-  iconTag: null,
-  iconAvatar: null,
-  iconFilter: null,
+  iconPlane,
+  iconHandshake,
+  iconTag,
+  iconAvatar,
+  iconFilter,
 }
