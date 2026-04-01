@@ -21,7 +21,7 @@ export default function AdminPanel() {
     <div className="contrato-wrap">
       <header className="app-header">
         <div className="app-header-row app-header-row--centered">
-          <BackButton onClick={() => navigate('/configuracoes')} />
+          <BackButton onClick={() => navigate(-1)} />
           <h1 className="app-header-title">Painel Administrador</h1>
           <span style={{ width: 60 }} />
         </div>

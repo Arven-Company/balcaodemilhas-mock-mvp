@@ -22,7 +22,7 @@ export default function AdminAddSuccess() {
           A {typeLabel.toLowerCase()} &quot;{title}&quot; já está disponível no aplicativo.
         </p>
         <div className="contrato-actions">
-          <button type="button" className="contrato-btn-primary" onClick={() => navigate('/admin')}>
+          <button type="button" className="contrato-btn-primary" onClick={() => navigate('/admin', { replace: true })}>
             Voltar ao Painel
           </button>
           <button type="button" className="contrato-btn-skip" onClick={() => navigate(type === 'emission' ? '/emissoes' : '/promocoes')}>

@@ -41,7 +41,7 @@ export default function AdminAddEmission() {
     <div className="contrato-wrap">
       <header className="app-header">
         <div className="app-header-row">
-          <button type="button" className="conta-back" onClick={() => navigate('/admin')} aria-label="Voltar">
+          <button type="button" className="conta-back" onClick={() => navigate(-1)} aria-label="Voltar">
             ← Voltar
           </button>
           <h1 className="app-header-title">Adicionar Emissão</h1>
