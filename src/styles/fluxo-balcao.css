@@ -189,6 +189,7 @@
   justify-content: center;
   z-index: 200;
   padding: var(--space-6);
+  animation: fadeIn var(--duration-fast) var(--ease-out);
 }
 
 .fluxo-modal {
@@ -198,6 +199,7 @@
   max-width: 360px;
   width: 100%;
   box-shadow: var(--shadow-modal);
+  animation: scaleIn var(--duration-normal) var(--ease-spring);
 }
 
 .fluxo-modal-title {
@@ -262,6 +264,7 @@
   display: flex;
   flex-direction: column;
   border-radius: var(--radius-modal) var(--radius-modal) 0 0;
+  animation: slideUp var(--duration-normal) var(--ease-spring);
 }
 
 .chat-modal-header {
