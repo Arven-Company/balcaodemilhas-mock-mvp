@@ -55,6 +55,21 @@
   --shadow-header: 0px 4px 10.1px 0px rgba(0, 0, 0, 0.1);
   --shadow-nav: 0px -6px 6px 0px rgba(0, 0, 0, 0.1);
   --shadow-modal: 0px 8px 24px 0px rgba(0, 0, 0, 0.15);
+  --shadow-sm: 0px 1px 4px 0px rgba(0, 0, 0, 0.08);
+
+  /* ---- UI Components (BottomSheet, TabToggle) ---- */
+  --sheet-bg: var(--color-bg-card);
+  --sheet-radius: var(--radius-modal);
+  --sheet-shadow: var(--shadow-modal);
+  --sheet-handle-bg: var(--color-border);
+  --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  --color-on-primary: #fff;
+  --radius-full: 9999px;
+  --radius-xl: 20px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --touch-target-min: 44px;
 
   /* ---- Bordas / raios ---- */
   --radius-card: 16px;
