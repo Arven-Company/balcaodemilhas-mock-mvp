@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useUI } from '../context/UIContext'
+import { useApp } from '../context/AppContext'
 import BackButton from '../components/BackButton'
+import '../styles/app-layout.css'
+import '../styles/conta.css'
+import '../styles/filtros.css'
 
 const COMPANHIAS = ['Virgin Atlantic', 'LATAM', 'Azul', 'GOL', 'TAP Air Portugal']
 
-export default function Filtros() {
-  const { filters, setFilters, addToast } = useUI()
-  const navigate = useNavigate()
+export default function Filtros({ onBack }) {
+  const { filters, setFilters, addToast } = useApp()
   const [selectedAirlines, setSelectedAirlines] = useState(filters.airlines || [])
   const [milesMax, setMilesMax] = useState(filters.milesMax ?? 500000)
 
@@ -25,7 +26,7 @@ export default function Filtros() {
   const handleApply = () => {
     setFilters({ airlines: selectedAirlines, milesMin: 0, milesMax })
     addToast('Filtros aplicados.', 'success')
-    navigate(-1)
+    onBack()
   }
 
   const handleClear = () => {
@@ -39,7 +40,7 @@ export default function Filtros() {
     <div className="filtros-wrap">
       <header className="app-header">
         <div className="app-header-row app-header-row--centered">
-          <BackButton onClick={() => navigate(-1)} />
+          <BackButton onClick={onBack} />
           <h1 className="app-header-title">Filtros</h1>
           <span style={{ width: 60 }} />
         </div>

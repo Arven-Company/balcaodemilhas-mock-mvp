@@ -1,8 +1,6 @@
 import { StrictMode, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import { AuthProvider } from './context/AuthContext'
-import { UIProvider } from './context/UIContext'
+import { AppProvider } from './context/AppContext'
 import './index.css'
 import App from './App.jsx'
 
@@ -16,13 +14,9 @@ function ThemeSync() {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      <AuthProvider>
-        <UIProvider>
-          <ThemeSync />
-          <App />
-        </UIProvider>
-      </AuthProvider>
-    </BrowserRouter>
+    <AppProvider>
+      <ThemeSync />
+      <App />
+    </AppProvider>
   </StrictMode>,
 )

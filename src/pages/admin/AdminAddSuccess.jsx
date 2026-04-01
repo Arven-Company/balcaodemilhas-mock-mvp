@@ -1,17 +1,14 @@
-import { useNavigate, useLocation } from 'react-router-dom'
+import '../../styles/app-layout.css'
+import '../../styles/conta.css'
+import '../../styles/contrato.css'
 
-export default function AdminAddSuccess() {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const type = location.state?.type
-  const title = location.state?.title
+export default function AdminAddSuccess({ type, title, onBackToPanel, onViewList }) {
   const typeLabel = type === 'emission' ? 'Emissão' : 'Promoção'
 
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row app-header-row--centered">
-          <span style={{ width: 60 }} />
+        <div className="app-header-row">
           <h1 className="app-header-title">{typeLabel} Adicionada</h1>
           <span style={{ width: 60 }} />
         </div>
@@ -23,10 +20,10 @@ export default function AdminAddSuccess() {
           A {typeLabel.toLowerCase()} &quot;{title}&quot; já está disponível no aplicativo.
         </p>
         <div className="contrato-actions">
-          <button type="button" className="contrato-btn-primary" onClick={() => navigate('/admin', { replace: true })}>
+          <button type="button" className="contrato-btn-primary" onClick={onBackToPanel}>
             Voltar ao Painel
           </button>
-          <button type="button" className="contrato-btn-skip" onClick={() => navigate(type === 'emission' ? '/emissoes' : '/promocoes')}>
+          <button type="button" className="contrato-btn-skip" onClick={onViewList}>
             Ver {typeLabel === 'Emissão' ? 'Emissões' : 'Promoções'}
           </button>
         </div>

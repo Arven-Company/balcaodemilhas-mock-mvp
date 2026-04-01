@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
-import { useUI } from '../context/UIContext'
+import { useApp } from '../context/AppContext'
 import { FIGMA_ASSETS } from '../assets/figma-assets'
 import BackButton from '../components/BackButton'
+import '../styles/app-layout.css'
+import '../styles/conta.css'
+import '../styles/contrato.css'
+import '../styles/editar-perfil.css'
 
-export default function EditarPerfil() {
-  const { profile, setProfile } = useAuth()
-  const { addToast } = useUI()
-  const navigate = useNavigate()
+export default function EditarPerfil({ onBack }) {
+  const { profile, setProfile, addToast } = useApp()
   const [name, setName] = useState(profile?.name ?? '')
   const [avatarUrl, setAvatarUrl] = useState(profile?.avatarUrl ?? '')
 
@@ -20,7 +20,7 @@ export default function EditarPerfil() {
   const handleSave = () => {
     setProfile({ name: name.trim() || profile?.name, avatarUrl: avatarUrl.trim() || '' })
     addToast('Perfil atualizado.', 'success')
-    navigate(-1)
+    onBack()
   }
 
   const displayAvatar = avatarUrl.trim() || FIGMA_ASSETS.avatar
@@ -29,7 +29,7 @@ export default function EditarPerfil() {
     <div className="contrato-wrap">
       <header className="app-header">
         <div className="app-header-row app-header-row--centered">
-          <BackButton onClick={() => navigate(-1)} />
+          <BackButton onClick={onBack} />
           <h1 className="app-header-title">Editar perfil</h1>
           <span style={{ width: 60 }} />
         </div>

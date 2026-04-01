@@ -1,6 +1,6 @@
-import { useNavigate, useParams } from 'react-router-dom'
-import { MOCK_HISTORICO_VENDAS } from '../../data/mocks'
-import BackButton from '../../components/BackButton'
+import '../../styles/app-layout.css'
+import '../../styles/conta.css'
+import '../../styles/contrato.css'
 
 function StepperItem({ title, description, status }) {
   const isCompleted = status === 'completed'
@@ -17,10 +17,7 @@ function StepperItem({ title, description, status }) {
   )
 }
 
-export default function DetalheVenda() {
-  const navigate = useNavigate()
-  const { id } = useParams()
-  const sale = MOCK_HISTORICO_VENDAS.find((s) => s.id === id)
+export default function DetalheVenda({ sale, onBack }) {
   const steps = [
     { key: 'security', title: 'Análise de Segurança', description: 'Análise concluída com sucesso.', status: 'completed' },
     { key: 'payment', title: 'Pagamento', description: 'Pagamento PIX recebido.', status: 'completed' },
@@ -30,9 +27,11 @@ export default function DetalheVenda() {
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row app-header-row--centered">
-          <BackButton onClick={() => navigate(-1)} />
-          <h1 className="app-header-title">Venda</h1>
+        <div className="app-header-row">
+          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
+            ← Voltar
+          </button>
+          <h1 className="app-header-title">Detalhes da Venda</h1>
           <span style={{ width: 60 }} />
         </div>
       </header>

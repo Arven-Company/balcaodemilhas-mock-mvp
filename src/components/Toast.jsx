@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import '../styles/toast.css'
 
 export function ToastItem({ toast, onDismiss }) {
   useEffect(() => {

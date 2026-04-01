@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import BackButton from '../../components/BackButton'
+import '../../styles/app-layout.css'
+import '../../styles/conta.css'
+import '../../styles/contrato.css'
+import '../../styles/fluxo-balcao.css'
 
-export default function CreateAd() {
-  const navigate = useNavigate()
+export default function CreateAd({ onBack, onNext }) {
   const [ad, setAd] = useState({
     sponsorName: '',
     from: '',
@@ -19,22 +20,20 @@ export default function CreateAd() {
 
   const handleNext = () => {
     if (!ad.sponsorName?.trim() || !ad.from?.trim() || !ad.to?.trim() || !ad.priceBRL?.trim()) return
-    navigate('/conta/anunciar/plano', {
-      state: {
-        adData: {
-          ...ad,
-          priceBRL: parseFloat(ad.priceBRL) || 0,
-        },
-      },
+    onNext({
+      ...ad,
+      priceBRL: parseFloat(ad.priceBRL) || 0,
     })
   }
 
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row app-header-row--centered">
-          <BackButton onClick={() => navigate(-1)} />
-          <h1 className="app-header-title">Anunciar</h1>
+        <div className="app-header-row">
+          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
+            ← Voltar
+          </button>
+          <h1 className="app-header-title">Anunciar Emissão</h1>
           <span style={{ width: 60 }} />
         </div>
       </header>

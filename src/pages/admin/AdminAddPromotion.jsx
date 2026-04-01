@@ -1,25 +1,28 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import BackButton from '../../components/BackButton'
+import '../../styles/app-layout.css'
+import '../../styles/conta.css'
+import '../../styles/contrato.css'
+import '../../styles/fluxo-balcao.css'
 
 const CATEGORIES = ['Clubes de Milhas', 'Pacotes e Hotéis', 'Cartões de Crédito']
 
-export default function AdminAddPromotion() {
-  const navigate = useNavigate()
+export default function AdminAddPromotion({ onBack, onConfirm }) {
   const [title, setTitle] = useState('')
   const [category, setCategory] = useState('Clubes de Milhas')
   const [expiryDate, setExpiryDate] = useState(() => new Date().toISOString().split('T')[0])
 
   const handleConfirm = () => {
     if (!title.trim()) return
-    navigate('/admin/sucesso', { state: { type: 'promotion', title: title.trim() } })
+    onConfirm('promotion', title.trim())
   }
 
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row app-header-row--centered">
-          <BackButton onClick={() => navigate(-1)} />
+        <div className="app-header-row">
+          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
+            ← Voltar
+          </button>
           <h1 className="app-header-title">Adicionar Promoção</h1>
           <span style={{ width: 60 }} />
         </div>

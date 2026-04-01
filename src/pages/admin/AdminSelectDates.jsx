@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
-import BackButton from '../../components/BackButton'
+import '../../styles/app-layout.css'
+import '../../styles/conta.css'
+import '../../styles/contrato.css'
 
 const MONTH_NAMES = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
 
@@ -44,10 +45,7 @@ function YearCalendar({ selectedDates, onToggleDate }) {
   )
 }
 
-export default function AdminSelectDates() {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const emissionData = location.state?.emissionData
+export default function AdminSelectDates({ emissionData, onBack, onConfirm }) {
   const [selectedDates, setSelectedDates] = useState([])
 
   const toggleDate = (date) => {
@@ -62,14 +60,16 @@ export default function AdminSelectDates() {
   const handleConfirm = () => {
     if (selectedDates.length === 0) return
     const title = emissionData?.from && emissionData?.to ? `${emissionData.from} → ${emissionData.to}` : 'Emissão'
-    navigate('/admin/sucesso', { state: { type: 'emission', title } })
+    onConfirm('emission', title)
   }
 
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row app-header-row--centered">
-          <BackButton onClick={() => navigate(-1)} />
+        <div className="app-header-row">
+          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
+            ← Voltar
+          </button>
           <h1 className="app-header-title">Selecionar Datas</h1>
           <span style={{ width: 60 }} />
         </div>

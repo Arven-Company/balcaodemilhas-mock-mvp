@@ -3,29 +3,22 @@
   padding-bottom: var(--space-8);
 }
 
-/* Profile card */
-.conta-profile-card {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-card-lg);
-  box-shadow: var(--shadow-card-soft);
-  padding: var(--space-7) var(--space-6);
+.conta-painel {
+  padding: var(--space-7) var(--space-6) !important;
+}
+
+.conta-painel-inner {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: var(--space-6);
 }
 
-.conta-profile-top {
-  display: flex;
-  align-items: center;
-  gap: var(--space-5);
-}
-
-.conta-profile-info {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  min-width: 0;
+.conta-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--color-border);
 }
 
 .conta-nome {
@@ -35,38 +28,10 @@
   margin: 0;
 }
 
-/* Stats row */
-.conta-stats-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: var(--space-4) 0;
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.conta-stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-1);
-}
-
-.conta-stat-value {
-  font-size: var(--text-md);
-  font-weight: var(--font-semibold);
-  color: var(--color-text);
-}
-
-.conta-stat-label {
-  font-size: var(--text-xs);
+.conta-plano-label {
+  font-size: var(--text-base);
   color: var(--color-text-muted);
-}
-
-.conta-stat-divider {
-  width: 1px;
-  height: 28px;
-  background: var(--color-border);
+  margin: var(--space-1) 0 0;
 }
 
 .conta-section {
@@ -80,69 +45,52 @@
   margin: 0 0 var(--space-5);
 }
 
-.conta-historico-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
+.conta-historico {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.conta-historico-card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
+.conta-historico-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto auto;
+  gap: var(--space-4);
+  align-items: center;
   padding: var(--space-5) var(--space-6);
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
+  margin-bottom: var(--space-4);
   cursor: pointer;
-  font-family: var(--font-family);
-  text-align: left;
-  width: 100%;
-  transition: box-shadow var(--duration-fast) var(--ease-default),
-              transform var(--duration-fast) var(--ease-default);
+  font-size: var(--text-sm);
+  transition: box-shadow 0.2s;
 }
 
-.conta-historico-card:hover {
+.conta-historico-item:hover {
   box-shadow: var(--shadow-card-soft);
 }
 
-.conta-historico-card:active {
-  transform: scale(0.98);
-}
-
-.conta-historico-card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .conta-historico-date {
-  font-size: var(--text-xs);
   color: var(--color-text-muted);
 }
 
-.conta-historico-card-body {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-4);
-}
-
-.conta-historico-miles {
-  font-size: var(--text-sm);
+.conta-historico-type {
   font-weight: var(--font-medium);
   color: var(--color-text);
 }
 
+.conta-historico-miles {
+  color: var(--color-text-secondary);
+}
+
 .conta-historico-value {
-  font-size: var(--text-md);
   font-weight: var(--font-semibold);
   color: var(--color-text);
 }
 
-.conta-historico-card-footer {
-  display: flex;
-  align-items: center;
+.conta-historico-status {
+  font-size: var(--text-xs);
+  color: var(--color-success);
 }
 
 /* Banner planos de assinatura (sem scroll, sem cards na Conta) */
@@ -367,11 +315,6 @@
   line-height: 1;
 }
 
-.conta-menu-chevron-icon {
-  flex-shrink: 0;
-  color: var(--color-text-muted);
-}
-
 .conta-config-row {
   display: flex;
   align-items: center;
@@ -421,30 +364,14 @@
   box-shadow: var(--shadow-card-soft);
 }
 
-.conta-detalhe-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--space-4) 0;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.conta-detalhe-row:last-child {
-  border-bottom: none;
-}
-
-.conta-detalhe-label {
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-}
-
-.conta-detalhe-value {
+.conta-detalhe-card p {
+  margin: 0 0 var(--space-3);
   font-size: var(--text-base);
   color: var(--color-text);
 }
 
-.conta-detalhe-value--bold {
-  font-weight: var(--font-semibold);
+.conta-detalhe-card p:last-child {
+  margin-bottom: 0;
 }
 
 /* Admin */

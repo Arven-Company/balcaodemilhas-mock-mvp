@@ -1,27 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&display=swap');
 
-/* Design tokens (3-layer: Primitive > Semantic > Component) */
-@import './styles/tokens.css';
-
-/* Layout: app shell, header, bottom nav, filters, drawers */
-@import './styles/app-layout.css';
-
-/* Component styles: cards (emissao, balcao, promo) */
-@import './styles/cards.css';
-
-/* Page-specific styles */
-@import './styles/conta.css';
-@import './styles/contrato.css';
-@import './styles/promocoes.css';
-@import './styles/fluxo-balcao.css';
-@import './styles/detalhe-voo.css';
-@import './styles/verificacao.css';
-@import './styles/editar-perfil.css';
-@import './styles/filtros.css';
-@import './styles/plan-success.css';
-@import './styles/admin-panel.css';
-@import './styles/disputa.css';
-@import './styles/toast.css';
+@import './styles/variables.css';
 
 * {
   box-sizing: border-box;
@@ -29,11 +8,9 @@
 
 :root {
   font-family: var(--font-family);
-  font-size: var(--text-base);
-  line-height: var(--line-height-normal);
-  font-weight: var(--font-regular);
+  line-height: 1.5;
+  font-weight: 400;
   font-synthesis: none;
-  font-feature-settings: "kern" 1;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -46,107 +23,48 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   -webkit-tap-highlight-color: transparent;
-  transition: background-color var(--duration-normal) var(--ease-default),
-              color var(--duration-normal) var(--ease-default);
+  tap-highlight-color: transparent;
 }
 
 #root {
   min-height: 100vh;
 }
 
-/* Reset tap highlight on interactive elements */
+/* App: sem efeito de link ao tocar/clicar */
 button,
 a,
 [role="button"] {
   -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
 }
 
 button {
   cursor: pointer;
-  font-family: inherit;
 }
 
-a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
-/* Focus states */
-button:focus:not(:focus-visible),
-a:focus:not(:focus-visible) {
+button:focus:not(:focus-visible) {
   outline: none;
 }
 
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 2px solid var(--color-focus-ring);
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
-/* ALL CAPS typography rule: always add letterspacing */
-.text-caps {
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: var(--font-semibold);
-}
-
-/* Screen reader only utility */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-/* Theme transition for surfaces */
-[data-theme] .app-shell,
-[data-theme] .card-emissao,
-[data-theme] .card-balcao,
-[data-theme] .card-promo,
-[data-theme] .conta-profile-card,
-[data-theme] .conta-menu,
-[data-theme] .conta-historico-card,
-[data-theme] .conta-detalhe-card,
-[data-theme] .conta-planos-banner,
-[data-theme] .bottom-nav {
-  transition: background-color var(--duration-normal) var(--ease-default),
-              border-color var(--duration-normal) var(--ease-default),
-              box-shadow var(--duration-normal) var(--ease-default);
-}
-
-/* Micro-interactions: pressable feel */
-.card-emissao:active,
-.card-balcao:active,
-.card-promo:active,
-.conta-historico-card:active,
-.conta-menu-item:active,
-.conta-ad-banner:active {
-  transform: scale(0.98);
-}
-
-/* Back button */
+/* Botão voltar padronizado: chevron esquerda em círculo (light: cinza claro; dark: variáveis) */
 .btn-back-circle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--touch-target-min);
-  height: var(--touch-target-min);
-  border-radius: var(--radius-full);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   background: var(--color-back-btn-bg);
   color: var(--color-back-btn-color);
   border: none;
   cursor: pointer;
   flex-shrink: 0;
-  transition: background var(--duration-fast) var(--ease-default),
-              transform var(--duration-fast) var(--ease-default);
+  transition: background 0.15s ease;
 }
 
 .btn-back-circle:hover {
@@ -154,5 +72,5 @@ textarea:focus-visible {
 }
 
 .btn-back-circle:active {
-  transform: scale(0.95);
+  opacity: 0.9;
 }

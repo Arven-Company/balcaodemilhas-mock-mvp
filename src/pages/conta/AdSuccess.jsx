@@ -1,16 +1,14 @@
-import { useNavigate, useLocation } from 'react-router-dom'
+import '../../styles/app-layout.css'
+import '../../styles/conta.css'
+import '../../styles/contrato.css'
 
-export default function AdSuccess() {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const adDetails = location.state?.adData
+export default function AdSuccess({ adDetails, onDone, onViewEmissions }) {
   const title = adDetails?.from && adDetails?.to ? `${adDetails.from} → ${adDetails.to}` : 'Seu anúncio'
 
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row app-header-row--centered">
-          <span style={{ width: 60 }} />
+        <div className="app-header-row">
           <h1 className="app-header-title">Anúncio Criado</h1>
           <span style={{ width: 60 }} />
         </div>
@@ -22,10 +20,10 @@ export default function AdSuccess() {
           O anúncio para &quot;{title}&quot; já está ativo e aparecerá na aba de emissões.
         </p>
         <div className="contrato-actions">
-          <button type="button" className="contrato-btn-primary" onClick={() => navigate('/emissoes')}>
+          <button type="button" className="contrato-btn-primary" onClick={onViewEmissions}>
             Ver Emissões
           </button>
-          <button type="button" className="contrato-btn-skip" onClick={() => navigate('/conta')}>
+          <button type="button" className="contrato-btn-skip" onClick={onDone}>
             Voltar para a Conta
           </button>
         </div>

@@ -1,12 +1,12 @@
 import { useRef, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useUI } from '../context/UIContext'
+import { useApp } from '../context/AppContext'
 import { MOCK_PLANOS } from '../data/mocks'
 import BackButton from '../components/BackButton'
+import '../styles/app-layout.css'
+import '../styles/conta.css'
 
-export default function Planos() {
-  const { addToast } = useUI()
-  const navigate = useNavigate()
+export default function Planos({ onBack }) {
+  const { setPurchasedPlanName, setScreen, addToast } = useApp()
   const planosRef = useRef(null)
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function Planos() {
     <div className="conta-detalhe-wrap">
       <header className="app-header">
         <div className="app-header-row app-header-row--centered">
-          <BackButton onClick={() => navigate(-1)} />
+          <BackButton onClick={onBack} />
           <h1 className="app-header-title">Planos</h1>
           <span style={{ width: 60 }} />
         </div>
@@ -56,7 +56,8 @@ export default function Planos() {
                   className="conta-plano-btn"
                   onClick={() => {
                     addToast('Plano adquirido com sucesso.', 'success')
-                    navigate('/conta/planos/sucesso', { state: { planName: pl.name } })
+                    setPurchasedPlanName(pl.name)
+                    setScreen('plan-success')
                   }}
                 >
                   Selecionar

@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import BackButton from '../../components/BackButton'
+import '../../styles/app-layout.css'
+import '../../styles/conta.css'
+import '../../styles/contrato.css'
+import '../../styles/fluxo-balcao.css'
 
 const AIRLINES = ['LATAM', 'Azul', 'GOL', 'TAP Air Portugal', 'Iberia']
 
-export default function AdminAddEmission() {
-  const navigate = useNavigate()
+export default function AdminAddEmission({ onBack, onSelectDates }) {
   const [emission, setEmission] = useState({
     airline: 'LATAM',
     to: '',
@@ -26,23 +27,21 @@ export default function AdminAddEmission() {
     if (!emission.from?.trim() || !emission.to?.trim() || emission.priceMiles <= 0) {
       return
     }
-    navigate('/admin/emissao/datas', {
-      state: {
-        emissionData: {
-          ...emission,
-          id: `admin-emission-${Date.now()}`,
-          airlineLogoUrl: '',
-          imageUrl: '',
-        },
-      },
+    onSelectDates({
+      ...emission,
+      id: `admin-emission-${Date.now()}`,
+      airlineLogoUrl: '',
+      imageUrl: '',
     })
   }
 
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row app-header-row--centered">
-          <BackButton onClick={() => navigate(-1)} />
+        <div className="app-header-row">
+          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
+            ← Voltar
+          </button>
           <h1 className="app-header-title">Adicionar Emissão</h1>
           <span style={{ width: 60 }} />
         </div>

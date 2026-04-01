@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import BackButton from '../../components/BackButton'
+import '../../styles/app-layout.css'
+import '../../styles/conta.css'
+import '../../styles/contrato.css'
 
 const AD_PLANS = [
   {
@@ -17,16 +18,17 @@ const AD_PLANS = [
   },
 ]
 
-export default function SelectAdPlan() {
-  const navigate = useNavigate()
+export default function SelectAdPlan({ onBack, onConfirm }) {
   const [selectedPlan, setSelectedPlan] = useState(AD_PLANS[1])
 
   return (
     <div className="contrato-wrap select-ad-plan-wrap">
       <header className="app-header">
-        <div className="app-header-row app-header-row--centered">
-          <BackButton onClick={() => navigate(-1)} />
-          <h1 className="app-header-title">Planos</h1>
+        <div className="app-header-row">
+          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
+            ← Voltar
+          </button>
+          <h1 className="app-header-title">Escolha um Plano</h1>
           <span style={{ width: 60 }} />
         </div>
       </header>
@@ -58,7 +60,7 @@ export default function SelectAdPlan() {
           <button
             type="button"
             className="contrato-btn-primary"
-            onClick={() => navigate('/conta/anunciar/sucesso')}
+            onClick={() => onConfirm(selectedPlan)}
           >
             Confirmar Anúncio por R$ {selectedPlan.price}
           </button>

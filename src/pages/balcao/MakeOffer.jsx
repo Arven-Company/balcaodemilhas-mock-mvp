@@ -1,14 +1,12 @@
 import { useState, useMemo } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useUI } from '../../context/UIContext'
-import { MOCK_BALCAO_COMPRA, MOCK_BALCAO_VENDA } from '../../data/mocks'
-import BackButton from '../../components/BackButton'
+import { useApp } from '../../context/AppContext'
+import '../../styles/app-layout.css'
+import '../../styles/conta.css'
+import '../../styles/contrato.css'
+import '../../styles/fluxo-balcao.css'
 
-export default function MakeOffer() {
-  const { addToast } = useUI()
-  const navigate = useNavigate()
-  const { id } = useParams()
-  const offer = [...MOCK_BALCAO_COMPRA, ...MOCK_BALCAO_VENDA].find((o) => o.id === id)
+export default function MakeOffer({ offer, onBack }) {
+  const { addToast } = useApp()
   const originalValue = offer?.originalValue ?? 100
   const milesLabel = offer?.miles ?? '—'
   const minAllowed = useMemo(() => Math.ceil(originalValue * 0.85), [originalValue])
@@ -24,15 +22,17 @@ export default function MakeOffer() {
   const handleSubmit = () => {
     if (isInvalid) return
     addToast('Proposta enviada.', 'success')
-    navigate(-1)
+    onBack()
   }
 
   return (
     <div className="contrato-wrap">
       <header className="app-header">
-        <div className="app-header-row app-header-row--centered">
-          <BackButton onClick={() => navigate(-1)} />
-          <h1 className="app-header-title">Oferta</h1>
+        <div className="app-header-row">
+          <button type="button" className="conta-back" onClick={onBack} aria-label="Voltar">
+            ← Voltar
+          </button>
+          <h1 className="app-header-title">Fazer Oferta</h1>
           <span style={{ width: 60 }} />
         </div>
       </header>

@@ -1,11 +1,10 @@
 import { useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
 import BackButton from '../components/BackButton'
+import '../styles/app-layout.css'
+import '../styles/conta.css'
+import '../styles/contrato.css'
 
-export default function Contrato() {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const mode = location.state?.mode || 'consult'
+export default function Contrato({ onFinish, onSkip, onBack, mode = 'gate' }) {
   const [step, setStep] = useState(1)
   const isConsult = mode === 'consult'
 
@@ -53,9 +52,9 @@ export default function Contrato() {
           {step > 1 ? (
             <BackButton onClick={() => setStep(step - 1)} />
           ) : isConsult ? (
-            <BackButton onClick={() => navigate(-1)} />
+            <BackButton onClick={onBack} />
           ) : (
-            <button type="button" className="conta-back" onClick={() => navigate(-1)} aria-label="Pular">Pular</button>
+            <button type="button" className="conta-back" onClick={onSkip} aria-label="Pular">Pular</button>
           )}
           <h1 className="app-header-title">Contrato</h1>
           <span style={{ width: 60 }} />
@@ -72,7 +71,7 @@ export default function Contrato() {
                 </button>
               )}
               {step === 3 && (
-                <button type="button" className="contrato-btn-primary" onClick={() => navigate(-1)}>
+                <button type="button" className="contrato-btn-primary" onClick={onBack}>
                   Voltar
                 </button>
               )}
@@ -85,11 +84,11 @@ export default function Contrato() {
                 </button>
               )}
               {step === 3 && (
-                <button type="button" className="contrato-btn-primary" onClick={() => navigate(-1)}>
+                <button type="button" className="contrato-btn-primary" onClick={onFinish}>
                   Aceitar e Finalizar
                 </button>
               )}
-              <button type="button" className="contrato-btn-skip" onClick={() => navigate(-1)}>
+              <button type="button" className="contrato-btn-skip" onClick={onSkip}>
                 Pular por enquanto
               </button>
             </>

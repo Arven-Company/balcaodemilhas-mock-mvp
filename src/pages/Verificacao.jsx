@@ -1,14 +1,13 @@
 import { useState } from 'react'
-import { useAuth } from '../context/AuthContext'
-import { useUI } from '../context/UIContext'
+import { useApp } from '../context/AppContext'
 import BackButton from '../components/BackButton'
+import '../styles/verificacao.css'
 
 const STEP_VERIFICACAO = 1
 const STEP_ANEXOS = 2
 
 export default function Verificacao({ onComplete, onBack }) {
-  const { completeVerification } = useAuth()
-  const { addToast } = useUI()
+  const { completeVerification, addToast } = useApp()
   const [step, setStep] = useState(STEP_VERIFICACAO)
   const [verificacaoOk, setVerificacaoOk] = useState(false)
   const [doc1, setDoc1] = useState(false)
