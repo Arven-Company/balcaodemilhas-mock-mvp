@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useApp } from '../context/AppContext'
 import { FIGMA_ASSETS } from '../assets/figma-assets'
+import { AVATARS } from '../assets/avatars'
 import { MOCK_EMISSOES, MOCK_FONTES_EMISSOES } from '../data/mocks'
 import DetalheVoo from './DetalheVoo'
 import BackButton from '../components/BackButton'
@@ -108,7 +109,7 @@ export default function Emissoes({ testMode }) {
                 <div className="card-emissao-agent">
                   {card.sponsor && card.agent ? (
                     <>
-                      <img src={FIGMA_ASSETS.avatar} alt="" />
+                      <img src={card.agentAvatar ?? FIGMA_ASSETS.avatar} alt="" className={card.agentAvatar === AVATARS.logoAgenciaTurismo ? 'card-emissao-agent-avatar--brand' : ''} />
                       <div className="card-emissao-agent-info">
                         <div className="rating">{card.rating}</div>
                         <div className="name">{card.agent}</div>

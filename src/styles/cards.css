@@ -113,6 +113,14 @@
   object-fit: cover;
 }
 
+/* Logo de agência (viagem): não recortar o ícone */
+.card-emissao-agent-avatar--brand {
+  object-fit: contain;
+  background: var(--color-bg-subtle, #f1f5f9);
+  padding: 1px;
+  box-sizing: border-box;
+}
+
 .card-emissao-agent-info .rating {
   font-size: 11px;
   color: var(--color-text-muted);

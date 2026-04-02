@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useApp } from '../context/AppContext'
 import { FIGMA_ASSETS } from '../assets/figma-assets'
+import { AVATARS } from '../assets/avatars'
 import BackButton from '../components/BackButton'
 import '../styles/cards.css'
 import '../styles/app-layout.css'
@@ -158,7 +159,7 @@ export default function DetalheVoo({ card, onBack, onNavigateToCreateOffer }) {
         <div className="card-emissao-footer">
           {card.agent ? (
             <div className="card-emissao-agent">
-              <img src={FIGMA_ASSETS.avatar} alt="" />
+              <img src={card.agentAvatar ?? FIGMA_ASSETS.avatar} alt="" className={card.agentAvatar === AVATARS.logoAgenciaTurismo ? 'card-emissao-agent-avatar--brand' : ''} />
               <div className="card-emissao-agent-info">
                 <div className="rating">{card.rating}</div>
                 <div className="name">{card.agent}</div>

@@ -1,4 +1,5 @@
 import { FIGMA_ASSETS } from '../assets/figma-assets'
+import { AVATARS } from '../assets/avatars'
 
 /* Emissões: ofertas de voos — destinos Brasil e Europa, preços em R$ ou milhas */
 export const MOCK_EMISSOES = [
@@ -11,6 +12,7 @@ export const MOCK_EMISSOES = [
     price: 'R$ 3.240',
     executiva: true,
     agent: 'Agência Turismo',
+    agentAvatar: AVATARS.logoAgenciaTurismo,
     rating: '★4,8',
     sponsor: true,
     airlineLogo: null,
@@ -66,6 +68,7 @@ export const MOCK_EMISSOES = [
     type: 'voo direto',
     executiva: false,
     agent: 'Carlos Mendes',
+    agentAvatar: AVATARS.carlosMendes,
     rating: '★4,7',
     sponsor: true,
     airlineLogo: null,
@@ -87,11 +90,11 @@ export const MOCK_EMISSOES = [
 
 /* Cards alternativos (Figma node 224-743) — variantes para tela de teste de emissões */
 export const TEST_EMISSOES_CARDS = [
-  { id: 'test-1', variant: 'a', name: 'Marcelo Campos', rating: '★4,8', negociacoes: '5 negociações', miles: '150k Flying Club', avatar: FIGMA_ASSETS.avatar },
-  { id: 'test-2', variant: 'b', name: 'Marcelo Campos', rating: '★4,8', negociacoes: '5 negociações', miles: '150k Flying Club', approx: '@ R$94', total: 'R$14.100', avatar: FIGMA_ASSETS.avatar },
-  { id: 'test-3', variant: 'c', name: 'Marcelo Campos', rating: '★4,8', negociacoes: '5 negociações', cols: [{ label: 'Flying Club', value: '150k' }, { label: 'Milheiro', value: 'R$90' }, { label: 'Total', value: 'R$90.000' }], avatar: FIGMA_ASSETS.avatar },
-  { id: 'test-4', variant: 'd', name: 'Marcelo Campos', rating: '★4,8', negociacoes: '5 negociações', miles: '150k Flying Club', total: 'R$14.100', approx: '@ R$94', avatar: FIGMA_ASSETS.avatar },
-  { id: 'test-5', variant: 'e', name: 'Marcelo Campos', rating: '★4,8', negociacoes: '5 negociações', cols: [{ label: 'Flying Club', value: '150k' }, { label: 'Milheiro', value: 'R$90' }], avatar: FIGMA_ASSETS.avatar },
+  { id: 'test-1', variant: 'a', name: 'Marcelo Campos', rating: '★4,8', negociacoes: '5 negociações', miles: '150k Flying Club', avatar: AVATARS.marceloCampos },
+  { id: 'test-2', variant: 'b', name: 'Marcelo Campos', rating: '★4,8', negociacoes: '5 negociações', miles: '150k Flying Club', approx: '@ R$94', total: 'R$14.100', avatar: AVATARS.marceloCampos },
+  { id: 'test-3', variant: 'c', name: 'Marcelo Campos', rating: '★4,8', negociacoes: '5 negociações', cols: [{ label: 'Flying Club', value: '150k' }, { label: 'Milheiro', value: 'R$90' }, { label: 'Total', value: 'R$90.000' }], avatar: AVATARS.marceloCampos },
+  { id: 'test-4', variant: 'd', name: 'Marcelo Campos', rating: '★4,8', negociacoes: '5 negociações', miles: '150k Flying Club', total: 'R$14.100', approx: '@ R$94', avatar: AVATARS.marceloCampos },
+  { id: 'test-5', variant: 'e', name: 'Marcelo Campos', rating: '★4,8', negociacoes: '5 negociações', cols: [{ label: 'Flying Club', value: '150k' }, { label: 'Milheiro', value: 'R$90' }], avatar: AVATARS.marceloCampos },
 ]
 
 /* RF-EMI-03: fontes de dados (rodapé Emissões) */
@@ -103,18 +106,18 @@ export const MOCK_FONTES_EMISSOES = [
 
 /* Balcão Compra: ofertas de vendedores — nomes brasileiros, valores em R$ para contraproposta */
 export const MOCK_BALCAO_COMPRA = [
-  { id: 'compra-1', name: 'Marcelo Campos', rating: '★4,8', negociacoes: '5 negociações', miles: '150k Flying Club', approx: 'aprox R$ 14.100', originalValue: 14100, avatar: FIGMA_ASSETS.avatar, airlineLogo: FIGMA_ASSETS.airlineLogo, companhia: 'Flying Club' },
-  { id: 'compra-2', name: 'Ana Paula Santos', rating: '★4,9', negociacoes: '12 negociações', miles: '80k Smiles', approx: 'aprox R$ 7.600', originalValue: 7600, avatar: FIGMA_ASSETS.avatar, airlineLogo: FIGMA_ASSETS.airlineLogo, companhia: 'Smiles' },
-  { id: 'compra-3', name: 'Roberto Oliveira', rating: '★4,7', negociacoes: '3 negociações', miles: '200k TAP', approx: 'aprox R$ 18.000', originalValue: 18000, avatar: FIGMA_ASSETS.avatar, airlineLogo: FIGMA_ASSETS.airlineLogo, companhia: 'TAP' },
-  { id: 'compra-4', name: 'Juliana Costa', rating: '★4,8', negociacoes: '8 negociações', miles: '150k Flying Club @ R$ 94', approx: 'aprox R$ 14.100', originalValue: 14100, avatar: FIGMA_ASSETS.avatar, airlineLogo: FIGMA_ASSETS.airlineLogo, companhia: 'Flying Club' },
-  { id: 'compra-5', name: 'Lucas Ferreira', rating: '★4,6', negociacoes: '2 negociações', miles: '100k Latam', approx: 'aprox R$ 9.200', originalValue: 9200, avatar: FIGMA_ASSETS.avatar, airlineLogo: FIGMA_ASSETS.airlineLogo, companhia: 'Latam' },
+  { id: 'compra-1', name: 'Marcelo Campos', rating: '★4,8', negociacoes: '5 negociações', miles: '150k Flying Club', approx: 'aprox R$ 14.100', originalValue: 14100, avatar: AVATARS.marceloCampos, airlineLogo: FIGMA_ASSETS.airlineLogo, companhia: 'Flying Club' },
+  { id: 'compra-2', name: 'Ana Paula Santos', rating: '★4,9', negociacoes: '12 negociações', miles: '80k Smiles', approx: 'aprox R$ 7.600', originalValue: 7600, avatar: AVATARS.anaPaulaSantos, airlineLogo: FIGMA_ASSETS.airlineLogo, companhia: 'Smiles' },
+  { id: 'compra-3', name: 'Roberto Oliveira', rating: '★4,7', negociacoes: '3 negociações', miles: '200k TAP', approx: 'aprox R$ 18.000', originalValue: 18000, avatar: AVATARS.robertoOliveira, airlineLogo: FIGMA_ASSETS.airlineLogo, companhia: 'TAP' },
+  { id: 'compra-4', name: 'Juliana Costa', rating: '★4,8', negociacoes: '8 negociações', miles: '150k Flying Club @ R$ 94', approx: 'aprox R$ 14.100', originalValue: 14100, avatar: AVATARS.julianaCosta, airlineLogo: FIGMA_ASSETS.airlineLogo, companhia: 'Flying Club' },
+  { id: 'compra-5', name: 'Lucas Ferreira', rating: '★4,6', negociacoes: '2 negociações', miles: '100k Latam', approx: 'aprox R$ 9.200', originalValue: 9200, avatar: AVATARS.lucasFerreira, airlineLogo: FIGMA_ASSETS.airlineLogo, companhia: 'Latam' },
 ]
 
 /* Balcão Venda: pedidos de compradores */
 export const MOCK_BALCAO_VENDA = [
-  { id: 'venda-1', name: 'Patricia Almeida', rating: '★4,9', negociacoes: '15 negociações', miles: '80k Smiles', approx: 'aprox R$ 7.600', originalValue: 7600, avatar: FIGMA_ASSETS.avatar, airlineLogo: FIGMA_ASSETS.airlineLogo, companhia: 'Smiles' },
-  { id: 'venda-2', name: 'Ricardo Souza', rating: '★4,7', negociacoes: '4 negociações', miles: '200k TAP', approx: 'aprox R$ 18.000', originalValue: 18000, avatar: FIGMA_ASSETS.avatar, airlineLogo: FIGMA_ASSETS.airlineLogo, companhia: 'TAP' },
-  { id: 'venda-3', name: 'Camila Rocha', rating: '★4,8', negociacoes: '6 negociações', miles: '120k Azul', approx: 'aprox R$ 11.400', originalValue: 11400, avatar: FIGMA_ASSETS.avatar, airlineLogo: FIGMA_ASSETS.airlineLogo, companhia: 'Azul' },
+  { id: 'venda-1', name: 'Patricia Almeida', rating: '★4,9', negociacoes: '15 negociações', miles: '80k Smiles', approx: 'aprox R$ 7.600', originalValue: 7600, avatar: AVATARS.patriciaAlmeida, airlineLogo: FIGMA_ASSETS.airlineLogo, companhia: 'Smiles' },
+  { id: 'venda-2', name: 'Ricardo Souza', rating: '★4,7', negociacoes: '4 negociações', miles: '200k TAP', approx: 'aprox R$ 18.000', originalValue: 18000, avatar: AVATARS.ricardoSouza, airlineLogo: FIGMA_ASSETS.airlineLogo, companhia: 'TAP' },
+  { id: 'venda-3', name: 'Camila Rocha', rating: '★4,8', negociacoes: '6 negociações', miles: '120k Azul', approx: 'aprox R$ 11.400', originalValue: 11400, avatar: AVATARS.camilaRocha, airlineLogo: FIGMA_ASSETS.airlineLogo, companhia: 'Azul' },
 ]
 
 export const MOCK_PROMOCOES = [
